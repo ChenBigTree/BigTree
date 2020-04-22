@@ -21,20 +21,21 @@ exports.main = async(event, context) => {
     return await cloud.database().collection("memo-ArticleList").get()
 
     // let arr = []
+    // for (let i = 1; i <= 12; i++) {
+    //   (function(i) {
+    //     cloud.database().collection("memo-ArticleList").where({
+    //       time: {
+    //         month: _.eq(i)
+    //       }
+    //     }).get((res) => {
 
-    // let p = new Promise((res, rej) => {
-    //   for (var i = 1; i <= 12; i++) {
-    //     await cloud.database().collection("memo-ArticleList").where({
-    //       "time.month": _.eq(i)
-    //     }).get({
-    //       success(res) {
-    //         arr.push(res.data)
+    //       arr[i] = res.data
+    //       if (i == 12) {
+    //         return arr
     //       }
     //     })
-    //   }
-    //   res(arr)
-    // })
-    // return p
+    //   })(i)
+    // }
 
   }
 }

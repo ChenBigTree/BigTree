@@ -18,5 +18,8 @@
       <view class="name">——{{hitokoto.name}}</view>
     </view>
   </view>
-
+  <view>
+    
+  
+  </view>
 </view>

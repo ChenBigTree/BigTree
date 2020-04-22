@@ -1,5 +1,8 @@
 // pages/home/home.js
 var _this;
+let db = wx.cloud.database()
+let memo = db.collection("memo-ArticleList")
+let _ = db.command
 Page({
 
   /**
@@ -61,7 +64,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -78,29 +83,58 @@ Page({
    */
   onShow: function() {
 
-
-    wx.cloud.callFunction({
-      name: "memo-ArticleList",
-      data: {
-        fun: "get"
-      },
-      success: res => {
-        console.log(res.result)
-        let arr = []
-        for (var i = 1; i <= 12; i++) {
-          (function(i) {
-            for (let key in res.result.data) {
-              // console.log(res.result.data[key].time.month)
-              if (res.result.data[key].time.month == i) {
-                arr[i] = (res.result.data[key])
-              }
+    for (let i = 1; i <= 12; i++) {
+      (function(i) {
+        wx.cloud.database().collection("memo-ArticleList").where({
+          "time.month": _.eq(i)
+        }).get({
+          success: r => {
+            arr[i] = res.data
+            if (i == 12) {
+              // _this.setData({
+              //   arr: arr
+              // })
+              console.log("arr", arr)
+              // console.log("_this.data.arr", _this.data.arr)
             }
-          })(i)
+          },
+          fail: e => {
+            console.log(e)
+          }
+        })
 
-        }
-        console.log("arr ==>", arr)
-      }
-    })
+      })(i)
+    }
+    // let arr = []
+    // wx.cloud.callFunction({
+    //   name: "memo-ArticleList",
+    //   data: {
+    //     fun: "get"
+    //   },
+    //   success: r => {
+    //     let data = r.result.data
+    //     for (let i = 1; i <= 12; i++) {
+    //       (function(i) {
+    //         for (let j in data) {
+    //           if (data[j].time.month == i) {
+    //             arr[i] = data[j]
+    //             if (i == 12) {
+    //               _this.setData({
+    //                 arr:arr
+    //               })
+    //               console.log("arr", arr)
+    //               console.log("_this.data.arr",_this.data.arr)
+    //             }
+    //           }
+    //         }
+    //       })(i)
+
+    //     }
+    //   },
+    //   fail: e => {
+    //     console.log(e)
+    //   }
+    // })
   },
 
   /**
