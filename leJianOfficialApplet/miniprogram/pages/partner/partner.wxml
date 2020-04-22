@@ -1,0 +1,11 @@
+<view class="partner">
+	<text class="partner-title">乐健合作伙伴</text>
+	<view class="partner-box clearfix">
+		<navigator class="partners" wx:for="{{partner}}" wx:key="key" data-id="{{item._id}}" url="../website/website?id={{item._id}}">
+			<view class="partners-logo">
+				<image mode="withFix" src="{{item.formVal.logoSrc}}"></image>
+			</view>
+			<view class="partners-name textOverflow ">{{item.formVal.companyName}}</view>
+		</navigator>
+	</view>
+</view> 

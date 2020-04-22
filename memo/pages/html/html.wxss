@@ -1,0 +1,7 @@
+/* pages/html/html.wxss */
+.rich_pages {
+  max-width: 100%;
+}
+.html{
+  padding: 20rpx;
+}

@@ -1,0 +1,19 @@
+/**app.wxss**/
+page{
+  width: 100%;
+  height: 100%;
+}
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.towTextOverflow {
+  text-align:justify;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}

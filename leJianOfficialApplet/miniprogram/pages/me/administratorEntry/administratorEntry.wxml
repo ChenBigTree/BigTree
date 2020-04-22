@@ -1,0 +1,42 @@
+<view class="adminstrator">
+	<view class="adminstrator-title clearfix">
+		<van-tabs swipeable class="vantabs" active="{{ active }}" bind:change="onChange">
+			<van-tab title="商家申请">
+				<view class="tabs" wx:for="{{applyData}}" wx:key="index">
+					<view class="list-img">
+						<view class="img-box">
+							<image src="{{item.useImg}}" mode="widthFix"></image>
+						</view>
+					</view>
+					<view class="infor">
+						<view class="infor-official">公司名：{{item.companyName}}</view>
+						<view class="infor-phone">联系方式：{{item.iponeVal}}</view>
+						<view class="infor-name">联系人：{{item.linkman}}</view>
+					</view>
+					<view class="list-btn" data-id="{{item._id}}">
+						<view class="pass" data-id="{{item._id}}" bindtap="passFun">通过</view>
+						<view class="del" data-id="{{item._id}}" bindtap="delFun">拒绝</view>
+					</view>
+				</view>
+			</van-tab>
+			<van-tab title="意见反馈">
+				<view class="tabs">
+					<view class="list-img">
+						<view class="img-box">
+							<image src="../../icon/2.png" mode="widthFix"></image>
+						</view>
+					</view>
+					<view class="infor">
+						<view class="infor-official">你的电脑很菜</view>
+						<view class="infor-phone">15089600646</view>
+						<view class="infor-name">大树</view>
+					</view>
+					<view class="list-btn">
+						<view class="pass">回复</view>
+						<view class="del">删除</view>
+					</view>
+				</view>
+			</van-tab>
+		</van-tabs> 
+	</view>
+</view>

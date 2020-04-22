@@ -1,0 +1,27 @@
+/* pages/addMemo/addMemo.wxss */
+
+#editor {
+  width: 100%;
+  height: calc(100% - 90rpx);
+  padding: 10px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.editor-icon {
+  width: 100%;
+  height: 80rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0px;
+  padding-bottom:10px; 
+  background: #f2f2f2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.editor-icon>image {
+  width: 40rpx;
+  height: 40rpx;
+  padding: 40rpx 20rpx;
+}

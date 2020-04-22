@@ -1,0 +1,10 @@
+.page{
+  background-color: white;
+}
+image{
+  width: 100%;
+}
+
+.txt{
+  margin: 30rpx;
+}

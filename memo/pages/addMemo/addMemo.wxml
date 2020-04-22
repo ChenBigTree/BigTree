@@ -1,0 +1,9 @@
+<editor show-img-toolbar="true" id="editor"></editor>
+<view class="editor-icon">
+  <image bindtap="img" src="../icon/img.png"></image>
+  <image bindtap="I" src="../icon/I{{I}}.png"></image>
+  <image bindtap="fontSize" src="../icon/fontSize.png"></image>
+  <image bindtap="B" src="../icon/B{{B}}.png"></image>
+  <image bindtap="U" src="../icon/U{{U}}.png"></image>
+  <image bindtap="good" src="../icon/good.png"></image>
+</view>

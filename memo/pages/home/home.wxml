@@ -1,0 +1,22 @@
+<view class="home">
+  <view class="header">
+    <view class="header-day">{{date}}</view>
+    <navigator url="../addMemo/addMemo"><view class="header-left">
+      <image mode="widthFix" src="../icon/add1.png"></image>
+    </view></navigator>
+  </view>
+  <view class="center">
+    <view class="center-center">
+      <view class="week">星期{{day}}</view>
+      <view class="towTextOverflow" bindtouchstart="touse" bindtouchmove="top" bindtap="top">{{hitokoto.hitokoto}}</view>
+      <view class="name">—— {{hitokoto.name}}</view>
+    </view>
+  </view>
+  <view class="toast" hidden="{{hides}}">
+    <view class="center-center">
+      <view class="hitokoto">{{hitokoto.hitokoto}}</view>
+      <view class="name">——{{hitokoto.name}}</view>
+    </view>
+  </view>
+
+</view>
