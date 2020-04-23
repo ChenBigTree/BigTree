@@ -2,7 +2,7 @@
 App({
   onLaunch: function () {
     this.globalData = {
-      userInfo:null
+      userInfo: null
     }
     let _this = this
     if (!wx.cloud) {
@@ -18,37 +18,28 @@ App({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           wx.cloud.callFunction({
-            name:"userInfoData",
-            data:{
-              fun:"get"
-            },
-            success(r){
-              console.log("r",r.result.data[0])
-              _this.globalData.userInfo = r.result.data[0]
-            }
+            name: "login"
+          }).then((e) => {
+            wx.getUserInfo({
+              complete: (c) => {
+                let userInfoData = {
+                  openid: e.result.openid,
+                  nickName: c.userInfo.nickName,
+                  avatarUrl: c.userInfo.avatarUrl,
+                  city: c.userInfo.city
+                }
+                this.globalData.userInfo = userInfoData
+                console.log("全局的userInfo", this.globalData.userInfo)
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                if (this.userInfoReadyCallback) {
+                  this.userInfoReadyCallback(res)
+                }
+              },
+            })
           })
-          // wx.cloud.callFunction({
-          //   name: "login"
-          // }).then((e) => {
-          //   console.log("e",e.result.openid)
-            // wx.getUserInfo({
-            //   complete: (c) => {
-            //     let userInfoData = {
-            //       openid: e.result.openid,
-            //       nickName: c.userInfo.nickName,
-            //       avatarUrl: c.userInfo.avatarUrl,
-            //       city: c.userInfo.city
-            //     }
-            //     this.globalData.userInfo = userInfoData
-            //     // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            //     // 所以此处加入 callback 以防止这种情况
-            //     if (this.userInfoReadyCallback) {
-            //       this.userInfoReadyCallback(res)
-            //     }
-            //   },
-            // })
-            //}) 
         }
+
       },
     })
   }

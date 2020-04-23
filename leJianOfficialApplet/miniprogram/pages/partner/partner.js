@@ -13,19 +13,7 @@ Page({
    */
   onLoad: function (options) {
     let _this = this
-    wx.cloud.callFunction({
-      name: "addFormVal",
-      data: {
-        fun:"get",
-        collectionName: "CompanyProfileList",
-        where:""
-      }
-    }).then(res => {
-      _this.setData({
-        partner: res.result.data
-      })
-      console.log(_this.data.partner)
-    })
+    
   },
 
   /**
@@ -39,7 +27,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.cloud.callFunction({
+      name: "addFormVal",
+      data: {
+        fun:"get",
+        collectionName: "CompanyProfileList",
+        where:""
+      }
+    }).then(res => {
+      this.setData({
+        partner: res.result.data
+      })
+      console.log(this.data.partner)
+    })
   },
 
   /**

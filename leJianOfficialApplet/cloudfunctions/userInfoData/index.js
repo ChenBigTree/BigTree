@@ -7,23 +7,23 @@ let _ = cloud.database().command
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   if (event.fun == "add") {
-    let userInfoList = (await cloud.database().collection("userInfoData").get()).data
-    let arr = []
-    for (let i in userInfoList) {
-      arr.push(userInfoList[i].userInfoData.openid)
-    }
-    let e = arr.includes(wxContext.OPENID)
-    if (!e) {
-      return await cloud.database().collection("userInfoData").add({
-        data: {
-          openid: event.openid,
-          nickName: event.nickName,
-          avatarUrl: event.avatarUrl,
-          isAdministrator:event.isAdministrator,
-          city: event.city,
-        }
-      })
-    }
+    let userInfoList = (await cloud.database().collection("userInfoData").where({
+      openid: event.openid
+    }).get()).data
+
+      if (userInfoList.length == 0) {
+        return await cloud.database().collection("userInfoData").add({
+          data: {
+            openid: event.openid,
+            nickName: event.nickName,
+            avatarUrl: event.avatarUrl,
+            isAdministrator: false,
+            city: event.city,
+          }
+        })
+      }
+
+
   } else if (event.fun == "get") {
     return await cloud.database().collection("userInfoData").where({
       openid: wxContext.OPENID

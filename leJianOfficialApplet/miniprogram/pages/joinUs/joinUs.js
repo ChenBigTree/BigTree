@@ -13,11 +13,15 @@ Page({
     time: "发送验证码", // 发送验证码按钮的txt
     Verification_Code: "", // 验证码的input
     disabled: false, // 验证码按钮的点击状态
-    iponeVal: "15089600646", // 手机号码Val
+    iponeVal: "", // 手机号码Val
     companyName: "",
     linkman: "",
     vcode: "", // 存储随机获取验证码
-    useInfo: {},
+    useInfo: null,
+    dialogShow: false,
+    isShowBut: false,
+    isShow: false,
+    text:""
   },
   // 获取手机号
   getiponeValFun(e) {
@@ -27,75 +31,80 @@ Page({
   },
   // 点击提交时触发
   formSubmit: function (e) {
-    var formVal = e.detail.value; // 获取输入框的值
-    if (formVal.companyName == '') {
-      Utils.showModal("公司名称不能为空");
-      return false
-    }
-    if (formVal.linkman == '') {
-      Utils.showModal("联系人不能为空");
-      return false
-    }
+    if (!app.globalData.userInfo) {
+      _this.openConfirm()
+      console.log("_this.data.useInfo", _this.data.useInfo)
+    } else {
+      var formVal = e.detail.value; // 获取输入框的值
+      if (formVal.companyName == '') {
+        Utils.showModal("公司名称不能为空");
+        return false
+      }
+      if (formVal.linkman == '') {
+        Utils.showModal("联系人不能为空");
+        return false
+      }
 
-    var doIpone = this.VerificationIponeFn(formVal.phone); // 点击发送验证码时 验证一次手机号码
-    if (!doIpone) {
-      Utils.showModal("手机号码不正确");
-      return false;
-    }
-    if (formVal.Verification == '') {
-      Utils.showModal("验证码不能为空");
-      return false
-    }
-    if (formVal.Verification != this.data.vcode) {
-      Utils.showModal("验证码不正确，请重试");
-      return false
-    }
+      var doIpone = this.VerificationIponeFn(formVal.phone); // 点击发送验证码时 验证一次手机号码
+      if (!doIpone) {
+        Utils.showModal("手机号码不正确");
+        return false;
+      }
+      if (formVal.Verification == '') {
+        Utils.showModal("验证码不能为空");
+        return false
+      }
+      if (formVal.Verification != this.data.vcode) {
+        Utils.showModal("验证码不正确，请重试");
+        return false
+      }
 
-    setTimeout(function () {
-      wx.showToast("提交成功！");
-    }, 1000)
+      setTimeout(function () {
+        wx.showToast("提交成功！");
+      }, 1000)
 
-    // setTimeout(() => {
-    //   wx.navigateTo({
-    //     url: '../joinUs/joinUs-Ok/joinUs-OK',
-    //   })
-    // }, 1500)
-    
-    delete formVal.Verification
-
-    wx.getUserInfo({
-      complete: (res) => {
-        wx.cloud.callFunction({
-          name: "login",
-        }).then(openid => {
-          console.log("提交的内容", formVal)
-          // 获取云函数内部函数
-          wx.cloud.callFunction({
-            name: "addFormVal",
-            data: {
-              fun:"add",
-              name: res.userInfo.nickName,
-              useImg: res.userInfo.avatarUrl,
-              openid: openid.result.openid,
-              companyName:formVal.companyName,
-              linkman:formVal.linkman,
-              iponeVal:_this.data.iponeVal,
-              process:false,
-              isPass:false
-            }
-          })
-        }).then((res) => {
-          console.log("添加成功", res)
-
-          _this.setData({
-            companyName: "",
-            linkman: "",
-            iponeVal: "",
-            Verification_Code: "",
-          })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../joinUs/joinUs-Ok/joinUs-OK',
         })
-      },
-    })
+      }, 1500)
+
+      delete formVal.Verification
+
+      wx.getUserInfo({
+        complete: (res) => {
+          wx.cloud.callFunction({
+            name: "login",
+          }).then(openid => {
+            console.log("提交的内容", formVal)
+            // 获取云函数内部函数
+            wx.cloud.callFunction({
+              name: "addFormVal",
+              data: {
+                fun: "add",
+                name: res.userInfo.nickName,
+                useImg: res.userInfo.avatarUrl,
+                openid: openid.result.openid,
+                companyName: formVal.companyName,
+                linkman: formVal.linkman,
+                iponeVal: _this.data.iponeVal,
+                process: false,
+                isPass: false
+              }
+            })
+          }).then((res) => {
+            console.log("添加成功")
+
+            _this.setData({
+              companyName: "",
+              linkman: "",
+              iponeVal: "",
+              Verification_Code: "",
+            })
+          })
+        },
+      })
+    }
   },
 
   openConfirm: function () {
@@ -139,23 +148,23 @@ Page({
 
     _this.getValidCode()
     console.log('验证码为：', _this.data.vcode)
-    // let code = []
-    // code[0] = _this.data.vcode
-    // let phone = _this.data.iponeVal
-    // wx.cloud.callFunction({
-    //   name: "SMS",
-    //   data: {
-    //     phone: phone,
-    //     code: code,
-    //     templateid: 576112
-    //   },
-    //   success(res) {
-    //     console.log('sndSms--->', res)
-    //   },
-    //   fail(res) {
-    //     console.log("读取失败", res)
-    //   }
-    // })
+    let code = []
+    code[0] = _this.data.vcode
+    let phone = _this.data.iponeVal
+    wx.cloud.callFunction({
+      name: "SMS",
+      data: {
+        phone: phone,
+        code: code,
+        templateid: 576112
+      },
+      success(res) {
+        console.log('sndSms--->', res)
+      },
+      fail(res) {
+        console.log("读取失败", res)
+      }
+    })
   },
 
   // 发送验证码的倒计时fn
@@ -165,7 +174,7 @@ Page({
         time: "发送验证码",
         disabled: false
       })
-      // wait = 12;
+      wait = 10;
     } else {
       if (wait < 10) {
         _this.setData({
@@ -197,12 +206,72 @@ Page({
       Verification_Code: Code
     });
   },
+
+  But() {
+    wx.cloud.callFunction({
+      name: "isShowPage",
+      data: {
+        page: "del"
+      }
+    }).then(res => {
+      console.log("重新提交成功", res)
+
+      _this.setData({
+        isShow: false,
+      })
+    }).catch(err => {
+      console.log("重新提交失败")
+    })
+  },
+
+  getUserInfo: function (e) {
+    wx.cloud.callFunction({
+      name: "login"
+    }).then((res) => {
+      let userInfoData = {
+        openid: res.result.openid,
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        city: e.detail.userInfo.city
+      }
+      app.globalData.userInfo = userInfoData
+      this.setData({
+        showLogin: !_this.data.showLogin,
+        userInfo: userInfoData
+      });
+
+      wx.cloud.callFunction({
+        name: "userInfoData",
+        data: {
+          openid: res.result.openid,
+          nickName: e.detail.userInfo.nickName,
+          avatarUrl: e.detail.userInfo.avatarUrl,
+          city: e.detail.userInfo.city,
+          isAdministrator: true,
+          fun: "add"
+        },
+        success(r) {
+          console.log("存储成功", r.result)
+        }
+      })
+      console.log("userInfoData==>", userInfoData)
+    })
+    if (_this.userInfoReadyCallback) {
+      _this.userInfoReadyCallback(res)
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     _this = this
-    console.log("全局有用户信息", app.globalData.userInfo)
+    if (app.globalData.userInfo) {
+      _this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      console.log("当前页面 data", _this.data.userInfo)
+    }
+
   },
 
   /**
@@ -216,7 +285,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    _this.setData({
+      isShowBut: false
+    })
+    wx.cloud.callFunction({
+      name: "isShowPage",
+      data: {
+        page: "joinUs"
+      }
+    }).then((res) => {
+      console.log(res.result)
+      _this.setData({
+        isShow: res.result.isB,
+        text: res.result.isText
+      })
+      console.log(res.result.isText)
+      if (res.result.isText == "你提交的申请未能通过审核") {
+        console.log(res.result.isText)
+        _this.setData({
+          isShowBut: true
+        })
+      }
+    })
   },
 
   /**

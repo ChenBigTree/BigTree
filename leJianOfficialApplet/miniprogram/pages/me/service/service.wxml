@@ -1,2 +1,1 @@
-<!--miniprogram/pages/me/service/service.wxml-->
-<text>miniprogram/pages/me/service/service.wxml</text>
+<view class="box"><image mode="widthFix" src="../../icon/erweima.png"></image></view>

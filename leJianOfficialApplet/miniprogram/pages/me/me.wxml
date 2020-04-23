@@ -16,23 +16,20 @@
 		</view>
 	</view>
 	<view class="me-list">
-		<view class="list">
-			<navigator hover-class="none" url="../me/business/business">商家后台</navigator>
+		<view class="list" data-url="../me/business/business" bindtap="openConfirm">
+			<view>商家后台</view>
 		</view>
-		<view class="list">
-			<navigator hover-class="none" url="../me/myFavorite/myFavorite">我的收藏</navigator>
+		<view class="list" data-url="../me/myFavorite/myFavorite" bindtap="openConfirm">
+			<view>我的收藏</view>
 		</view>
-		<view class="list" hidden="{{isAdministrator}}">
-			<navigator hover-class="none" url="../me/administratorEntry/administratorEntry">管理员入口</navigator>
+		<view class="list" data-url="../me/administratorEntry/administratorEntry" bindtap="openConfirm" wx:if="{{isAdministrator&&userInfo}}">
+			<view>管理员入口</view>
 		</view>
-		<view class="list">
-			<navigator hover-class="none" url="../me/investmentPromoter/investmentPromoter">成为招商员</navigator>
+		<view class="list" data-url="../me/feedback/feedback" bindtap="openConfirm">
+			<view>反馈意见</view>
 		</view>
-		<view class="list">
-			<navigator hover-class="none" url="../me/feedback/feedback">反馈意见</navigator>
-		</view>
-		<view class="list">
-			<navigator hover-class="none" url="../me/service/service">联系客服</navigator>
+		<view class="list" data-url="../me/service/service" bindtap="openConfirm">
+			<view>联系客服</view>
 		</view>
 	</view>
 

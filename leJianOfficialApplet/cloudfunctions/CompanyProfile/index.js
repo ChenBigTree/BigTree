@@ -8,7 +8,8 @@ exports.main = async (event, context) => {
 
   return await cloud.database().collection("CompanyProfileList").add({
     data: {
-      formVal:event.formVal
+      formVal:event.formVal,
+      openid:wxContext.OPENID
     },
   })
 }

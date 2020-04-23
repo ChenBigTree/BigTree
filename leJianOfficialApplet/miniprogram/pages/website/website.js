@@ -86,6 +86,7 @@ Page({
     }).then(res => {
       let cor = _this.data.corporateInformation
       let form = res.result.data[0].formVal
+      console.log("form",form)
       cor.corporateName = form.companyName
       cor.corporateBrief = form.companyBrief
       cor.corporateaddress = form.companyaddress

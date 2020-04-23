@@ -44,7 +44,7 @@ exports.main = async (event, context) => {
         return await cloud.database().collection("CompanyProfileList").get()
       } else { // 获取点击的商家信息
         return await cloud.database().collection("CompanyProfileList").where({
-          _id: event.where
+          openid: event.where
         }).get()
       }
     }
@@ -52,15 +52,44 @@ exports.main = async (event, context) => {
     let dataList = await cloud.database().collection("sub-companyData").where({
       openid: wxContext.OPENID
     }).get()
-    if (dataList.data == []) {
-      return "该账号未有提交记录"
+    if (dataList.data.length == 0) {
+      return {
+        isB: false,
+        isShow: false,
+        isText: "对不起！您未有提交加盟申请列表"
+      }
     } else {
-      for (let i in dataList) {
-        if (dataList[i].isPass) {
-          return 'true'
+      if (dataList.data[0].isPass == false && dataList.data[0].process == false) {
+        return {
+          isB: true,
+          isShow: false,
+          isText: "你提交的申请，管理员未处理"
+        }
+      } else if (dataList.data[0].isPass == false && dataList.data[0].process == true) {
+        return {
+          isB: true,
+          isShow: false,
+          isText: "你提交的申请未能通过审核"
+        }
+      } else if (dataList.data[0].isPass == true && dataList.data[0].process == true) {
+        let bus = await cloud.database().collection("CompanyProfileList").where({
+          openid: wxContext.OPENID
+        }).get()
+
+        if (bus.data.length == 0) {
+          return {
+            isB: true,
+            isShow: false,
+            isText: ""
+          }
+        } else {
+          return {
+            isB: true,
+            isShow: true,
+            isText: "您已成为我们的合作伙伴"
+          }
         }
       }
     }
   }
-
 }

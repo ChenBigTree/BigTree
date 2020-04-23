@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isShow: false,
+    text: "",
     formVal: {
       companyBrief: "",
       companyName: "",
@@ -14,7 +16,7 @@ Page({
       iponeVal: "",
       linkman: "",
       logoSrc: ""
-    }
+    },
   },
   // 点击地标按钮选定位
   address() {
@@ -27,7 +29,7 @@ Page({
   // 点击提交获取数据
   formSubmit(e) {
     var formVal = e.detail.value; // 获取输入框的值
-    console.log("formVal获取",formVal)
+    console.log("formVal获取", formVal)
     if (formVal.companyName == '') {
       Utils.showModal("公司名称不能为空");
       return false
@@ -64,6 +66,9 @@ Page({
     }
 
     console.log("处理logo前", _this.data.formVal)
+    wx.showLoading({
+      name: "正在提交中"
+    })
     wx.cloud.uploadFile({
       cloudPath: "companyLogo/" + (new Date().getTime() + ".png"),
       filePath: _this.data.formVal.logoSrc,
@@ -74,9 +79,7 @@ Page({
         wx.cloud.getTempFileURL({
           fileList: [res.fileID],
           success: e => {
-            wx.showLoading({
-              name: "正在提交中"
-            })
+
             console.log("临时链接", e.fileList[0].tempFileURL)
 
             _this.inputFun(e.fileList[0].tempFileURL, 'logoSrc')
@@ -92,7 +95,12 @@ Page({
                 Utils.showModal("提交成功")
                 wx.hideLoading()
                 _this.setData({
-                  formVal:""
+                  formVal: "",
+                  isShow: false,
+                })
+
+                wx.switchTab({
+                  url: '../../partner/partner',
                 })
                 console.log("上传商家基本信息成功", res)
               },
@@ -110,7 +118,6 @@ Page({
       fail: console.error
     })
   },
-
   // 验证手机号函数
   VerificationIponeFn: function (value) {
     var checkVal = Utils.Verification.phone;
@@ -120,7 +127,6 @@ Page({
     })
     return checkVal.test(_this.data.iponeVal)
   },
-
   // 商家上传logo
   upIogo() {
     wx.chooseImage({
@@ -128,11 +134,9 @@ Page({
       success: function (e) {
         console.log("图片临时路径", e.tempFiles[0].path)
         _this.inputFun(e.tempFiles[0].path, "logoSrc")
-        console.log("图片临时路径时",_this.data.formVal)
       }
     })
   },
-
   companyName(e) {
     this.inputFun(e.detail, 'companyName')
   },
@@ -172,31 +176,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    _this = this,
-    wx.cloud.callFunction({
-      name:"addFormVal",
-      data:{
-        fun:"business"
-      },
-      success:res =>{
-        console.log('res==>',res)
-      },fail:err=>{
-        console.log("err==>",err)
-      }
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+    _this = this
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.cloud.callFunction({
+      name: "addFormVal",
+      data: {
+        fun: "business"
+      },
+      success: res => {
+        console.log('res==>', res.result)
+        if(res.result.isText == ""){
+          _this.setData({
+            isShow: true
+          })
+        }else{
+          _this.setData({
+            isShow: false,
+            text:res.result.isText
+          })
+        }
+
+        // if (res.result.isB == true && res.result.isShow == true) {
+        //   _this.setData({
+        //     isShow: false,
+        //     text: "您已成为我们的合作伙伴",
+        //   })
+        // }else{
+        //   _this.setData({
+        //     isShow: true,
+        //     text: res.result.isText,
+        //   })
+        // }
+      },
+      fail: err => {
+        console.log("err==>", err)
+      }
+    })
 
   },
 

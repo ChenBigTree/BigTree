@@ -111,3 +111,16 @@
   background-color: #e64444;
   color: #fff;
 }
+
+.tj{
+  text-align: center;
+  margin-top: 100rpx;
+}
+.tj>button{
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 100rpx;
+  font-size: 28rpx;
+
+}

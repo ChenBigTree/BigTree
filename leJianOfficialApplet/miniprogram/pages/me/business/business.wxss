@@ -3,6 +3,11 @@
   padding: 20rpx;
 }
 
+.tj {
+  text-align: center;
+  margin-top: 100rpx;
+}
+
 .btn {
   width: 300rpx;
   height: 80rpx;
@@ -80,4 +85,9 @@
   z-index: 2;
   font-size: 45rpx;
   height: 100%;
+}
+
+.no {
+  text-align: center;
+  margin-top: 200rpx;
 }

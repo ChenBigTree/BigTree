@@ -7,10 +7,13 @@ Page({
   data: {
     userInfo: null,
     showLogin: false,
+    isAdministrator: false,
+    dialogShow: false
   },
   getUserInfo: function (e) {
     wx.getUserInfo({
       success: e => {
+        console.log("e==>", e)
         wx.cloud.callFunction({
           name: "login"
         }).then((res) => {
@@ -21,7 +24,7 @@ Page({
             city: e.userInfo.city
           }
           app.globalData.userInfo = userInfoData
-          this.setData({
+          this.setData({ 
             showLogin: !_this.data.showLogin,
             userInfo: userInfoData
           });
@@ -33,8 +36,8 @@ Page({
               nickName: e.userInfo.nickName,
               avatarUrl: e.userInfo.avatarUrl,
               city: e.userInfo.city,
-              isAdministrator:false,
-              fun:"add"
+              isAdministrator: true,
+              fun: "add"
             },
             success(r) {
               console.log("存储成功", r.result)
@@ -53,31 +56,30 @@ Page({
    */
   onLoad: function (options) {
     _this = this
-    if (app.globalData.userInfo) {
-      console.log("全局有用户信息", app.globalData.userInfo)
-      _this.setData({
-        userInfo: app.globalData.userInfo
-      })
-      console.log("data",_this.data.userInfo)
-    } else {
-      console.log("全局没有用户信息")
-      wx.getSetting({
-        success: e => {
-          if (e.authSetting['scope.userInfo']) {
-            console.log("已授权")
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-            _this.getUserInfo()
-          }
-        },
-      })
-      console.log("全局app==>", app.globalData.userInfo)
-    }
+
+    wx.cloud.callFunction({
+      name: "administrator"
+    }).then((res) => {
+      console.log("是否管理员", res.result.data.length)
+      if (res.result.data.length != 0) {
+        _this.setData({
+          isAdministrator: true
+        })
+      }
+    })
+    
   },
 
-  openConfirm: function () {
-    this.setData({
-      dialogShow: true
-    })
+  openConfirm: function (e) {
+    if (_this.data.userInfo == null) {
+      this.setData({
+        dialogShow: true
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url,
+      })
+    }
   },
 
   /**
@@ -91,7 +93,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (app.globalData.userInfo) {
+      console.log("全局有用户信息", app.globalData.userInfo)
+      _this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      console.log("data", _this.data.userInfo)
+    } else {
+      console.log("全局没有用户信息")
+      wx.getSetting({
+        success: e => {
+          if (e.authSetting['scope.userInfo']) {
+            console.log("已授权")
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            _this.getUserInfo()
+          }
+        },
+      })
+      console.log("全局app==>", app.globalData.userInfo)
+    }
   },
 
   /**
