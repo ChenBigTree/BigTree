@@ -1,29 +1,15 @@
-// pages/html/html.js
-var _this;
+// miniprogram/pages/list/list.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    active: 0
   },
-
+  // 首页加载的渲染方法
+  
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
-    _this=this
-    // console.log('e',e)
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('pushHtmlData', {data: 'test'});
-    // 监听pushHtmlData事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('pushHtmlData', function(data) {
-      console.log('asdad',data)
-      _this.setData({
-        html:data.data
-      })
-    })
+  onLoad: function (options) {
+
   },
 
   /**
@@ -73,5 +59,20 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  // 页面传值
+  PageByValue(){
+    wx.navigateTo({
+      url: '../list/PageByValue/PageByValue?text=来自首页传来的值',
+      events:{
+        someEvent: data=> {
+          console.log(data)
+        }
+      },
+      success(res){
+        res.eventChannel.emit('someEvent', { data: '通过监听器传list页面的参数' })
+      }
+    })
+  },
+
 })

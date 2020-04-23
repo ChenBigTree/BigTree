@@ -1,0 +1,4 @@
+<button bindtap="getValidCode">获取六位验证码(大小写+数字)</button>
+<text>{{code}}</text>
+<button bindtap="getValidCodes">获取六位验证码(数字)</button>
+<text>{{codes}}</text>

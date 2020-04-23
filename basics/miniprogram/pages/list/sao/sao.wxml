@@ -1,0 +1,2 @@
+<button bindtap="sao">扫一扫</button>
+<button open-type="share" bindtap="zf">转发</button>

@@ -1,0 +1,42 @@
+/* miniprogram/pages/list/flex/flex.wxss */
+.box{
+  width: 100%;
+  height: 100%;
+  background: #f3f3f3;
+}
+.box1{
+  height: 80%;
+  border-bottom: #000 1rpx solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center{
+  width: 300rpx;
+  height: 300rpx;
+  line-height: 300rpx;
+  text-align: center;
+  background: #fff;
+  border-radius: 20rpx;
+  box-shadow: 5px 5px 6px #000;
+  
+}
+
+.auto{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.auto>view{
+  text-align: center;
+  line-height: 60rpx;
+  float: left;
+  width: 80rpx;
+  height: 60rpx;
+  background: #C8EBFA;
+}

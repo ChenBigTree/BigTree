@@ -1,5 +1,4 @@
-// pages/html/html.js
-var _this;
+// miniprogram/pages/list/Render/Render.js
 Page({
 
   /**
@@ -12,18 +11,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
-    _this=this
-    // console.log('e',e)
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('pushHtmlData', {data: 'test'});
-    // 监听pushHtmlData事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('pushHtmlData', function(data) {
-      console.log('asdad',data)
-      _this.setData({
-        html:data.data
-      })
+  onLoad: function (options) {
+    let _this = this
+    wx.showLoading({
+      title:"正在获取数据中..."
     })
+    setTimeout(() => {
+      wx.hideLoading({
+        complete: (res) => {
+          console.log("数据获取成功！")
+          _this.setData({
+            text:"获取数据渲染成功"
+          })
+        },
+      })
+    }, 5000);
   },
 
   /**

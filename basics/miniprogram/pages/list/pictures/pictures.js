@@ -1,5 +1,5 @@
-// pages/html/html.js
-var _this;
+// miniprogram/pages/list/pictures/pictures.js
+let _this 
 Page({
 
   /**
@@ -8,22 +8,22 @@ Page({
   data: {
 
   },
-
+  upIogo() {
+    wx.chooseImage({
+      count: 1,
+      success: function (e) {
+        console.log("图片临时路径", e.tempFiles[0].path)
+        _this.setData({
+          logoSrc: e.tempFiles[0].path
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
-    _this=this
-    // console.log('e',e)
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('pushHtmlData', {data: 'test'});
-    // 监听pushHtmlData事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('pushHtmlData', function(data) {
-      console.log('asdad',data)
-      _this.setData({
-        html:data.data
-      })
-    })
+  onLoad: function (options) {
+     _this = this
   },
 
   /**

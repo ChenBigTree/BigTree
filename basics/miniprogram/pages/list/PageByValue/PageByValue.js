@@ -1,27 +1,39 @@
-// pages/html/html.js
-var _this;
+// miniprogram/pages/list/PageByValue/PageByValue.js
+let app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    text:"",
+    appText:"",
+    eventData:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
-    _this=this
-    // console.log('e',e)
+  onLoad: function (data) {
+    this.setData({
+      nbTitle: '新标题',
+      nbLoading: true,
+      nbFrontColor: '#ffffff',
+      nbBackgroundColor: '#000000',
+    })
+    console.log(data)
+    let _this = this
+    this.setData({
+      text:data.text,
+      appText:app.globalData.text
+    })
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('pushHtmlData', {data: 'test'});
-    // 监听pushHtmlData事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('pushHtmlData', function(data) {
-      console.log('asdad',data)
+    // eventChannel.emit('someEvent', {data: 'test'});
+    // 监听someEvent事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('someEvent', function(data) {
+      console.log(data)
       _this.setData({
-        html:data.data
+        eventData:data
       })
     })
   },

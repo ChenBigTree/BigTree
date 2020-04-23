@@ -1,0 +1,11 @@
+.img-box {
+  width: 100%;
+  background: #fff;
+  margin: 10rpx auto 0;
+  overflow: hidden;
+}
+
+.img-box>image {
+  width: 100%;
+  display: block;
+}

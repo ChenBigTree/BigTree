@@ -1,0 +1,16 @@
+.list{
+  padding: 20rpx;
+}
+.title{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 0 0 20rpx ;
+  font-size: 28rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.listlist{
+  font-weight: bold;
+  font-size: 32rpx;
+}

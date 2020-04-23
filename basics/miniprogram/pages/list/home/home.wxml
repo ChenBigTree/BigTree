@@ -1,0 +1,22 @@
+<view class="home">
+	<navigator class="goback" open-type="navigateBack" delta="1">返回</navigator>
+	<view class="header">
+		<view class="header-day">{{date}}</view>
+	</view>
+	<view class="center">
+		<view class="center-center">
+			<view class="week">星期{{day}}</view>
+			<view class="towTextOverflow" bindtouchstart="touse" bindtouchmove="top" bindtap="top">{{hitokoto.hitokoto}}</view>
+			<view class="name">—— {{hitokoto.name}}</view>
+		</view>
+	</view>
+	<view class="toast" hidden="{{hides}}">
+		<view class="center-center">
+			<view class="hitokoto">{{hitokoto.hitokoto}}</view>
+			<view class="name">——{{hitokoto.name}}</view>
+		</view>
+	</view>
+	<view class="box-box">
+		<view class="box" wx:for="{{num}}">{{item}}</view>
+	</view>
+</view>

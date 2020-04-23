@@ -1,0 +1,9 @@
+/* miniprogram/pages/login/login.wxss */
+.button{
+  width: 90%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #777;
+  text-align: center;
+  margin: 30rpx 0 0 5%;
+}

@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/list/list",
+    "pages/list/login/login",
+    "pages/list/PageByValue/PageByValue",
+    "pages/list/Render/Render",
+    "pages/list/home/home",
+    "pages/list/promise/promise",
+    "pages/list/verification/verification",
+    "pages/list/remdom/remdom",
+    "pages/list/pictures/pictures",
+    "pages/list/flex/flex",
+    "pages/list/sao/sao",
+    "pages/list/file/file",
+    "pages/list/getphone/getphone",
+    "pages/list/dataManipulation/dataManipulation"
+  ],
+  "window": {
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "知识点总结",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

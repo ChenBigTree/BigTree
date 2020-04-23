@@ -1,0 +1,4 @@
+<button bindtap="upIogo">上传logo</button>
+<view class="img-box fl">
+	<image mode="widthFix" src="{{logoSrc}}"></image>
+</view>

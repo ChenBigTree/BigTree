@@ -1,0 +1,89 @@
+<van-tabs active="{{ active }}">
+	<view class="list">
+		<van-tab title="初级">
+			<view class="listlist">未完成</view>
+			<view class="title"><navigator hover-class="none" url="./file/file">文件上传与下载</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator></view>
+			<view class="title">微信运动</view>
+			<view class="title">数据缓存</view>
+			<view class="title">校验图片和文字是否合法</view>
+			<view class="title">优惠卷（代金卷）</view>
+			<view class="title">公众号关注组件</view>
+			<view class="title">内容安全</view>
+			<view class="title">图像处理</view>
+			<view class="title">上传文件监听</view>
+			<view class="title">音视频合成</view>
+			<view class="title">剪贴板</view>
+			<view class="title">小程序跳转小程序</view>
+			<view class="title"><navigator hover-class="none" url="./login/login">获取手机号</navigator></view>
+			<view class="title" bindtap="PageByValue">导航栏</view>
+			<view class="title">小程序置顶</view>
+			<view class="listlist">完成</view>
+			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
+			<view class="title"><navigator hover-class="none" url="./sao/sao">扫一扫</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="../list/Render/Render">首次数据加载的渲染方法</navigator>
+			</view>
+			<view class="title"><navigator hover-class="none" url="./sao/sao">转发</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./home/home">如何发起http请求和请求注意事项</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject）</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./pictures/pictures">如何从本地选择图片或者拍照上传图片</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./remdom/remdom">获取六位随机数？</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./home/home"> 如何实现小程序下拉刷新?触底加载</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./verification/verification">验证手机号是否正确？邮箱等</navigator>
+			</view>
+			<view class="title"><navigator hover-class="none" url="./login/login">登录验证与获取用户信息</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./login/login">收货地址</navigator></view>
+		</van-tab>
+		<van-tab title="中级">
+			<view class="listlist">未完成</view>
+			<view class="title"> 如何解决小程序异步请求问题？</view>
+			<view class="title">如何获取本地定位信息,解析地址获取经纬度</view>
+			<view class="title">如何发送手机信息通知，</view>
+			<view class="title">发送公众号模板消息</view>
+			<view class="title">发送小程序订阅消息（服务通知）</view>
+			<view class="title">使用音乐播放的使用</view>
+			<view class="title">在不使用后台添加域名的情况下，调用接口。</view>
+			<view class="title">富文本的配置与调用</view>
+			<view class="title">小程序如何生成二维码</view>
+			<view class="title">联表查询</view>
+			<view class="title">实时数据推送</view>
+			<view class="title">ad</view>
+			<view class="title">小程序直播</view>
+			<view class="title">即时配送</view>
+			<view class="title">客服消息</view>
+			<view class="title">即时配送</view>
+			<view class="listlist">完成</view>
+		</van-tab>
+		<van-tab title="高级">
+			<view class="listlist">未完成</view>
+			<view class="title"> 组件间的共享特性怎么处理？</view>
+			<view class="title">生成自定义海报</view>
+			<view class="title">小程序如何使用字体图标</view>
+			<view class="title">支付功能</view>
+			<view class="title">抖音视频播放模板</view>
+			<view class="title">语音转文字</view>
+			<view class="title">发票抬头</view>
+			<view class="title">生物认证</view>
+			<view class="title">小程序上传文件并打开</view>
+			<view class="title">物流</view>
+			<view class="title">aria-component 无障碍访问组件</view>
+			<view class="title">选择器</view>
+			<view class="title">web-view</view>
+			<view class="title">多端开发kbone框架，h5云开发</view>
+			<view class="title">OCR</view>
+			<view class="listlist">完成</view>
+		</van-tab>
+	</view>
+</van-tabs>

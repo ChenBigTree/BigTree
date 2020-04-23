@@ -1,0 +1,15 @@
+<view class="data">
+	<van-search value="{{ value }}" placeholder="请输入搜索关键词" use-action-slot bind:change="onChange1" bind:search="onSearch">
+		<view slot="action" bind:tap="onClick1">搜索</view>
+	</van-search>
+	<van-search value="{{ value }}" placeholder="请输入添加内容" use-action-slot bind:change="onChange2" bind:search="onSearch">
+		<view slot="action" bind:tap="onClick2">添加数据</view>
+	</van-search>
+	<view>
+
+		<view class="box" wx:for="{{getData}}">
+			<text>{{item.value}}</text>
+      <view bindtap="del" data-id="{{item._id}}">X</view>
+		</view>
+	</view>
+</view>

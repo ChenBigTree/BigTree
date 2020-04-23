@@ -1,0 +1,8 @@
+<view class="button" bindtap="openConfirm">获取权限与用户信息</view>
+<view class="button" bindtap="getPhone">获取手机号</view>
+
+<!-- <button class="button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+	手机号领取
+</button> -->
+<view class="button" bindtap="address">获取收货地址</view>
+<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>

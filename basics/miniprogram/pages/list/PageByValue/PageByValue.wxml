@@ -1,0 +1,3 @@
+<view><text>{{text}}</text></view>
+<view><text>{{appText}}</text></view>
+<view><text>{{eventData.data}}</text></view>
