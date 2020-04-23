@@ -49,7 +49,7 @@ Page({
   },
 
   // 点击地址信息跳转地图查看路线规划
-  mapFun() {
+  mapFun() { 
     qqmapsdk.geocoder({
       address: _this.data.corporateInformation.corporateaddress,
       success: function (res) {

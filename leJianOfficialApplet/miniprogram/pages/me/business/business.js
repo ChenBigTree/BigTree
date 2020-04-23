@@ -1,4 +1,3 @@
-// const chooseLocation = requirePlugin('chooseLocation');
 let _this;
 let Utils = require("../../../utils/utils")
 Page({
@@ -200,18 +199,6 @@ Page({
             text:res.result.isText
           })
         }
-
-        // if (res.result.isB == true && res.result.isShow == true) {
-        //   _this.setData({
-        //     isShow: false,
-        //     text: "您已成为我们的合作伙伴",
-        //   })
-        // }else{
-        //   _this.setData({
-        //     isShow: true,
-        //     text: res.result.isText,
-        //   })
-        // }
       },
       fail: err => {
         console.log("err==>", err)
