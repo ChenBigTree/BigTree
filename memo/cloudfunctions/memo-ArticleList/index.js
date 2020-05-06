@@ -18,24 +18,10 @@ exports.main = async(event, context) => {
       },
     })
   } else if (event.fun == "get") {
-    return await cloud.database().collection("memo-ArticleList").get()
-
-    // let arr = []
-    // for (let i = 1; i <= 12; i++) {
-    //   (function(i) {
-    //     cloud.database().collection("memo-ArticleList").where({
-    //       time: {
-    //         month: _.eq(i)
-    //       }
-    //     }).get((res) => {
-
-    //       arr[i] = res.data
-    //       if (i == 12) {
-    //         return arr
-    //       }
-    //     })
-    //   })(i)
-    // }
-
+    return await cloud.database().collection("memo-ArticleList").where({
+      time: {
+        month: _.eq(event.i)
+      }
+    }).get()
   }
 }

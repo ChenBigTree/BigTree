@@ -61,11 +61,44 @@ Page({
     })
   },
 
+  // 获取美文
+  getBeautifulEssay() {
+    let arr = []
+
+    for (let i = 0; i < 12; i++) {
+      (function(i) {
+        wx.cloud.callFunction({
+          name: "memo-ArticleList",
+          data: {
+            fun: "get",
+            i: i
+          },
+          success: res => {
+            if (res.result.data.length != 0){
+              arr[i] = res.result.data
+            }
+            if(i == 11){
+              console.log("arr==>", arr)
+              _this.setData({
+                ArticleList:arr
+              })
+            }
+          },
+          fail: err => {
+            console.log(err)
+          }
+        })
+      })(i)
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    _this = this;
+    this.timeFun()
+    this.hitokotoFun()
   },
 
   /**
@@ -73,68 +106,13 @@ Page({
    */
   onReady: function() {
 
-    _this = this;
-    this.timeFun()
-    this.hitokotoFun()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-    for (let i = 1; i <= 12; i++) {
-      (function(i) {
-        wx.cloud.database().collection("memo-ArticleList").where({
-          "time.month": _.eq(i)
-        }).get({
-          success: r => {
-            arr[i] = res.data
-            if (i == 12) {
-              // _this.setData({
-              //   arr: arr
-              // })
-              console.log("arr", arr)
-              // console.log("_this.data.arr", _this.data.arr)
-            }
-          },
-          fail: e => {
-            console.log(e)
-          }
-        })
-
-      })(i)
-    }
-    // let arr = []
-    // wx.cloud.callFunction({
-    //   name: "memo-ArticleList",
-    //   data: {
-    //     fun: "get"
-    //   },
-    //   success: r => {
-    //     let data = r.result.data
-    //     for (let i = 1; i <= 12; i++) {
-    //       (function(i) {
-    //         for (let j in data) {
-    //           if (data[j].time.month == i) {
-    //             arr[i] = data[j]
-    //             if (i == 12) {
-    //               _this.setData({
-    //                 arr:arr
-    //               })
-    //               console.log("arr", arr)
-    //               console.log("_this.data.arr",_this.data.arr)
-    //             }
-    //           }
-    //         }
-    //       })(i)
-
-    //     }
-    //   },
-    //   fail: e => {
-    //     console.log(e)
-    //   }
-    // })
+    this.getBeautifulEssay()
   },
 
   /**
