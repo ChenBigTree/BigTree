@@ -1,0 +1,181 @@
+/* pages/community/speechAdd.wxss */
+page {
+  display: block;
+  min-height: 100%;
+  background-color: #2f3336;
+  position: relative;
+}
+.communityPage-li-swiper{
+  position: relative;
+  text-align: center;
+}
+.swiper {  
+  width: 100%;
+}  
+.lessonImg{
+  width: 100%;
+  background: #999;
+  position: relative;
+
+}
+.imgSwiper{
+  width:750rpx;
+  height:470rpx;
+  background: yellow;
+}
+.imgBack{
+  width:750rpx;
+  height:422rpx;
+  position: relative;
+  background: #999;
+}
+.itemImg{
+  width: 100%;
+  position: relative;
+}
+.uploadImg{
+  background: #999;
+  border-radius: 10rpx;
+  position: absolute;
+  top:121rpx;
+  left:285rpx;
+}
+.userIcon {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50rpx;
+  overflow: hidden;
+  position: absolute;
+  right: 265rpx;
+  bottom: 160rpx;
+}
+.name {
+  width: 50rpx;
+  position: absolute;
+  font-size: 25rpx;
+  bottom: 125rpx;
+  right: 275rpx;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.txtBox {
+  position: absolute;
+  top: 50rpx;
+  left: 45rpx;
+}
+.txtBox .title {
+  position: absolute;
+  width: 430rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #c8c088;
+  font-size: 40rpx;
+  left: 20rpx;
+}
+.txtBox .date {
+  position: absolute;
+  width: 250rpx;
+  top: 60rpx;
+  left: 70rpx;
+}
+.txt {
+  margin-top: 25rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #eee;
+}
+.btn {
+  margin: 20rpx;
+}
+.shadow {
+  border-radius: 15rpx;
+  text-align: center;
+}
+.hidden {
+  display: none;
+ }
+ .show {
+  display: block;
+ }
+ .kinds {
+  display: inline-block;
+  margin:10rpx;
+  /* padding: 0 25rpx; */
+  font-size: 28rpx;
+  justify-content: space-around;
+ }
+ .kinds .kinds- {
+  display: inline-block;
+  margin:10rpx;
+  box-sizing: border-box;
+  padding: 10rpx;
+  border-radius: 15rpx;
+  color: #FFF;
+  border:1rpx solid #FFF;
+ }
+ .kinds-.kinds-c {
+  color: orangered;
+  border:1px solid orangered;
+ }
+
+.uploadImg image{
+  width:50rpx;
+}
+.viewBtn{
+  background: yellow;
+  position: fixed;
+  bottom: 20rpx;
+  width: 100%;
+}
+
+.defaultImg {
+  width: 100%;
+  height: 100%;
+}
+
+.btnImg{
+  width: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnImg view{
+  display:flex;
+  justify-content:center;
+}
+.btnview {
+  position: fixed;
+  bottom: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  width: 100%;
+}
+input{
+  border: 0;
+  background: rgb(233, 233, 233);
+}
+
+.speak-style{ 
+    position: fixed;
+    height: 240rpx; 
+    width: 240rpx;
+    bottom: 0rpx;  
+    border-radius: 20rpx; 
+    margin: 30% 255rpx 40% 255rpx; 
+}
+.sound-style{ 
+  position: absolute; 
+  width: 74rpx; 
+  height:150rpx; 
+  margin-top: 62rpx; 
+  margin-left: 83rpx; 
+}
+.speak-style > text{ 
+	margin-left: 100rpx; 
+    color:#fff; 
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的课堂",
+  "usingComponents": {
+    "i-tabs": "../../components/tabs/index",
+    "i-tab": "../../components/tab/index",
+    "circlePage": "../../components/circlePage/index",
+    "curriculumPage": "../../components/curriculumPage/index"
+  }
+}

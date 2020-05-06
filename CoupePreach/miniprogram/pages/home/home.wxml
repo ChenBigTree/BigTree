@@ -1,0 +1,6 @@
+<view class="home">
+	<view class="title">
+		<w-tabs bind:onChange="handleChange" options="{{ tabs1 }}" />
+	</view>
+	
+</view>

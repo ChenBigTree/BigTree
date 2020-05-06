@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-auth": "../components/auth/dialog"
+  },
+  "navigationBarBackgroundColor":"#FFFFFF"
+}

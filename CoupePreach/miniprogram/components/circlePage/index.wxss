@@ -1,0 +1,165 @@
+/* components/circlePage/index.wxss */
+.top-circle {
+  margin-top: 22rpx;
+}
+.circle {
+  margin-top: 16rpx;
+  margin-bottom: 16rpx;
+  border-bottom: 2rpx solid #ececec;
+  font-family: Arial, sans-serif;
+  margin-right: 20rpx;
+}
+.userhead {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 8rpx;
+  margin-left: 16rpx;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16rpx;
+  width: 100%;
+}
+.username {
+  color: #576b95;
+  font-size: 32rpx;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  margin-top: -10rpx;
+  /* margin-right: 20rpx; */
+}
+.content {
+  font-size: 32rpx;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: #252525;
+  margin-bottom: 10rpx;
+}
+.community-title-box {
+  width: 400rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.community-li-title-none {
+  position: absolute;
+  width: 380rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #c8c087;
+  top: 70rpx;
+  left: 45rpx;
+  font-weight: bolder;
+}
+.community-li-title-avatar-box{
+  position: relative;
+  bottom: 100rpx;
+}
+.community-li-title-avatar {
+  width: 70rpx;
+  height: 70rpx;
+  overflow: hidden;
+  border-radius: 50rpx;
+  position: absolute;
+  right: 220rpx;
+  bottom: 160rpx;
+}
+.community-li-title-name {
+  width: 50rpx;
+  position: absolute;
+  right: 230rpx;
+  font-size: 25rpx;
+  color: #333;
+  bottom: 120rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+.userIcon {
+  width: 70rpx;
+  height: 70rpx;
+}
+.li-imgs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+.community-li-title-time {
+  position: absolute;
+  top: 120rpx;
+  left: 145rpx;
+  font-size: 25rpx;
+}
+.community-title-box {
+  width: 300rpx;
+  height: 100rpx;
+  margin-left: 0rpx;
+}
+
+.communityPage-li-img-none{
+  position: relative;
+}
+.community-li-title-avatar image{
+  width: 100%;
+}
+.uploadImg{
+  border-radius: 10rpx;
+  position: absolute;
+  top:115rpx;
+  left:255rpx;
+}
+.timeArea {
+  font-size: 8pt;
+  line-height: 20pt;
+  color: #888;
+  margin-top: 6rpx;
+  position: relative;
+}
+.timeArea-right {
+  vertical-align: bottom;
+}
+.dd-icon {
+  height: 32rpx;
+  width: 32rpx;
+}comm-zan {
+  width: 100%;
+}.r {
+  border-bottom: 16rpx solid #f7f7f7;
+  border-left: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  width: 2rpx;
+  margin-top: 5rpx;
+  margin-left: 20rpx;
+}.zan {
+  overflow: hidden;
+  background-color: #f7f7f7;
+  align-items: center;
+  border-bottom: 1rpx solid #ececec;
+  padding: 12rpx 6rpx 8rpx 6rpx;
+}.love-icon {
+  float: right;
+  padding-left: 8rpx;
+  padding-right: 2rpx;
+  width: 32rpx;
+  height: 32rpx;
+  padding-top: 4rpx;
+}.like {
+  font-size: 32rpx;
+  line-height: 44rpx;
+  color: #576b95;
+}
+.null{
+  font-size: 14px;
+  text-align: center;
+  padding: 30px 0;
+  color: #6b6b6b;
+}

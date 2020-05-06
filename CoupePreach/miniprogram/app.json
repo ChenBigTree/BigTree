@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/myHomepage/myHomepage",
+    "pages/my/my",
+    "pages/my/fans/fans",
+    "pages/my/partner/partner",
+    "pages/my/administrator/administrator",
+    "pages/my/administrator/course/course",
+    "pages/myHomepage/speechAdd/speechAdd",
+    "pages/myHomepage/speechDetail/speechDetail"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "科普宣讲团",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/home/home",
+        "iconPath": "images/icon/首页2.png",
+        "selectedIconPath": "images/icon/首页1.png"
+      },
+      {
+        "text": "个人主页",
+        "pagePath": "pages/myHomepage/myHomepage",
+        "iconPath": "images/icon/partner2.png",
+        "selectedIconPath": "images/icon/partner1.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "images/icon/我的2.png",
+        "selectedIconPath": "images/icon/我的1.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

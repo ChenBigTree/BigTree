@@ -1,0 +1,5 @@
+<view class="adm clearfix">
+	<view class="list">
+		<navigator hover-class="none" url="../administrator/course/course">课程管理</navigator>
+	</view>
+</view>
