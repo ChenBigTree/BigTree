@@ -11,7 +11,7 @@
 	},
 	"appid": "wx99155eb36a6a05c7",
 	"projectname": "basics",
-	"libVersion": "2.8.1",
+	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -49,6 +49,12 @@
 					"name": "pages/list/dataManipulation/dataManipulation",
 					"pathName": "pages/list/dataManipulation/dataManipulation",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/file/file",
+					"pathName": "pages/list/file/file",
 					"scene": null
 				}
 			]

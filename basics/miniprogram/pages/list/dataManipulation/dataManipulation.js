@@ -6,24 +6,26 @@ const _ = db.command
 Page({
 
   data: {
-    value: ''
+    value1: ''
   },
+
   onChange1(e) {
     this.setData({
-      value: e.detail
+      value1: e.detail.value
     });
   },
+
   onChange2(e) {
     this.setData({
-      add: e.detail
+      add: e.detail.value
     });
   },
+
   onClick1() {
-    console.log(this.data.value);
     tesk.where(_.or(
       [{
         value: db.RegExp({
-          regexp: '.*' + _this.data.value,
+          regexp: '.*' + _this.data.value1,
           options: 'i'
         })
       }]
@@ -36,6 +38,7 @@ Page({
       }
     })
   },
+
   onClick2() {
     console.log(_this.data.add)
     if (_this.data.add != "") {
@@ -53,6 +56,7 @@ Page({
       })
     }
   },
+
   del(e) {
     console.log(e.currentTarget.dataset.id)
     tesk.doc(e.currentTarget.dataset.id).remove({
@@ -62,7 +66,8 @@ Page({
       }
     })
   },
-  get(){
+  
+  get() {
     tesk.get({
       success: res => {
         console.log("获取数据成功", res)
@@ -81,7 +86,7 @@ Page({
    */
   onLoad: function (options) {
     _this = this,
-    _this.get()
+      _this.get()
   },
 
   /**

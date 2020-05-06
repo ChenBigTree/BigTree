@@ -2,9 +2,6 @@
 	<view class="list">
 		<van-tab title="初级">
 			<view class="listlist">未完成</view>
-			<view class="title"><navigator hover-class="none" url="./file/file">文件上传与下载</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator></view>
 			<view class="title">微信运动</view>
 			<view class="title">数据缓存</view>
 			<view class="title">校验图片和文字是否合法</view>
@@ -25,6 +22,9 @@
 			<view class="title">
 				<navigator hover-class="none" url="../list/Render/Render">首次数据加载的渲染方法</navigator>
 			</view>
+			<view class="title"><navigator hover-class="none" url="./file/file">文件上传与下载</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator></view>
+			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator></view>
 			<view class="title"><navigator hover-class="none" url="./sao/sao">转发</navigator></view>
 			<view class="title"><navigator hover-class="none" url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中</navigator></view>
 			<view class="title"><navigator hover-class="none" url="./home/home">如何发起http请求和请求注意事项</navigator></view>
