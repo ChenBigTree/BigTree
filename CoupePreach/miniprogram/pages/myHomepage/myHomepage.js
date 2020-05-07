@@ -10,35 +10,6 @@ Page({
     icons: require("../../utils/icons.js"),
     showMore: false,
     showFooter: true,
-    // tabList: [{
-    //     name: "健康",
-    //     isSelect: false
-    //   },
-    //   {
-    //     name: "美食",
-    //     isSelect: false
-    //   },
-    //   {
-    //     name: "感悟",
-    //     isSelect: false
-    //   },
-    //   {
-    //     name: "全部",
-    //     isSelect: true
-    //   },
-    //   {
-    //     name: "商业",
-    //     isSelect: false
-    //   },
-    //   {
-    //     name: "营销",
-    //     isSelect: false
-    //   },
-    //   {
-    //     name: "管理",
-    //     isSelect: false
-    //   }
-    // ],
     ifManage: false,
     statusBarHeight: app.globalData.statusBarHeight,
     wallData: [],
@@ -131,6 +102,10 @@ Page({
         batchTimes: batchTimes - 1
       })
     })
+    this.setData({
+      wallData:[],
+    })
+    this.getWallData()
   },
 
   //监听屏幕滚动 判断上下滚动

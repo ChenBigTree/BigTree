@@ -1,0 +1,69 @@
+<!--pages/wenzhen/forumDetail.wxml-->
+<view class="forumDetail">
+	<view class="header">
+		<view class="text">
+			<view class="title">{{forumDetail.title}}</view>
+			<view class="price">￥{{forumDetail.price}}</view>
+		</view>
+		<view class="user-info">
+			<image mode="aspectFill" src="{{forumDetail.auth.avatarUrl}}"></image>
+			<view class="name">{{forumDetail.auth.name}}</view>
+			<view class="jobs">
+				<text class="jibing">{{forumDetail.auth.jibing}}</text>|<text class="keshi">{{forumDetail.auth.keshi}}</text>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="score">
+		<view class="star">
+			<i-cell title="4分">
+				<i-rate bind:change="onChange1" value="{{starIndex1}}">
+				</i-rate>
+			</i-cell>
+		</view>
+		<view class="comment">
+			0条评论
+		</view>
+	</view> -->
+	<i-sticky scrollTop="{{scrollTop}}">
+		<i-sticky-item i-class="i-sticky-demo-title">
+			<view slot="title">
+				<i-tabs current="{{ current }}" bindchange="handleChange">
+					<i-tab key="tab1" title="课程介绍"></i-tab>
+					<i-tab key="tab2" title="课程内容"></i-tab>
+				</i-tabs>
+			</view>
+			<view slot="content">
+			
+				<view class="i-sticky-demo-item" wx:if="{{current=='tab1'}}">
+					<view class="outline">
+						<view class="cover">
+							<image mode="aspectFit" src="{{forumDetail.cover}}"></image>
+						</view>
+						<view class="explain">
+							<view class="title">[课程说明]</view>
+							<view class="text">
+								{{forumDetail.detail}}
+							</view>
+						</view>
+						<view class="explain">
+							<view class="title">[适用人群]</view>
+							<view class="text">
+								<view class="text-item">{{forumDetail.person}}</view>
+							</view>
+						</view>
+						<!-- <view class="btn">购买课程 ￥{{forumDetail.price}}</view> -->
+					</view>
+				</view>
+				<view class="i-sticky-demo-item" wx:if="{{current=='tab2'}}">
+					<view class="chapters">
+						<block wx:if="{{chapter.length>0}}">
+						<view class="add" bindtap="addChapter"> +我要添加内容</view>
+							<view class="chapter-item" wx:for="{{chapter}}" bindtap="toPlay" data-id="{{item._id}}">{{item.title}}</view>
+						</block>
+						<view class="null" wx:else>暂无相关内容 <text class="add" bindtap="addChapter">我要添加内容</text></view>
+					</view>
+				</view>
+			</view>
+		</i-sticky-item>
+	</i-sticky>
+</view>

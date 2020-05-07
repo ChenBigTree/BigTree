@@ -42,7 +42,7 @@
 <block wx:if="{{showClassify}}">
 	<view class="txt">请选择分类</view>
 	<view class="shadow" style="margin-top:25rpx">
-		<view wx:for='{{lists}}' class="kinds">
+		<view wx:for='{{lists}}' wx:key="index" class="kinds">
 			<view class="kinds- {{tag==item.tag?'kinds-c':''}}" data-index="{{index}}" bindtap="chose">{{item.tag}}</view>
 		</view>
 	</view>
@@ -76,6 +76,4 @@
 		</view>
 	</view>
 </view>
-
-
 <i-message id="message" />

@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "map-auth":"../../../components/auth/dialog",
+    "i-tag":"../../../components/tag/index"
+  },
+  "navigationBarBackgroundColor": "#2f3336",
+  "navigationBarTextStyle": "white"
 }

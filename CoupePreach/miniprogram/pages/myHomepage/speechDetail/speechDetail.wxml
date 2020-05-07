@@ -1,2 +1,163 @@
-<!--miniprogram/pages/myHomepage/speechDetail/speechDetail.wxml-->
-<text>miniprogram/pages/myHomepage/speechDetail/speechDetail.wxml</text>
+<view class="top-circle" wx:if='{{wallData.length>0}}'  data-name="isform" catchtap="showform">
+	<view class="circle" style="width:100%;margin-top:0;">
+		<!-- 如果没有上传图片 -->
+		<view class="li-imgs" wx:if="{{wallData[0].images.length==0}}" data-playState="pause" bindtap="audioPause">
+			<view class="communityPage-li-img-none" style="width:100%;padding:0;">
+				<view class="communityPage-li-imgli-none">
+					<image src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg" mode="widthFix" style="width:100%;"></image>
+				</view>
+
+				<view class="content">
+					<view class="community-li-title-none">{{wallData[0].title==''?wallData[0].userInfo.nickName+'的精彩分享':wallData[0].title}}</view>
+					<view class="community-li-title-time">{{wallData[0].time}}</view>
+				</view>
+				<view class="community-li-title-avatar">
+					<image src='{{wallData[0].userInfo.avatarUrl}}'></image>
+				</view>
+				<view class="community-li-title-name">{{wallData[0].userInfo.nickName}}</view>
+
+			</view>
+			<view class="uploadImg" data-playState="play" catchtap="audioPlay" wx:if="{{showPlay}}">
+				<image mode="aspectFit" style="width:120rpx;height:120rpx;" src="{{playImg}}"></image>
+			</view>
+		</view>
+		<!-- 如果有上传图片 -->
+		<view class="li-imgs" style="width:100%;margin-top:0;" wx:if="{{wallData[0].images.length>0}}" data-playState="pause" bindtap="audioPause">
+			<swiper class="swiper" indicator-dots="{{false}}" style="height:422rpx;;width:100%;padding:0;">
+				<block wx:for="{{wallData[0].images}}" wx:key="index" wx:for-item="it">
+					<swiper-item>
+						<image src="{{it}}" mode="aspectFill" style="height:422rpx;width:100%;" />
+					</swiper-item>
+				</block>
+			</swiper>
+			<view class="uploadImg" data-playState="play" catchtap="audioPlay" wx:if="{{showPlay}}">
+				<image mode="aspectFit" style="width:120rpx;height:120rpx;" src="{{playImg}}"></image>
+			</view>
+		</view>
+
+		<view class="pro">
+			<view class="proleft">{{AudioStarttime}}</view>
+			<view class="procenter body-view">
+				<slider bindchange="sliderchange" max="{{AudioMax}}" min="0" value="{{AudioOffset}}"></slider>
+			</view>
+			<view class="proright">{{AudioLong}}</view>
+		</view>
+
+		<view class="vwAuthor">
+			<view class="vwAvr">
+				<image class="vwAvatar" src="{{wallData[0].userInfo.avatarUrl}}"></image>
+			</view>
+			<view class="vwAuthorTitle"> 
+				<view class="vwName">{{wallData[0].userInfo.nickName}}</view>
+				<view class="vwDita">
+					<view class="vwDi">
+						<image src="../../../images/icon/view.png"></image>
+						<text>{{wallData[0].views}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="vTitle">
+			<text>{{wallData[0].title==''?wallData[0].userInfo.nickName+'的精彩分享':wallData[0].title}}</text>
+			<view class="tag">
+				<i-tag class="i-tags" wx:if="{{wallData[0].tag}}" name="{{wallData[0].tag}}" color="green">
+					{{wallData[0].tag}}
+				</i-tag>
+			</view>
+		</view>
+		<view class="vOperate">
+			<view class="vOleft">
+				<view class="vTime">{{wallData[0].time}}</view>
+				<view class="vText" wx:if="{{showDelete}}"><text bindtap="deletePyq" data-item='{{wallData[0]}}' data-index="{{indexN}}" class="timeArea-delete">删除</text></view>
+				<view wx:if="{{false}}" class="vText"><text bindtap="toDaka" data-item='{{wallData[0]}}' data-index="{{indexN}}" class="timeArea-delete">打卡</text></view>
+				<view class="vText" wx:if="{{false}}"><text bindtap="toDaka" data-item='{{wallData[0]}}' data-index="{{indexN}}" class="timeArea-delete">打卡</text></view>
+			</view>
+			<view class="vIcons">
+				<view class="vIcon">
+					<button open-type="share" type="default" style="border: none;width:50rpx;background:none;padding-left: 0;line-height: 1;margin: 0;">
+						<image src='../../../images/icon/share.png'></image>
+					</button>
+				</view>
+				<!-- <view class="vIcon"> -->
+				<!-- <view class='zan-pinglun' wx:if="{{showZan == indexN}}"> -->
+				<view class="event-box">
+					<text class='iconfont icon-xin' data-indexN="{{indexN}}" data-_id="{{wallData[0]._id}}" catchtap='dianzan'> 赞</text>
+					<text catchtap="showPinLun" data-index="{{indexN}}" class='iconfont icon-pinglun'> 留言</text>
+				</view>
+				<!-- <image src="/images/more.png" data-index="{{indexN}}" bindtap="toShowZan"></image> -->
+				<!-- </view>     -->
+				<!-- </view>     -->
+			</view>
+		</view>
+
+
+		<view class="row">
+			<view class="col">
+				<view class="comm-zan">
+					<!-- 点赞 -->
+					<view wx:if='{{wallData[0].zans.length>0}}'>
+						<view class="r"></view>
+						<view class="zan">
+							<image class="love-icon" src="/images/pyq/love-icon.png"></image>
+							<text class="like">{{wallData[0].zanText}}</text>
+						</view>
+					</view>
+					<!-- 打卡记录 -->
+					<view wx:if='{{false}}'>
+						<view class="r"></view>
+						<view class="comments">
+							<view wx:for="{{dakas}}" wx:key='index' bindtap="toVoice" data-index="{{index}}" data-id="{{item._id}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
+								<view class="ttd-row">
+									<view class="ttd-avatar">
+										<image src="{{item.userInfo.avatarUrl}}"></image>
+									</view>
+									<view class="ttd-name">
+										<text class="noblueColor">{{item.userInfo.nickName+': '}}{{item.time}}</text>
+									</view>
+									<view class="ttd-volume">
+										<image src="/images/volumeg.png"></image>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<!-- 留言 -->
+					<view wx:if='{{wallData[0].comments.length>0}}'>
+						<view wx:if='{{wallData[0].zans.length<=0}}' class="r"></view>
+
+						<view class="comments">
+							<view wx:for="{{wallData[0].comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
+
+								<view class="tt-row" wx:if='{{!item.toName}}'>
+									<text class="blueColor">{{item.userInfo.nickName+' : '}}</text>
+									<text class="noblueColor">{{item.comment}}</text>
+								</view>
+
+								<view wx:if='{{item.toName}}'>
+									<text class="blueColor">{{item.userInfo.nickName}}</text>
+									<text class="noblueColor"> 回复</text>
+									<text class="blueColor">{{item.toName+': '}}</text>
+									<text class="noblueColor">{{item.comment}}</text>
+								</view>
+							</view>
+
+						</view>
+					</view>
+				</view>
+
+			</view>
+		</view>
+	</view>
+</view>
+<map-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></map-auth>
+
+
+<view wx:if='{{showPinLun}}' data-name="form" catchtap="showform">
+	<form report-submit='true' class="clearfix" bindsubmit='submitComment'>
+		<view class='liuyan'>
+			<input class='input' auto-focus cursor-spacing="32rpx" value='{{commentValue}}' bindinput='getcomment' value="{{Msg}}" placeholder='{{placeholderPL}}'></input>
+			<button class='icon' form-type='submit' style="width:120rpx;">发送</button>
+		</view>
+	</form>
+</view>

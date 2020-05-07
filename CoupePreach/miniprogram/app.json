@@ -8,7 +8,9 @@
     "pages/my/administrator/administrator",
     "pages/my/administrator/course/course",
     "pages/myHomepage/speechAdd/speechAdd",
-    "pages/myHomepage/speechDetail/speechDetail"
+    "pages/myHomepage/speechDetail/speechDetail",
+    "pages/myHomepage/forumManager/forumManager",
+    "pages/my/administrator/courseShelf/courseShelf"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

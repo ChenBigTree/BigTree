@@ -1,0 +1,142 @@
+/* pages/wenzhen/forumManager.wxss */
+/* pages/wenzhen/forumDetail.wxss */
+.header {
+  display: flex;
+  padding: 20px;
+  background-color: #27b5b1;
+  color: #fff;
+  font-size: 14px;
+}
+
+.header .text {
+  flex: 1;
+  line-height: calc((100rpx + 32px + 16px)/2);
+}
+
+.header .text .title {
+  font-weight: bold;
+}
+
+.header .text .price {
+  color: #f0b65a;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.user-info image {
+  width: 150rpx;
+  height: 150rpx;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.user-info .name {
+  font-size: 14px;
+  padding: 5px 5px 5px 10px;
+  letter-spacing: 5px;
+  text-align: center;
+}
+
+.score {
+  display: flex;
+  padding: 4px 10px 0 0;
+  background-color: #fff;
+}
+
+.score .star {
+  text-align: center;
+}
+
+.score .comment {
+  text-align: right;
+  line-height: 60px;
+  font-size: 12px;
+}
+
+.score .star,
+.score .comment {
+  flex: 1;
+
+}
+
+.outline {
+  padding: 5px 20px;
+}
+
+.outline .cover image {
+  width: 100%;
+  display: block;
+}
+
+.explain {
+  font-size: 12px;
+  color: #6b6b6b;
+  margin-top: 10px;
+}
+
+.explain .title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.explain .text {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.outline .btn {
+  background-color: #26b5b1;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.jobs {
+  font-size: 12px;
+}
+
+.jobs .jibing {
+  margin-right: 5px;
+}
+
+.jobs .keshi {
+  margin-left: 5px;
+}
+
+.null {
+  text-align: center;
+  font-size: 12px;
+  color: #6b6b6b;
+  padding: 30px 0;
+}
+
+.null .add {
+  color: #27b5b1;
+}
+
+view.add {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #6b6b6b;
+  padding: 5px 0;
+  color: #27b5b1;
+  line-height: 35px;
+
+}
+
+.chapters {
+  padding: 5px 0;
+}
+
+.chapter-item {
+  font-size: 14px;
+  color: #6b6b6b;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-top: 2px;
+}

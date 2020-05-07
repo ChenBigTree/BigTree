@@ -2,4 +2,7 @@
 	<view class="list">
 		<navigator hover-class="none" url="../administrator/course/course">课程管理</navigator>
 	</view>
+	<view class="list">
+		<navigator hover-class="none" url="../administrator/courseShelf/courseShelf">上下架管理</navigator>
+	</view>
 </view>
