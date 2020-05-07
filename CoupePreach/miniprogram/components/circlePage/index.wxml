@@ -7,7 +7,10 @@
 					<image class="userhead" src="{{itemName.userInfo.avatarUrl}}"></image>
 				</view>
 				<view class="col" data-sid="{{itemName._id}}" bindtap="lookDetail">
-					<view class="username" style="font-weight:600;">{{itemName.userInfo.nickName}}</view>
+					<view class="clearfix">
+						<view class="username towTextOverflow">{{itemName.userInfo.nickName}}</view>
+						<text class="isPutaway" data-id="{{itemName._id}}" catchtap="getData">{{itemName.isShow.isPass== true && itemName.isShow.isApply==true ? "下架": itemName.isShow.isPass == false && itemName.isShow.isApply == false ? "上架" : itemName.isShow.isPass == false && itemName.isShow.isApply == true ? "待审核" : "不通过" }}</text>
+					</view>
 					<!-- bindlongtap="copyText" -->
 					<view class="content" data-text="{{itemName.content}}">
 						<text>{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</text>
@@ -40,7 +43,7 @@
 					</view>
 					<view class='timeArea'>
 						<text>{{itemName.time}}</text>
-						
+
 						<!-- <view class='timeArea-right'>
 							<image class="dd-icon" src="/images/view.png"></image>
 							<text>{{itemName.views}}</text>
@@ -62,11 +65,11 @@
 							<view class="comments">
 								<view wx:for="{{itemName.comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
 									<view class="tt-row" wx:if='{{!item.toName}}'>
-										<text class="blueColor">{{item.username+': '}}</text>
+										<text class="blueColor">{{item.userInfo.nickName+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>
 									</view>
 									<view wx:if='{{item.toName}}'>
-										<text class="blueColor">{{item.username}}</text>
+										<text class="blueColor">{{item.userInfo.nickName}}</text>
 										<text class="noblueColor"> 回复</text>
 										<text class="blueColor">{{item.toName+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>

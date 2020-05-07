@@ -2,6 +2,7 @@
 .top-circle {
   margin-top: 22rpx;
 }
+
 .circle {
   margin-top: 16rpx;
   margin-bottom: 16rpx;
@@ -9,12 +10,20 @@
   font-family: Arial, sans-serif;
   margin-right: 20rpx;
 }
+
 .userhead {
   width: 72rpx;
   height: 72rpx;
   border-radius: 8rpx;
   margin-left: 16rpx;
 }
+
+.comments {
+  background: #F7F7F7;
+  font-size: 14px;
+  padding: 5px;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -27,13 +36,33 @@
   margin-left: 16rpx;
   width: 100%;
 }
+
 .username {
+  width: calc(100% - 100rpx);
   color: #576b95;
   font-size: 32rpx;
   font-family: Arial, sans-serif;
   overflow: hidden;
-  margin-top: -10rpx;
-  /* margin-right: 20rpx; */
+  font-weight: 600;
+  float: left;
+}
+
+.isPutaway {
+  width: 100rpx;
+  float: right;
+  text-align: center;
+  background: #c8c087;
+  border-radius: 5px;
+  padding: 1px 0;
+  font-size: 28rpx;
+}
+.towTextOverflow {
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .content {
   font-size: 32rpx;
@@ -42,12 +71,14 @@
   color: #252525;
   margin-bottom: 10rpx;
 }
+
 .community-title-box {
   width: 400rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .community-li-title-none {
   position: absolute;
   width: 380rpx;
@@ -59,10 +90,12 @@
   left: 45rpx;
   font-weight: bolder;
 }
-.community-li-title-avatar-box{
+
+.community-li-title-avatar-box {
   position: relative;
   bottom: 100rpx;
 }
+
 .community-li-title-avatar {
   width: 70rpx;
   height: 70rpx;
@@ -72,6 +105,7 @@
   right: 220rpx;
   bottom: 160rpx;
 }
+
 .community-li-title-name {
   width: 50rpx;
   position: absolute;
@@ -83,40 +117,47 @@
   overflow: hidden;
   text-overflow: ellipsis
 }
+
 .userIcon {
   width: 70rpx;
   height: 70rpx;
 }
+
 .li-imgs {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 8rpx;
 }
+
 .community-li-title-time {
   position: absolute;
   top: 120rpx;
   left: 145rpx;
   font-size: 25rpx;
 }
+
 .community-title-box {
   width: 300rpx;
   height: 100rpx;
   margin-left: 0rpx;
 }
 
-.communityPage-li-img-none{
+.communityPage-li-img-none {
   position: relative;
 }
-.community-li-title-avatar image{
+
+.community-li-title-avatar image {
   width: 100%;
 }
-.uploadImg{
+
+.uploadImg {
   border-radius: 10rpx;
   position: absolute;
-  top:115rpx;
-  left:255rpx;
+  top: 115rpx;
+  left: 255rpx;
 }
+
 .timeArea {
   font-size: 8pt;
   line-height: 20pt;
@@ -124,40 +165,53 @@
   margin-top: 6rpx;
   position: relative;
 }
+
 .timeArea-right {
   vertical-align: bottom;
 }
+
 .dd-icon {
   height: 32rpx;
   width: 32rpx;
-}comm-zan {
+}
+
+comm-zan {
   width: 100%;
-}.r {
+}
+
+.r {
   border-bottom: 16rpx solid #f7f7f7;
   border-left: 16rpx solid transparent;
   border-right: 16rpx solid transparent;
   width: 2rpx;
   margin-top: 5rpx;
   margin-left: 20rpx;
-}.zan {
+}
+
+.zan {
   overflow: hidden;
   background-color: #f7f7f7;
   align-items: center;
   border-bottom: 1rpx solid #ececec;
   padding: 12rpx 6rpx 8rpx 6rpx;
-}.love-icon {
+}
+
+.love-icon {
   float: right;
   padding-left: 8rpx;
   padding-right: 2rpx;
   width: 32rpx;
   height: 32rpx;
   padding-top: 4rpx;
-}.like {
+}
+
+.like {
   font-size: 32rpx;
   line-height: 44rpx;
   color: #576b95;
 }
-.null{
+
+.null {
   font-size: 14px;
   text-align: center;
   padding: 30px 0;

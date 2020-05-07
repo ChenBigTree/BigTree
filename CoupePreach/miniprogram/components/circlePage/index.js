@@ -13,11 +13,32 @@ Component({
   data: {
 
   },
-
+  
   /**
    * 组件的方法列表
    */
   methods: {
+    
+    getData(e){
+      
+      console.log(e.currentTarget.dataset.id)
+      wx.cloud.database().collection("circle").doc(e.currentTarget.dataset.id).update({
+        data:{
+          isShow:{
+            isApply:true
+          }
+        },
+        success:res=>{
+          wx.reLaunch({
+            url: '../../pages/myHomepage/myHomepage'
+          })
+          console.log(res)
+        },
+        fail:err=>{
+          console.log(err)
+        }
+      })
+    },
     lookDetail(e) {
       console.log('sdfsadf')
       console.log(e.currentTarget.dataset) ///////////******* */
@@ -25,6 +46,5 @@ Component({
         url: '../../pages/myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.sid,
       })
     }
-
   }
 })

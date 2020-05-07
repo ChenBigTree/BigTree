@@ -1,0 +1,30 @@
+<!--pages/wenzhen/RecomManage.wxml-->
+<!--pages/index.wxml-->
+<view class="page">
+	<block wx:for="{{someData}}">
+		<navigator class="nurse" hover-class="none" url="../../../myHomepage/speechDetail/speechDetail?id={{item._id}}">
+			<view class="left">
+				<image src="{{item.userInfo.avatarUrl}}"></image>
+			</view>
+			<view class="right">
+				<view class="nameView">
+					<view class="name">{{item.userInfo.nickName}}</view>
+				</view>
+				<view class="like">
+					<text class="texts">{{item.title}}</text>
+					<view class="vTitle">
+						<view class="tag">
+							<i-tag class="i-tags" wx:if="{{item.tag}}" name="{{item.tag}}" color="green">
+								{{item.tag}}
+							</i-tag>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="btn">
+				<view class="text" data-index="{{index}}">通过</view>
+				<view class="text" data-index="{{index}}">通过</view>
+			</view>
+		</navigator>
+	</block>
+</view>

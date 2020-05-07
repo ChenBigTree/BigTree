@@ -21,7 +21,7 @@ Component({
     toCurriculumDetail(e){
       console.log(e.currentTarget.dataset.id)
       wx.navigateTo({
-        url: '../../pages/wenzhen/forumManager?id='+e.currentTarget.dataset.id,
+        url: '../../pages/myHomepage/forumManager/forumManager?id='+e.currentTarget.dataset.id,
       })
     }
 

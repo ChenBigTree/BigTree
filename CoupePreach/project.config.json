@@ -69,6 +69,20 @@
 					"id": -1,
 					"name": "pages/myHomepage/speechAdd/speechAdd",
 					"pathName": "pages/myHomepage/speechAdd/speechAdd",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/myHomepage/forumManager/forumManager",
+					"pathName": "pages/myHomepage/forumManager/forumManager",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/administrator/courseShelf/courseShelf",
+					"pathName": "pages/my/administrator/courseShelf/courseShelf",
 					"scene": null
 				}
 			]

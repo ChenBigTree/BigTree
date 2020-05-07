@@ -1,0 +1,81 @@
+/* pages/wenzhen/RecomManage.wxss */
+/* pages/index.wxss */
+.nurse {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  justify-content: top;
+  padding-top: 40rpx;
+  border-bottom: solid 1rpx rgb(212, 212, 212);
+}
+
+.left {
+  margin-left: 30rpx;
+}
+
+.left image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.right {
+  flex: 1;
+  margin-left: 30rpx;
+  padding-right: 20rpx;
+}
+
+.nameView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.keshi {
+  color: #999;
+  font-size: small;
+  margin-left: 10rpx;
+  font-weight: bold;
+}
+
+.company {
+  color: rgb(126, 126, 126);
+  font-size: small;
+}
+
+.like {
+  color: rgb(167, 167, 167);
+  font-size: small;
+}
+
+.vTitle {
+  color: #fff;
+  margin: 0rpx 20rpx 10rpx 15rpx;
+}
+
+.texts {
+  color: #333;
+  padding: 10rpx 0;
+}
+
+.btn {
+  line-height: 110px;
+  font-size: 14px;
+  padding: 0 10px;
+  color: #2d8cf0;
+}
+
+.btn.gray {
+  color: #333;
+}
+
+.btn .text {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

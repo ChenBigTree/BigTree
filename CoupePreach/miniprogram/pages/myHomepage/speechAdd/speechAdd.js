@@ -4,7 +4,7 @@ const {
 } = require('../../../components/base/index');
 const recorderManager = wx.getRecorderManager()
 const backgroundAudioManager = wx.getBackgroundAudioManager()
-var util = require("../../../utils/util")
+var util = require("../../../utils/util.js")
 const app = getApp();
 Page({
 
@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showClassify:true,
+    showClassify: true,
     percent: 100,
     startClick: false,
     //contentHeight: contentHeight,
@@ -66,8 +66,6 @@ Page({
   },
 
   chose: function (e) {
-    console.log(e.currentTarget.dataset.index)
-    console.log(this.data.lists[e.currentTarget.dataset.index].tag)
     this.setData({
       tag: this.data.lists[e.currentTarget.dataset.index].tag
     })
@@ -78,14 +76,14 @@ Page({
       show: !this.data.show
     })
   },
-  getTime:function() {
+  getTime: function () {
     var date = new Date()
     var year = date.getFullYear(); //年
     var month = date.getMonth() + 1; //月
     var day = date.getDate(); //日
-    console.log(year+'-'+month+'-'+day)
+    console.log(year + '-' + month + '-' + day)
     this.setData({
-      time:year+'-'+month+'-'+day
+      time: year + '-' + month + '-' + day
     })
   },
   /**
@@ -96,7 +94,12 @@ Page({
     if (options.id) {
       this.setData({
         curriculumId: options.id,
-        showClassify:false
+        showClassify: false
+      })
+    } else {
+      this.setData({
+        curriculumId: '',
+        showClassify: true
       })
     }
     this.initRecord()
@@ -138,14 +141,12 @@ Page({
         fun:"get"
       },
       success: res => {
+  
         console.log('集合', res.result.data)
         this.setData({
           lists: res.result.data,
         })
       },
-      fail:err=>{
-        console.log(err)
-      }
     })
   },
   onHide: function () { //离开页面
@@ -154,7 +155,9 @@ Page({
   onUnload: function () { //离开页面
     backgroundAudioManager.stop()
   },
-
+  onShow() {
+    
+  },
   initRecord: function () {
     recorderManager.onStart(() => {
       console.log('开始录音')
@@ -455,7 +458,7 @@ Page({
       db.collection('chapters').add({
         data: {
           type: 'speech',
-          userInfo: that.data.userInfo,
+          userInfo:that.data.userInfo.userInfoData,
           createTime: db.serverDate(),
           content: that.data.textareaTxt,
           title: that.data.title,
@@ -485,12 +488,14 @@ Page({
               icon: 'success'
             })
             if (that.data.curriculumId) {
+              console.log("跳转forumManager",that.data.userInfo)
               wx.reLaunch({
-                url: '../wenzhen/forumManager?id=' + that.data.curriculumId,
+                url: '../forumManager/forumManager?id=' + that.data.curriculumId,
               })
             } else {
+              console.log("跳转myHomepage1",that.data.userInfo)
               wx.reLaunch({
-                url: './myspeech',
+                url: '../myHomepage/myHomepage',
               })
             }
           })
@@ -506,9 +511,9 @@ Page({
     } else {
       db.collection('circle').add({
         data: {
-          tag:this.data.tag,
+          tag: this.data.tag,
           type: 'speech',
-          userInfo: that.data.userInfo,
+          userInfo:that.data.userInfo.userInfoData,
           createTime: db.serverDate(),
           content: that.data.textareaTxt,
           title: that.data.title,
@@ -521,6 +526,10 @@ Page({
           dakas: [],
           //tab: tab,
           isTop: false,
+          isShow:{
+            isPass:false,
+            isApply:false
+          }
         },
         success: res => {
           console.log('db add success--->', res) ////////////
@@ -529,8 +538,9 @@ Page({
             title: '提交成功',
             icon: 'success'
           })
+          console.log("跳转myHomepage2",that.data.userInfo.userInfoData)
           wx.reLaunch({
-            url: './myspeech',
+            url: '../myHomepage',
           })
           //resolve(res)
         },
@@ -555,23 +565,32 @@ Page({
           icon: 'none',
         })
         return
-      } else {
-        wx.showLoading({
-          title: '数据上传中',
-          mask: true
-        })
-        this.updateImgs()
-        //if (this.data.tmpImgs.length == 0) {
-        //console.log('this.data.tmpImgs.length == 0')
-        //let result1 = await this.updateVoice()
-        //let result2 = await this.saveData(result1)
-        //} else {
-        //console.log('this.data.tmpImgs.length != 0')//////////////////////-----------02
-        //let result1 = await this.updateImgs()
-        //let result2 = await this.updateVoice(result1)
-        //let result3 = await this.saveData(result2)
-        //}
       }
+      if (this.data.showClassify) {
+        if(this.data.tag==''){
+          wx.showToast({
+            title: '标签不能为空',
+            icon: 'none',
+          })
+          return
+        }
+      }
+      wx.showLoading({
+        title: '数据上传中',
+        mask: true
+      })
+      this.updateImgs()
+      //if (this.data.tmpImgs.length == 0) {
+      //console.log('this.data.tmpImgs.length == 0')
+      //let result1 = await this.updateVoice()
+      //let result2 = await this.saveData(result1)
+      //} else {
+      //console.log('this.data.tmpImgs.length != 0')//////////////////////-----------02
+      //let result1 = await this.updateImgs()
+      //let result2 = await this.updateVoice(result1)
+      //let result3 = await this.saveData(result2)
+      //}
+
     } else {
       console.log('subOk fail')
     }

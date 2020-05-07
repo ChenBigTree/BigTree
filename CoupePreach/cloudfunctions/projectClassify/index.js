@@ -8,7 +8,8 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
   if (event.fun == "get") {
-    return await cloud.database().collection(event.collectionName).get()
+      return await cloud.database().collection(event.collectionName).get()
+    
   } else if (event.fun == "add") {
     let tag = (await cloud.database().collection(event.collectionName).where({
       tag: event.tag
@@ -32,5 +33,5 @@ exports.main = async (event, context) => {
         tag: event.tag
       }
     })
-  }
+  } 
 }
