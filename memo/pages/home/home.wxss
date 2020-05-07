@@ -86,3 +86,44 @@
 .toast>.hitokoto {
   margin-bottom: 20rpx;
 }
+
+.essay-date {
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.beauty-box {
+  width: 90%;
+  margin-left: 5%;
+  height: 130px;
+  background: #fff;
+  display: flex;
+}
+
+.time {
+  flex: 1;
+  background: #f33;
+}
+
+.essay-date {
+  line-height: 30px;
+}
+
+.article {
+  flex: 3;
+  background: #caa000;
+}
+
+.image-box {
+  flex: 2;
+  background: #ff6700;
+}
+
+.dian {
+  font-size: 30px;
+  height: 30px;
+  display: inline-block;
+}
