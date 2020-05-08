@@ -12,7 +12,7 @@ Page({
     ThumbAnimation: !1,
     onEnded: !1,
     AudioPlayHidden: !1,
-    AudioStarttime: "0:0",
+    AudioStarttime: "00:00",
     AudioDuration: "0:00",
     AudioLong: "",
     Msg: '',
@@ -72,9 +72,6 @@ Page({
         }
       }).then(res => {
         console.log('获取章节==>', res.result.data)
-
-        console.log(res)
-        console.log("MY")
         wx.cloud.callFunction({
           name: 'dakaGet',
           data: {
@@ -187,7 +184,6 @@ Page({
   },
 
   getcomment(e) {
-    console.log(e.detail.value)
     this.setData({
       commentValue: e.detail.value
     })
@@ -221,7 +217,6 @@ Page({
 
   dianzan(e) {
     let that = this
-    console.log(e.currentTarget.dataset)
 
     if (!this.data.userInfo) {
       wx.pageScrollTo({
@@ -236,6 +231,64 @@ Page({
       })
       return
     }
+
+    console.log("_id", e.currentTarget.dataset._id)
+    let id = e.currentTarget.dataset._id
+    wx.cloud.database().collection("circle").where({
+      _id: id
+    }).get().then(res => {
+      console.log(res.data)
+      let datas = res.data[0]
+      for (let i = 0; i < datas.zans.length; i++) {
+        if (this.data.openid == datas.zans[i].openid) {
+          datas.zans.splice(i, 1)
+
+          wx.cloud.database().collection('circle').doc(id).update({
+            data: {
+              zans: datas.zans
+            },
+            success: function (res) {
+
+              wx.cloud.database().collection('circle').doc(id).get().then(res => {
+                console.log("取消点赞成功", res.data)
+                that.setData({
+                  wallData: res.data
+                })
+              })
+            }
+          })
+          return false
+        }
+      }
+
+      console.log("用户未点赞")
+      var data = this.data.wallData
+      data[0].zans.push({
+        name: this.data.userInfo.userInfoData.nickName
+      })
+      data[0].zanText = data[0].zans.map(a => {
+        return a.name
+      }).join(", ")
+      this.setData({
+        wallData: data
+      })
+      wx.cloud.callFunction({
+        name: 'chat',
+        data: {
+          type: 'zan',
+          collectionname: that.data.collection,
+          data: {
+            username: this.data.userInfo.userInfoData.nickName,
+            _id: e.currentTarget.dataset._id
+          }
+        }
+      })
+
+    }).catch(err => {
+      console.log(err)
+    })
+    return
+
     console.log('isZan==>', that.data.isZan)
     //未点赞
     if (!that.data.isZan) {
@@ -264,9 +317,13 @@ Page({
       }).then(res => {
 
       })
+    } else { // 已经点赞
+      console.log("openid", this.data.openid)
+
     }
+
     this.setData({
-      isZan: true,
+      isZan: !this.data.isZan,
       showZan: 1,
       placeholderPL: "留言"
     })
@@ -641,6 +698,7 @@ Page({
       }).then(res => {
         console.log(res.result.openid)
         that.setData({
+          openid: res.result.openid,
           isZan: that.data.wallData[0].zans.some(a => {
             return a.openid === res.result.openid
           })

@@ -11,9 +11,8 @@
 	<i-tab key="tab1" title="动态"></i-tab>
 	<i-tab key="tab2" title="课程"></i-tab>
 </i-tabs>
-<circlePage wallData="{{wallData}}" wx:if="{{current=='tab1'}}" />
+<circlePage  wx:if="{{current=='tab1'}}" />
 <curriculumPage curriculumArr="{{curriculumArr}}" wx:if="{{current=='tab2'}}" />
-<!-- <circlePage wallData="{{wallData}}" /> -->
 
 <!-- 评论框 -->
 <view wx:if='{{showPinLun}}'>

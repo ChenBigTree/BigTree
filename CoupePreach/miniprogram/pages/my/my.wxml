@@ -23,6 +23,9 @@
 		</view>
 	</view>
 	<view class="me-list">
+		<view class="list" data-url="../my/mySpace/mySpace" bindtap="openConfirm">
+			<view>我的主页</view>
+		</view>
 		<view class="list" data-url="../my/administrator/administrator" bindtap="openConfirm">
 			<view>管理员入口</view>
 		</view>

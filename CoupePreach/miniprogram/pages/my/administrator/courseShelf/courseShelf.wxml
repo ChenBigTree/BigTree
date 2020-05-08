@@ -1,17 +1,17 @@
 <!--pages/wenzhen/RecomManage.wxml-->
 <!--pages/index.wxml-->
 <view class="page">
-	<block wx:for="{{someData}}">
+	<block wx:for="{{someData}}" wx:key="index">
 		<navigator class="nurse" hover-class="none" url="../../../myHomepage/speechDetail/speechDetail?id={{item._id}}">
 			<view class="left">
 				<image src="{{item.userInfo.avatarUrl}}"></image>
 			</view>
 			<view class="right">
 				<view class="nameView">
-					<view class="name">{{item.userInfo.nickName}}</view>
+					<view class="name oneTextOverflow">{{item.userInfo.nickName}}</view>
 				</view>
 				<view class="like">
-					<text class="texts">{{item.title}}</text>
+					<text class="texts towTextOverflow">{{item.title}}</text>
 					<view class="vTitle">
 						<view class="tag">
 							<i-tag class="i-tags" wx:if="{{item.tag}}" name="{{item.tag}}" color="green">
@@ -22,9 +22,10 @@
 				</view>
 			</view>
 			<view class="btn">
-				<view class="text" data-index="{{index}}">通过</view>
-				<view class="text" data-index="{{index}}">通过</view>
+				<view class="text" data-id="{{item._id}}" data-state="yes" catchtap="handle">通过</view>
+				<view class="text" data-id="{{item._id}}" data-state="no" catchtap="handle">不通过</view>
 			</view>
 		</navigator>
 	</block>
+	<view class="null" wx:if="{{someData.length<=0}}">暂无内容</view>
 </view>

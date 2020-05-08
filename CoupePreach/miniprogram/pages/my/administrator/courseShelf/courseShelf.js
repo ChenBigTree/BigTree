@@ -8,6 +8,32 @@ Page({
   data: {
     someData: ''
   },
+  handle(e) {
+    if (e.currentTarget.dataset.state == 'yes') {
+      this.updateFun("update", e.currentTarget.dataset.id,"yes")
+    } else {
+      this.updateFun("update", e.currentTarget.dataset.id,"no")
+    }
+  },
+  updateFun(fun, id, update) {
+    let _this = this
+    wx.cloud.callFunction({
+      name: "stairway",
+      data: {
+        fun: fun,
+        id: id,
+        update: update
+      },
+      success: res => {
+        console.log("处理成功")
+        _this.someData() 
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
+  },
+  // 获取全部动态
   getData() {
     wx.cloud.callFunction({
       name: "stairway",
@@ -24,7 +50,12 @@ Page({
       }
     })
   },
+
+  // 获取待处理动态
   someData() {
+    this.setData({
+      someData: ''
+    })
     wx.cloud.callFunction({
       name: "stairway",
       data: {
@@ -34,8 +65,16 @@ Page({
       },
       success: res => {
         console.log("待处理", res.result.data)
+        function compare(e) {
+          return function (a, b) {
+            var value1 = a[e];
+            var value2 = b[e];
+            return parseInt(value1) - parseInt(value2);
+          }
+        }
+        var arr2 = res.result.data.sort(compare('time')).reverse();
         _this.setData({
-          someData:res.result.data
+          someData: arr2
         })
       },
       fail: err => {
@@ -48,7 +87,7 @@ Page({
    */
   onLoad: function (options) {
     _this = this
-    this.getData()
+    // this.getData()
     this.someData()
   },
 

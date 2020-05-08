@@ -52,7 +52,7 @@
 				<view class="vwDita">
 					<view class="vwDi">
 						<image src="../../../images/icon/view.png"></image>
-						<text>{{wallData[0].views}}</text>
+						<text>{{wallData[0].views>9?wallData[0].views:'0'+wallData[0].views}}</text>
 					</view>
 				</view>
 			</view>

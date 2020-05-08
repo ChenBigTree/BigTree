@@ -56,7 +56,7 @@
   padding: 1px 0;
   font-size: 28rpx;
 }
-.towTextOverflow {
+.oneTextOverflow {
   text-align: justify;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,7 +71,22 @@
   color: #252525;
   margin-bottom: 10rpx;
 }
-
+.threeTextOverflow {
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.tweTextOverflow {
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .community-title-box {
   width: 400rpx;
   white-space: nowrap;
@@ -82,13 +97,11 @@
 .community-li-title-none {
   position: absolute;
   width: 380rpx;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   color: #c8c087;
-  top: 70rpx;
+  top: 40rpx;
   left: 45rpx;
   font-weight: bolder;
+  height: 88rpx;
 }
 
 .community-li-title-avatar-box {
@@ -132,8 +145,8 @@
 
 .community-li-title-time {
   position: absolute;
-  top: 120rpx;
-  left: 145rpx;
+  top: 200rpx;
+  left: 100rpx;
   font-size: 25rpx;
 }
 

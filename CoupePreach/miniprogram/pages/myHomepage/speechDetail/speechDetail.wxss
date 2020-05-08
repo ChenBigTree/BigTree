@@ -46,6 +46,10 @@ page {
   align-items: center;
 }
 
+.vwDi text {
+  margin-left: 3px;
+}
+
 .vwDi image {
   width: 30rpx;
   height: 30rpx;

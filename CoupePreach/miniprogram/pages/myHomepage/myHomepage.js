@@ -12,7 +12,6 @@ Page({
     showFooter: true,
     ifManage: false,
     statusBarHeight: app.globalData.statusBarHeight,
-    wallData: [],
     showZan: -1, //显示点赞按钮
     showPinLun: false,
     nmAvator: '/images/pyq/ng.jpg',
