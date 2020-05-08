@@ -189,7 +189,7 @@ Page({
     console.log("执行")
     var date = new Date();
     var year = date.getFullYear()
-    var month = date.getMonth() + 1
+    var month = date.getMonth()
     var ri = date.getDate()
     var hours = date.getHours()
     var min = date.getMinutes()

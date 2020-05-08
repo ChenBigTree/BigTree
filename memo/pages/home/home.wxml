@@ -1,10 +1,13 @@
 <view class="home">
   <view class="header">
     <view class="header-day">{{date}}</view>
-    <navigator url="../addMemo/addMemo"><view class="header-left">
-      <image mode="widthFix" src="../icon/add1.png"></image>
-    </view></navigator>
+    <navigator url="../addMemo/addMemo">
+      <view class="header-left">
+        <image mode="widthFix" src="../icon/add1.png"></image>
+      </view>
+    </navigator>
   </view>
+  <!-- 头部一言框 -->
   <view class="center">
     <view class="center-center">
       <view class="week">星期{{day}}</view>
@@ -12,14 +15,26 @@
       <view class="name">—— {{hitokoto.name}}</view>
     </view>
   </view>
+  <!-- 弹出框 -->
   <view class="toast" hidden="{{hides}}">
     <view class="center-center">
       <view class="hitokoto">{{hitokoto.hitokoto}}</view>
       <view class="name">——{{hitokoto.name}}</view>
     </view>
   </view>
-  <view>
-    
-  
+  <!-- 尾部美文框 -->
+  <view class="essay">
+    <view class="essay-date">
+      <view class="dian">·</view>2020年08月
+      <view class="dian">·</view> </view>
+    <view class="essay-beauty">
+      <view class="beauty-box">
+        <view class="time"></view>
+        <view class="article"></view>
+        <view class="image-box">
+          <!-- <image mode="widthFix" src="http://img2.imgtn.bdimg.com/it/u=2462146637,4274174245&fm=26&gp=0.jpg"></image> -->
+        </view>
+      </view>
+    </view>
   </view>
 </view>

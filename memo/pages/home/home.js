@@ -64,7 +64,7 @@ Page({
   // 获取美文
   getBeautifulEssay() {
     let arr = []
-
+    let arr1 = []
     for (let i = 0; i < 12; i++) {
       (function(i) {
         wx.cloud.callFunction({
@@ -74,14 +74,18 @@ Page({
             i: i
           },
           success: res => {
-            if (res.result.data.length != 0){
-              arr[i] = res.result.data
-            }
-            if(i == 11){
-              console.log("arr==>", arr)
+            console.log(res.result.data)
+            arr[i] = res.result.data
+            let index = 0
+            arr.forEach(function() {
+              index++
+            })
+            if (index == 12) {
+
               _this.setData({
-                ArticleList:arr
+                ArticleList: arr
               })
+              console.log("arr==>", arr)
             }
           },
           fail: err => {
