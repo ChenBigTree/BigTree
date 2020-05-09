@@ -33,4 +33,3 @@ exports.main = (event, context) => {
     env: wxContext.ENV,
   }
 }
-

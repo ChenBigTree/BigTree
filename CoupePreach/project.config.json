@@ -83,6 +83,13 @@
 					"id": -1,
 					"name": "pages/my/administrator/courseShelf/courseShelf",
 					"pathName": "pages/my/administrator/courseShelf/courseShelf",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/mySpace/mySpace",
+					"pathName": "pages/my/mySpace/mySpace",
 					"scene": null
 				}
 			]

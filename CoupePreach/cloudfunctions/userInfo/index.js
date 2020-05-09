@@ -15,16 +15,29 @@ exports.main = async (event, context) => {
     if (user == 0) {
       return await userInfoData.add({
         data: {
-          userInfoData: event.userInfoData,
-          openid: wxContext.OPENID
+          nickName: event.userInfoData.nickName,
+          avatarUrl: event.userInfoData.avatarUrl,
+          city: event.userInfoData.city,
+          isAdministrator: event.userInfoData.isAdministrator,
+          isTeacher: event.userInfoData.isTeacher,
+          isDistributionMember: event.userInfoData.isDistributionMember,
+          fans: event.userInfoData.fans,
+          partner: event.userInfoData.partner,
+          PriceOfCourse: event.userInfoData.PriceOfCourse,
+          openid: wxContext.OPENID,
+          individualResume:event.userInfoData.individualResume
         }
       })
-    }else{
+    } else {
       return "用户已存在"
     }
-  } else if (event.fun == "get_personal") { // 获取个人信息
+  } else if (event.fun == "get_personal") { // 获取自己信息
     return await userInfoData.where({
       openid: wxContext.OPENID
+    }).get()
+  } else if (event.fun == "get_othersInformation") { // 获取他人信息
+    return await userInfoData.where({
+      openid: event.openid
     }).get()
   }
 }

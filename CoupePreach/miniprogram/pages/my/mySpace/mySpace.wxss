@@ -1,1 +1,322 @@
-/* miniprogram/pages/my/mySpace/mySpace.wxss */
+/* pages/nurse.wxss */
+
+.head {
+	background: #2bb2e9;
+	color: white;
+	padding-top: 1rpx;
+	padding-bottom: 20rpx;
+}
+
+.head .vHead {
+	margin: 20rpx 20rpx 20rpx 20rpx;
+	/* display:flex; */
+}
+
+/* .avatar {
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	
+
+} */
+
+.avatar image {
+	width: 150rpx;
+	height: 150rpx;
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+.vTitle {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: left;
+	/* margin-left:40rpx; */
+	margin-top: 10px;
+}
+
+.vTitle .name {
+	font-weight: bold;
+	text-align: center;
+}
+
+.vDigtal {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.digtalMenu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 60rpx 0 60rpx;
+}
+
+.vtip {
+	font-size: small;
+}
+
+.vBtn {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+	border-bottom: solid 1rpx #c3c3c3;
+	font-size: small;
+}
+
+.vBtn .btn {
+	margin: 20rpx 0 20rpx 20rpx;
+	width: 130rpx;
+	border-radius: 10rpx;
+	padding: 20rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.isSelected {
+	background: rgb(226, 250, 226);
+}
+
+.noSelected {
+	background: rgb(240, 237, 237);
+}
+
+.btnIcon image {
+	width: 60rpx;
+	height: 60rpx;
+}
+
+.tip,
+.menu {
+	border-bottom: solid 1rpx #c3c3c3;
+}
+
+.tipTitle {
+	padding: 20rpx;
+	font-size: small;
+	color: #666;
+}
+
+.tipContent {
+	padding: 20rpx;
+	font-size: small;
+	color: #999;
+}
+
+.blank {
+	margin-bottom: 120rpx;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+	height: 120rpx;
+}
+
+.fbtn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 150rpx;
+	height: 100%;
+}
+
+.btnIcon image {
+	width: 50rpx;
+	height: 50rpx;
+}
+
+.btnText {
+	font-size: small;
+}
+
+.subBtn {
+	width: 450rpx;
+	height: 100%;
+	color: #fff;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background: rgb(83, 216, 83);
+}
+
+.title-box {
+	height: 71rpx;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 2px 2px #ddd;
+}
+
+.textarea-box {
+	background: #f2f2f2;
+	font-size: 14px;
+	padding: 10px;
+	color: #333;
+	border-radius: 5px;
+}
+
+.textarea-box>textarea {
+	width: 100%;
+}
+
+.input-number {
+	margin-right: 10rpx;
+}
+
+.title-text {
+	margin: 15rpx 20rpx;
+	padding: 0 10rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+	color: #333;
+	font-size: 32rpx;
+	border-left: 4rpx solid #333;
+}
+
+.price {
+	font-size: 32rpx;
+	color: #B21016;
+	font-weight: 600;
+	margin: 5rpx 0;
+}
+
+.btn {
+	border: 1px solid #B21016;
+	padding: 0 16rpx;
+	border-radius: 10rpx;
+	height: 42rpx;
+	line-height: 42rpx;
+	margin: 12rpx 20rpx;
+}
+
+.recom-item {
+	display: flex;
+	background-color: #fff;
+	padding: 5px;
+	font-size: 12px;
+	color: #6b6b6b;
+	border-bottom: 1px solid #ddd;
+	height: 220rpx;
+}
+
+.recom-item .cover {
+	width: 250rpx;
+	overflow: hidden;
+}
+
+.recom-item .cover image {
+	width: 100%;
+	max-height: 220rpx;
+}
+
+.recom-item .text {
+	flex: 1;
+	padding-left: 5px;
+	position: relative;
+}
+
+.text .title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	word-wrap: break-word;
+	-webkit-line-clamp: 3;
+	font-size: 16px;
+	color: #333;
+	-webkit-box-orient: vertical;
+}
+
+.info {
+	position: absolute;
+	bottom: 0;
+	width: 90%;
+	display: flex;
+	padding: 0 10px;
+}
+
+.info .views,
+.info .time {
+	flex: 1;
+}
+
+.info .views image {
+	width: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	max-height: 88.28px;
+}
+
+.info .time {
+	text-align: right;
+}
+
+.introduce {
+	padding: 0 15px;
+}
+
+.introduce-title {
+	padding: 4px 0;
+}
+
+.introduce-content {
+	margin-bottom: 5px;
+	font-size: 14px;
+	text-indent: 24px;
+}
+
+.introduce-content.hidden {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+
+	-webkit-box-orient: vertical;
+}
+
+.introduce-content.null {
+	padding: 0;
+	text-align: left;
+	text-indent: 24px;
+}
+
+.icon {
+	text-align: center;
+}
+
+.null {
+	font-size: 14px;
+	text-align: center;
+	color: #6b6b6b;
+}
+
+.tag {
+	padding: 5px 0;
+}
+
+.set {
+	position: fixed;
+	top: 30rpx;
+	right: 30rpx;
+	width: 48rpx;
+}
+
+.set>image {
+	width: 100%;
+	overflow: hidden;
+}

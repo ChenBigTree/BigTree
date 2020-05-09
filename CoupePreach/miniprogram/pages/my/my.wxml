@@ -23,7 +23,7 @@
 		</view>
 	</view>
 	<view class="me-list">
-		<view class="list" data-url="../my/mySpace/mySpace" bindtap="openConfirm">
+		<view class="list" data-url="../my/mySpace/mySpace?openid={{userInfo.openid}}&&form='my'" bindtap="openConfirm">
 			<view>我的主页</view>
 		</view>
 		<view class="list" data-url="../my/administrator/administrator" bindtap="openConfirm">

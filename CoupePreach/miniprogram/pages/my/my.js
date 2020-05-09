@@ -27,15 +27,17 @@ Page({
           name: "login"
         }).then((res) => {
           let userInfoData = {
-            openid: res.result.openid,
             nickName: e.userInfo.nickName,
             avatarUrl: e.userInfo.avatarUrl,
+            individualResume:'',
             city: e.userInfo.city,
             isAdministrator: true, // 是否管理员
             isTeacher: true, // 是否讲师
             isDistributionMember: true, // 是否分销员
             fans: [], // 粉丝
             partner: [], // 伙伴
+            PriceOfCourse: 50,
+            openid:res.result.openid
           }
           app.globalData.userInfo = userInfoData
           this.setData({
@@ -47,7 +49,7 @@ Page({
           wx.cloud.callFunction({
             name: "userInfo",
             data: {
-              userInfoData: userInfoData,
+              userInfoData:userInfoData,
               fun: "add"
             },
             success(res) {

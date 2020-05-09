@@ -16,25 +16,46 @@ exports.main = async (event, context) => {
           isPass: false
         }
       }).get()
-    } else if (event.get == 'exclusive') { // 获取指定用户全部动态数据
+    } else if (event.get == "exclusive") { // 获取指定用户全部动态数据
       return await cloud.database().collection('circle').where({
         _openid: wxContext.OPENID
       }).get()
-    } else if (event.get == 'homeAll') { // 首页获取全部已同意上架的所有数据
+    } else if (event.get == "homeAll") { // 首页获取全部已同意上架的所有数据
       return await cloud.database().collection("circle").where({
         isShow: {
           isApply: true,
           isPass: true
         }
       }).get()
-    } else if (event.get == 'homeAssign') { // 首页获取指定已同意上架的热门数据前五条
+    } else if (event.get == "homeAssign") { // 首页获取指定标签的已同意上架的热门数据前五条
       return await cloud.database().collection("circle").where({
         isShow: {
           isApply: true,
           isPass: true
         },
-        tag:event.tag
+        tag: event.tag
       }).get()
+    } else if (event.get == "individual") { // 其他用户获取个人课程
+
+      if (event.openid == wxContext.OPENID) {
+        return {
+          data: (await cloud.database().collection("circle").where({
+            _openid: event.openid
+          }).get()),
+          isF: true
+        }
+      } else {
+        return {
+          data: (await cloud.database().collection("circle").where({
+            _openid: event.openid,
+            isShow: {
+              isApply: true,
+              isPass: true
+            }
+          }).get()),
+          isF: false
+        }
+      }
     }
 
   } else if (event.fun == "update") {

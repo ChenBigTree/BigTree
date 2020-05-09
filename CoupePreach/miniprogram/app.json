@@ -21,8 +21,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [
-      {
+    "list": [{
         "text": "首页",
         "pagePath": "pages/home/home",
         "iconPath": "images/icon/首页2.png",
@@ -42,6 +41,7 @@
       }
     ]
   },
+  "requiredBackgroundModes": ["audio"],
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }

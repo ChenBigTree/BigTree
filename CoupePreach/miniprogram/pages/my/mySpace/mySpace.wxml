@@ -1,2 +1,120 @@
-<!--miniprogram/pages/my/mySpace/mySpace.wxml-->
-<text>miniprogram/pages/my/mySpace/mySpace.wxml</text>
+<!--pages/nurse.wxml-->
+<view class="page">
+	<!-- 头部信息 -->
+	<view class="head">
+		<view class="vHead">
+			<view class="avatar">
+				<image src="{{useInfo.avatarUrl}}"></image>
+			</view>
+			<view class="vTitle">
+				<text class="name">{{useInfo.nickName}}</text>
+				<!-- <text class="vtip">{{nurse.keshi}} {{nurse.job}}</text>
+				<text class="vtip">{{nurse.company}}</text> -->
+			</view>
+
+		</view>
+		<!-- <view class="vDigtal">
+			<view class="digtalMenu">
+				<text>5756次</text>
+				<view class="vtip">服务人数</view>
+			</view>
+			<view class="digtalMenu">
+				<text>100%</text>
+				<text class="vtip">好评率</text>
+			</view>
+			<view class="digtalMenu">
+				<text>100分</text>
+				<text class="vtip">同行认可</text>
+			</view>
+		</view> -->
+		<view class="introduce">
+			<!-- <view class="introduce-title">自我简介:</view> -->
+			<block wx:if="{{isSet}}">
+				<view class="introduce-content {{hidden?'hidden':''}}" wx:if="{{useInfo.individualResume!=''}}">{{useInfo.individualResume}}</view>
+				<view class="introduce-content null" wx:else>这个人什么也没留下……</view>
+
+				<view class="icon">
+					<i-icon type="{{hidden?'unfold':'packup'}}" bindtap="setStatus" size="24" color="f4f4f4"></i-icon>
+				</view>
+			</block>
+			<view class="textarea-box" wx:else>
+				<textarea bindblur="bindTextAreaBlur" auto-height maxlength="-1" placeholder="请填写修改的简介" value="{{useInfo.individualResume}}"></textarea>
+			</view>
+		</view>
+	</view>
+	<!-- 设置按钮 -->
+	<view class="set" bindtap="set" wx:if="{{isShow}}">
+		<image mode="widthFix" src="../../../images/icon/set.png"></image>
+	</view>
+	<!-- 课程列表 -->
+	<view class="recoms">
+		<i-sticky scrollTop="{{scrollTop}}">
+			<i-sticky-item i-class="i-sticky-demo-title">
+				<view slot="title" class="title-box clearfix">
+					<view class="title-text fl">课程列表</view>
+					<view class="title-price fr clearfix">
+						<block wx:if="{{isSet}}">
+							<view class="price fl">￥<text>{{useInfo.PriceOfCourse}}</text></view>
+							<view class="btn fr">购买</view>
+						</block>
+						<view wx:else class="input-number">
+							<i-input-number value="{{ price }}" min="0" max="1000" bindchange="handleChange1" />
+						</view>
+					</view>
+				</view>
+				<view slot="content">
+					<view class="recom-list" wx:if='{{recomList.length>0}}'>
+						<block wx:for='{{recomList}}' wx:key="key">
+							<view class="recom-item" bindtap="toDetail" data-index="{{index}}" data-id="{{item._id}}">
+								<view class="cover">
+									<image mode="heightFix" wx:if="{{item.images.length>0}}" src="{{item.images[0]}}"></image>
+									<image mode="heightFix" wx:else src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg"></image>
+								</view>
+								<view class="text">
+									<view class="title">{{item.title?item.title:'精彩分享'}}</view>
+									<view class="tag clearfix">
+										<i-tag class="i-tags fl" wx:if="{{item.tag}}" name="{{item.tag}}" color="green" type="border">
+											{{item.tag}}
+										</i-tag>
+
+										<i-tag class="i-tags fr" wx:if="{{isShow}}" name="{{item.tag}}" color="yellow" type="border">
+											{{item.isShow.isPass== true && item.isShow.isApply==true ? '已上架': item.isShow.isPass == false && item.isShow.isApply == false ? '未上架' : item.isShow.isPass == false && item.isShow.isApply == true ? '待审核' : '不通过' }}
+										</i-tag>
+									</view>
+									<view class="info">
+										<view class="views">
+											<image mode="widthFix" src="../../../images/icon/view.png"></image><text>{{item.views}}</text>
+										</view>
+										<view class="time">{{item.time}}</view>
+									</view>
+								</view>
+							</view>
+						</block>
+					</view>
+					<view class="null" wx:else>暂无相关内容 </view>
+				</view>
+			</i-sticky-item>
+		</i-sticky>
+
+	</view>
+</view>
+<!--page-->
+
+<!--底部菜单-->
+<!-- <view class="footer">
+	<view class="fbtn" bindtap="toHome">
+		<view class="btnIcon">
+			<image src="/images/home.png"></image>
+		</view>
+		<view class="btnText">主页</view>
+	</view>
+	<view class="fbtn">
+		<view class="btnIcon">
+			<image src="/images/like.png"></image>
+		</view>
+		<view class="btnText">关注</view>
+	</view>
+	<view class="subBtn" bindtap="toPay">
+		<view class="txtBtn">{{btnSel[selIndex].item}}（¥{{btnSel[selIndex].price}}/次）</view>
+	</view>
+</view> -->
