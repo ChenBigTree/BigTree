@@ -20,6 +20,10 @@ exports.main = async (event, context) => {
       return await cloud.database().collection('circle').where({
         _openid: wxContext.OPENID
       }).get()
+    } else if (event.get == "one") { // 获取指定用户全部动态数据
+      return await cloud.database().collection('circle').where({
+        _id: event.id
+      }).get()
     } else if (event.get == "homeAll") { // 首页获取全部已同意上架的所有数据
       return await cloud.database().collection("circle").where({
         isShow: {
@@ -94,6 +98,12 @@ exports.main = async (event, context) => {
             isApply: false,
             isPass: false
           }
+        }
+      })
+    } else if (event.update == "dianzan"){
+      return data.update({
+        data:{
+          zans:event.zansArr
         }
       })
     }

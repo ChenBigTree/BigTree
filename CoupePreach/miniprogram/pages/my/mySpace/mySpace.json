@@ -4,6 +4,7 @@
     "i-sticky-item": "../../../components/sticky-item/index",
     "i-icon": "../../../components/icon/index",
     "i-tag": "../../../components/tag/index",
-    "i-input-number": "../../../components/input-number/index"
+    "i-input-number": "../../../components/input-number/index",
+    "mp-auth": "../../../components/auth/dialog"
   }
 }

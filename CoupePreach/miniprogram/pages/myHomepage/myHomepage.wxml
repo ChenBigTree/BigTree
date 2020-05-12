@@ -1,28 +1,30 @@
 <!--pages/community/speech.wxml-->
-<include src="/pages/common/footermenu.wxml"></include>
-<view class='header'>
-	<text bindtap="toEdit" class='iconfont icon-xiangji r-right'></text>
-</view>
 
-<view class="top-relate">
-	<image class="img-top" mode="widthFix" src="https://6c6a-ljyhr-0y7bz-1301345086.tcb.qcloud.la/pgy/pgy.png?sign=0a90fc0e8ddf8d2036f7d397772c75e5&t=1587102250"> </image>
-</view>
-<i-tabs current="{{ current }}" bindchange="handleChange">
+	<include src="/pages/common/footermenu.wxml"></include>
+	<view class='header'>
+		<view class='r-right'>
+			<text catchtap="toEdit" class="iconfont icon-xiangji"></text></view>
+	</view>
+
+	<view class="top-relate">
+		<image class="img-top" mode="widthFix" src="https://6c6a-ljyhr-0y7bz-1301345086.tcb.qcloud.la/pgy/pgy.png?sign=0a90fc0e8ddf8d2036f7d397772c75e5&t=1587102250"> </image>
+	</view>
+	<!-- <i-tabs current="{{ current }}" bindchange="handleChange">
 	<i-tab key="tab1" title="动态"></i-tab>
 	<i-tab key="tab2" title="课程"></i-tab>
-</i-tabs>
-<circlePage  wx:if="{{current=='tab1'}}" />
-<curriculumPage curriculumArr="{{curriculumArr}}" wx:if="{{current=='tab2'}}" />
+</i-tabs> -->
+	<circlePage wx:if="{{current=='tab1'}}" />
+	<!-- <curriculumPage curriculumArr="{{curriculumArr}}" wx:if="{{current=='tab2'}}" /> -->
 
-<!-- 评论框 -->
-<view wx:if='{{showPinLun}}'>
-	<form report-submit='true' bindsubmit='submitComment'>
-		<view class='liuyan'>
-			<input class='input' auto-focus cursor-spacing="32rpx" value='{{commentValue}}' bindinput='getcomment' placeholder='{{placeholderPL}}'></input>
-			<button class='icon' form-type='submit' style="width:15%;height:70%;margin-right: 14rpx;">发送</button>
-		</view>
-	</form>
-</view>
+	<!-- 评论框 -->
+	<view wx:if='{{showPinLun}}'>
+		<form report-submit='true' bindsubmit='submitComment'>
+			<view class='liuyan'>
+				<input class='input' auto-focus cursor-spacing="32rpx" value='{{commentValue}}' bindinput='getcomment' placeholder='{{placeholderPL}}'></input>
+				<button class='icon' form-type='submit' style="width:15%;height:70%;margin-right: 14rpx;">发送</button>
+			</view>
+		</form>
+	</view>
 
-<!-- 授权框 -->
-<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>
+	<!-- 授权框 -->
+	<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>

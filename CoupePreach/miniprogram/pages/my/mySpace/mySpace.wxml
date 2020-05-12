@@ -55,7 +55,12 @@
 					<view class="title-price fr clearfix">
 						<block wx:if="{{isSet}}">
 							<view class="price fl">￥<text>{{useInfo.PriceOfCourse}}</text></view>
-							<view class="btn fr">购买</view>
+							<block wx:if="{{isShowPay}}">
+								<view class="btn fr" wx:if="{{!isShow}}" bindtap="toPay">购买</view>
+							</block>
+							<!-- <view wx:if="{{isShow}}" class="price fl"></view> -->
+							<view wx:else class="price fl">已购买</view>
+							
 						</block>
 						<view wx:else class="input-number">
 							<i-input-number value="{{ price }}" min="0" max="1000" bindchange="handleChange1" />
@@ -97,6 +102,8 @@
 		</i-sticky>
 
 	</view>
+	<!-- 授权框 -->
+	<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>
 </view>
 <!--page-->
 

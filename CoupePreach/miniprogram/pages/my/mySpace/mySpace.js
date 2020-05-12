@@ -1,4 +1,6 @@
 // pages/wenzhen/newNurse.js
+let _this
+const app = getApp()
 Page({
 
   /**
@@ -10,38 +12,13 @@ Page({
     selIndex: 0,
     nurse: null,
     scrollTop: 0,
-    isSet:true,
-    btnSel: [{
-        selected: true,
-        item: '图文咨询',
-        price: 50,
-        times: 10,
-        long: 48,
-        tip: '通过文字、图片、语音进行咨询',
-        content: '可以通过文字、图片、语音的形式和专家沟通;\n一次咨询的时效为48小时，在48小时内随时和医生沟通（对话上限为10次）;\n专家未回复问题可退款;'
-      },
-      {
-        selected: false,
-        item: '在线咨询',
-        price: 100,
-        times: 50,
-        long: 48,
-        tip: '与医生进行选定时长的电话咨询',
-        content: '以电话的形式和医生沟通，时间和时长可自主选择;\n电话未接通可退款；'
-      },
-      {
-        selected: false,
-        item: '视频咨询',
-        price: 200,
-        times: 5,
-        long: 48,
-        tip: '与医生进行选定时长的视频咨询',
-        content: '以视频的形式和医生沟通，时间和时长可自主选择;\n视频未接通可退款；'
-      }
-    ],
-
+    isSet: true,
     useInfo: "",
     price: 1,
+  },
+
+  toPay(e) { // 点击购买课程
+
   },
 
   handleChange1({ // 用户修改自己课程的价格
@@ -57,40 +34,146 @@ Page({
     })
   },
 
-  toDetail(e) {
+  toDetail(e) { // 跳转课程详情页
     console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
       url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
     })
   },
-  set(){
+  set() {
     this.setData({
-      isSet:!this.data.isSet
+      isSet: !this.data.isSet
+    })
+  },
+
+  // 购买功能
+  toPay: function () {
+    let that = this;
+    if (!that.data.myUserInfo) {
+      that.setData({
+        dialogShow: true
+      })
+    } else {
+      console.log('toPay--->', that.data.useInfo)
+
+      let money = that.data.price
+      let gname = that.data.useInfo.nickName + "的全部课程"
+      wx.cloud.callFunction({
+        name: "yunPay",
+        data: {
+          orderid: "XJT" + new Date().getTime(),
+          money: money,
+          // money: 0.01,
+          gname: gname,
+        },
+        success(res) {
+          console.log("提交成功", res.result)
+          that.pay(res.result.result)
+        },
+        fail(res) {
+          console.log("提交失败", res)
+        }
+      })
+    }
+  },
+
+  //实现小程序支付
+  pay(payData) {
+    let that = this
+    //官方标准的支付方法
+    wx.requestPayment({
+      timeStamp: payData.timeStamp,
+      nonceStr: payData.nonceStr,
+      package: payData.package, //统一下单接口返回的 prepay_id 格式如：prepay_id=***
+      signType: 'MD5',
+      paySign: payData.paySign, //签名
+      success(res) {
+        console.log("支付成功", res)
+        wx.cloud.callFunction({
+          name: "userInfo",
+          data: {
+            fun: "update",
+            update: "distributionMember",
+            id: that.data.useInfo._id,
+            openid: that.data.useInfo.openid
+          },
+          success: res => {
+            console.log("支付成功 修改个人资料", res)
+            that.getMy()
+            that.getOne(that.data.useInfo.openid)
+          },
+          fail: err => {
+            console.log("支付失败 修改个人资料", err)
+          }
+        })
+      },
+      fail(res) {
+        console.log("支付失败", res)
+      },
+      complete(res) {
+        console.log("支付完成", res)
+      }
+    })
+  },
+  getMy() {
+
+    wx.cloud.callFunction({
+      name: "userInfo",
+      data: {
+        fun: "get_personal",
+      },
+      success: res => {
+        app.globalData.userInfo = res.result.data[0]
+        this.setData({
+
+        })
+        console.log("获取全局个人资料", app.globalData.userInfo)
+      },
+      fail: err => {
+        console.log("获取个人资料 失败", err)
+      }
+    })
+  },
+
+  getOne(openid) {
+    wx.cloud.callFunction({
+      name: "userInfo",
+      data: {
+        fun: "get_othersInformation",
+        openid: openid
+      },
+      success: res => {
+        console.log("课程者信息==>", res.result.data[0])
+        for (let i in _this.data.myUserInfo.distributionMember) {
+          if (openid == _this.data.myUserInfo.distributionMember[i].openid) {
+            console.log("本人已购买全部课程")
+            _this.setData({
+              isShowPay: false,
+              useInfo: res.result.data[0],
+              price: res.result.data[0].PriceOfCourse
+            })
+            return
+          }
+        }
+        console.log("3")
+        _this.setData({
+          isShowPay: true,
+          useInfo: res.result.data[0],
+          price: res.result.data[0].PriceOfCourse
+        })
+        console.log("this.data.isShowPay", this.data.isShowPay)
+      }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _this = this
+    _this = this
     wx.showLoading({
       title: '正在加载',
     })
-    console.log(options.openid)
-    wx.cloud.callFunction({
-      name: "userInfo",
-      data: {
-        fun: "get_othersInformation",
-        openid: options.openid
-      },
-      success: res => {
-        console.log("个人信息==>", res.result.data)
-        _this.setData({
-          useInfo: res.result.data[0],
-          price:res.result.data[0].PriceOfCourse
-        })
-      }
-    })
+    this.getOne(options.openid)
 
     wx.cloud.callFunction({
       name: 'stairway',
@@ -107,39 +190,10 @@ Page({
       });
       this.setData({
         recomList: arr,
-        isShow: res.result.data.isF
+        isShow: res.result.isF
       })
       wx.hideLoading()
     })
-
-    return
-    this.setData({
-      openid: options.openid
-    })
-    wx.cloud.callFunction({
-      name: 'xj_getNurse',
-      data: {
-        type: 'byOpenid',
-        openid: options.openid
-      }
-    }).then(res => {
-      console.log('专家首页==>', res.result.data)
-      let btnSel = this.data.btnSel
-      btnSel[0].price = res.result.data[0].textPrice
-      btnSel[1].price = res.result.data[0].onlinePrice
-      btnSel[2].price = res.result.data[0].videoPrice
-      this.setData({
-        nurse: res.result.data[0],
-        btnSel: btnSel
-      })
-      if (this.data.recomList) {
-        wx.hideLoading({
-          complete: (res) => {},
-        })
-      }
-
-    })
-
   },
   onPageScroll(event) {
     this.setData({
@@ -147,6 +201,55 @@ Page({
     })
   },
 
+  getUserInfo: function (e) {
+    console.log("进来了")
+    wx.getUserInfo({
+      success: e => {
+        wx.cloud.callFunction({
+          name: "login"
+        }).then((res) => {
+          let userInfoData = {
+            nickName: e.userInfo.nickName,
+            avatarUrl: e.userInfo.avatarUrl,
+            individualResume: '',
+            city: e.userInfo.city,
+            isAdministrator: false, // 是否管理员
+            isTeacher: true, // 是否讲师
+            isDistributionMember: false, // 是否分销员
+            fans: [], // 粉丝
+            partner: [], // 伙伴
+            PriceOfCourse: 50,
+            openid: res.result.openid,
+            distributionMember: [] // 购买的课程
+          }
+          app.globalData.userInfo = userInfoData
+          _this.setData({
+            showLogin: !_this.data.showLogin,
+            userInfo: userInfoData
+          });
+          console.log("app=>", app.globalData)
+
+          wx.cloud.callFunction({
+            name: "userInfo",
+            data: {
+              userInfoData: userInfoData,
+              fun: "add"
+            },
+            success(res) {
+              console.log("存储成功 ==>", res)
+            },
+            fail: err => {
+              console.log("存储失败 ==>", err)
+            }
+          })
+          console.log("userInfoData==>", userInfoData)
+        })
+        if (_this.userInfoReadyCallback) {
+          _this.userInfoReadyCallback(res)
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -158,8 +261,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-
+    // console.log("获取全局的用户信息 =>", app.globalData.userInfo)
+    if (app.globalData.userInfo) {
+      this.setData({
+        myUserInfo: app.globalData.userInfo
+      })
+      console.log("存储全局的用户信息 =>", this.data.myUserInfo)
+    }
+    this.getMy()
   },
 
   /**
@@ -190,10 +299,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

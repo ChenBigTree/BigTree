@@ -19,22 +19,22 @@ Component({
   pageLifetimes: {
     show: function () {
       this.getAllData()
-      console.log("页面展示时执行")
+      // console.log("页面展示时执行")
     },
   },
   /**
    * 组件挂载之前执行
    */
   attached: function () {
-    this.getAllData()
-    console.log("组件挂载之前执行")
+    // this.getAllData()
+    // console.log("组件挂载之前执行")
   },
 
   /**
    * 组件挂载后执行
    */
   ready: function () {
-    console.log("组件挂载后执行")
+    // console.log("组件挂载后执行")
   },
   /**
    * 组件的方法列表

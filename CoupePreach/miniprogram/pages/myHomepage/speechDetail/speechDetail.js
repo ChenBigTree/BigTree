@@ -31,12 +31,7 @@ Page({
     btoText: "正在加载...",
     title: '',
     adminOpenid: "o0L8g0WabpVHRvjgVVGAUjMlCnsA",
-    shareObg: {
-      title: '蒲公莹',
-      desc: '',
-      path: '/pages/pyq/circle/index',
-      imageUrl: "/image/pyq/pyq03.jpg",
-    } //转发样式
+    isFa: true
   },
   getUserInfo(e) {
     console.log(e.detail.userInfo)
@@ -57,9 +52,22 @@ Page({
       })
     }
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+    return {
+      title: this.data.title,
+      path: 'pages/myHomepage/speechDetail/speechDetail?userInfo=' + JSON.stringify(this.data.wallData[0].userInfo) + "&&id=" + this.data.wallData[0]._id,
+    }
+  },
+
   onLoad: function (options) {
     var that = this
     console.log('onload--options--->', options)
+    
+    // return 
     if (options.free) {
       that.setData({
         collection: 'chapters',
@@ -222,49 +230,123 @@ Page({
       wx.pageScrollTo({
         scrollTop: 200,
       })
-      // wx.showToast({
-      //   title: '需要授权才能点赞评论,见第一条墙消息.',
-      //   icon: 'none'
-      // })
       this.setData({
         dialogShow: true
       })
       return
     }
+    console.log("isZan ", this.data.isZan)
 
     console.log("_id", e.currentTarget.dataset._id)
     let id = e.currentTarget.dataset._id
-    wx.cloud.database().collection("circle").where({
-      _id: id
-    }).get().then(res => {
-      console.log(res.data)
-      let datas = res.data[0]
-      for (let i = 0; i < datas.zans.length; i++) {
-        if (this.data.openid == datas.zans[i].openid) {
-          datas.zans.splice(i, 1)
+    console.log("点赞总数 ", this.data.wallData[0])
+    let zansArr = this.data.wallData[0].zans
+    if (this.data.isZan) {
+      this.setData({
+        isFa: false
+      })
+      console.log("用户已点赞")
+      for (let i = 0; i < zansArr.length; i++) {
+        if (this.data.openid == zansArr[i].openid) {
 
-          wx.cloud.database().collection('circle').doc(id).update({
+          console.log("截取前", zansArr)
+          zansArr.splice(i, 1)
+
+          console.log("截取后", zansArr)
+
+          wx.cloud.callFunction({
+            name: "stairway",
             data: {
-              zans: datas.zans
+              fun: "update",
+              update: "dianzan",
+              id: id,
+              zansArr: zansArr
             },
-            success: function (res) {
-
-              wx.cloud.database().collection('circle').doc(id).get().then(res => {
-                console.log("取消点赞成功", res.data)
+            success: (ress) => {
+              wx.cloud.callFunction({ // 获取取消点赞后的数据
+                name: "stairway",
+                data: {
+                  fun: "get",
+                  get: "one",
+                  id: id
+                }
+              }).then(res => {
+                console.log("更新成功", ress.result.stats)
+                console.log("获取取消点赞后成功", res.result.data)
+                let date = `${new Date(res.result.data[0].time).getFullYear()}-${new Date(res.result.data[0].time).getMonth()+1>=10?new Date(res.result.data[0].time).getMonth()+1:"0"+(new Date(res.result.data[0].time).getMonth()+1)}-${new Date(res.result.data[0].time).getDate()>9?new Date(res.result.data[0].time).getDate():"0"+new Date(res.result.data[0].time).getDate()}`
+                res.result.data[0].time = date
+                for (let i = 0; i < res.result.data.length; i++) {
+                  res.result.data[i].zanText = res.result.data[i].zans.map(a => {
+                    return a.name
+                  }).join(", ")
+                }
                 that.setData({
-                  wallData: res.data
+                  wallData: res.result.data,
+                  isZan: false,
+                  isFa: true
                 })
               })
+
+            },
+            fail: err => {
+              console.log(err)
             }
           })
           return false
         }
       }
+    } else {
+      console.log("用户未点赞")
+      var data = this.data.wallData
+      console.log("openid", this.data.openid)
+      data[0].zans.push({
+        name: this.data.userInfo.nickName,
+        time: new Date(),
+        openid: this.data.openid
+      })
+      console.log("cao", data[0].zans)
+      data[0].zanText = data[0].zans.map(a => {
+        return a.name
+      }).join(", ")
+      that.setData({
+        wallData: data,
+        isZan: true,
+        isFa: false
+      })
+      wx.cloud.callFunction({
+        name: 'chat',
+        data: {
+          type: 'zan',
+          collectionname: that.data.collection,
+          data: {
+            username: this.data.userInfo.nickName,
+            _id: e.currentTarget.dataset._id
+          }
+        }
+      }).then(res => {
+        console.log("点赞成功")
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+
+    return
+    wx.cloud.callFunction({
+      name: "stairway",
+      data: {
+        fun: "get",
+        get: "one",
+        id: id
+      }
+    }).then(res => {
+      console.log(res.result.data)
+      let datas = res.result.data[0]
+
 
       console.log("用户未点赞")
       var data = this.data.wallData
       data[0].zans.push({
-        name: this.data.userInfo.userInfoData.nickName
+        name: this.data.userInfo.nickName
       })
       data[0].zanText = data[0].zans.map(a => {
         return a.name
@@ -278,15 +360,20 @@ Page({
           type: 'zan',
           collectionname: that.data.collection,
           data: {
-            username: this.data.userInfo.userInfoData.nickName,
+            username: this.data.userInfo.nickName,
             _id: e.currentTarget.dataset._id
           }
         }
+      }).then(() => {
+        this.setData({
+          isFa: true
+        })
       })
 
     }).catch(err => {
       console.log(err)
     })
+
     return
 
     console.log('isZan==>', that.data.isZan)
@@ -294,13 +381,13 @@ Page({
     if (!that.data.isZan) {
       var data = this.data.wallData
       data[0].zans.push({
-        name: this.data.userInfo.userInfoData.nickName
+        name: this.data.userInfo.nickName
       })
       data[0].zanText = data[0].zans.map(a => {
         return a.name
       }).join(", ")
       console.log("data[0].zans", data[0].zans)
-      console.log("this.data.userInfo.userInfoData.nickName", this.data.userInfo.userInfoData.nickName)
+      console.log("this.data.userInfo.nickName", this.data.userInfo.nickName)
       this.setData({
         wallData: data
       })
@@ -310,7 +397,7 @@ Page({
           type: 'zan',
           collectionname: that.data.collection,
           data: {
-            username: this.data.userInfo.userInfoData.nickName,
+            username: this.data.userInfo.nickName,
             _id: e.currentTarget.dataset._id
           }
         }
@@ -319,7 +406,6 @@ Page({
       })
     } else { // 已经点赞
       console.log("openid", this.data.openid)
-
     }
 
     this.setData({
@@ -330,7 +416,7 @@ Page({
 
   },
 
-  submitComment(e) {
+  submitComment(e) { //提交数据
     let that = this
     if (!this.data.userInfo) {
 
@@ -624,89 +710,64 @@ Page({
     }
   },
 
-  toHome() {
-    wx.navigateTo({
-      url: './index',
-    })
-  },
-
   getMyWallData(id, collection) {
     let that = this
     console.log(id)
     wx.showNavigationBarLoading()
-    const db = wx.cloud.database()
-    db.collection(collection).where({
-      _id: id
-    }).get().then(res => {
-      console.log(res)
-      console.log("MY")
-      wx.cloud.callFunction({
-        name: 'dakaGet',
-        data: {
-          id: id
-        },
-        success: res1 => {
-          let redata = res1.result.data
-          console.log("dakaGet-->", redata)
-          if (redata.length > 0) {
-            console.log('dd')
-            for (let i = 0; i < redata.length; i++) {
-              console.log('getTime-->', redata[i].createTime)
-              redata[i].time = redata[i].createTime.getTime
-            }
-            this.setData({
-              dakas: redata
+
+    wx.cloud.callFunction({
+      name: "stairway",
+      data: {
+        id: id,
+        fun: "get",
+        get: "one"
+      },
+      success: res => {
+        console.log(res)
+        for (let i = 0; i < res.result.data.length; i++) {
+          console.log("res.result.data[i].time", res.result.data[i].time)
+          res.result.data[i].time = this.parseTime(new Date(res.result.data[i].createTime).getTime())
+          res.result.data[i].zanText = res.result.data[i].zans.map(a => {
+            return a.name
+          }).join(", ")
+
+        }
+        console.log("aa")
+        this.setData({
+          wallData: res.result.data,
+        })
+        console.log('wallData', this.data.wallData)
+        let title = this.data.wallData[0].title
+        if (title == '') {
+          this.setData({
+            title: this.data.wallData[0].userInfo.nickName + '的精彩分享'
+          })
+        } else {
+          this.setData({
+            title: this.data.wallData[0].title
+          })
+        }
+        wx.setNavigationBarTitle({
+          title: this.data.title
+        })
+        wx.cloud.callFunction({
+          name: "login"
+        }).then(res => {
+          console.log(res.result.openid)
+          that.setData({
+            openid: res.result.openid,
+            isZan: that.data.wallData[0].zans.some(a => {
+              return a.openid === res.result.openid
             })
-          }
-        },
-        fail: err => {
-          console.log("dakaGet-->", err)
-        }
-      })
-      var zanText
-
-      for (let i = 0; i < res.data.length; i++) {
-        res.data[i].time = this.parseTime(res.data[i].createTime.getTime())
-        res.data[i].zanText = res.data[i].zans.map(a => {
-          return a.name
-        }).join(", ")
-        for (let j = 0; j < res.data[i].dakas.length; j++) {
-
-          res.data[i].dakas[j].time = this.parseTime(res.data[i].dakas[j].createTime.getTime())
-          res.data[i].dakas[j].volume = "/images/volumeg.png"
-        }
-      }
-      this.setData({
-        wallData: res.data
-      })
-      console.log('wallData', this.data.wallData)
-      let title = this.data.wallData[0].title
-      if (title == '') {
-        this.setData({
-          title: this.data.wallData[0].userInfo.nickName + '的精彩分享'
-        })
-      } else {
-        this.setData({
-          title: this.data.wallData[0].title
-        })
-      }
-      wx.setNavigationBarTitle({
-        title: this.data.title
-      })
-      wx.cloud.callFunction({
-        name: "login"
-      }).then(res => {
-        console.log(res.result.openid)
-        that.setData({
-          openid: res.result.openid,
-          isZan: that.data.wallData[0].zans.some(a => {
-            return a.openid === res.result.openid
           })
         })
-      })
 
-      wx.hideNavigationBarLoading()
+        wx.hideNavigationBarLoading()
 
+      },
+      fail: err => {
+        console.log(err)
+      }
     })
   },
 
@@ -863,13 +924,6 @@ Page({
       url: './speechDaka?speech=' + JSON.stringify(this.data.wallData[0]),
     })
   },
-
-  onShareAppMessage() {
-    return {
-      title: this.data.title
-    }
-  },
-
   parseTime(dateTimeStamp) { //dateTimeStamp是一个时间毫秒，注意时间戳是秒的形式，在这个毫秒的基础上除以1000，就是十位数的时间戳。13位数的都是时间毫秒。
     var result = ''
     var datetime = new Date();

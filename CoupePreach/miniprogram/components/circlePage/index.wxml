@@ -57,11 +57,11 @@
 							<view class="comments">
 								<view wx:for="{{itemName.comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
 									<view class="tt-row" wx:if='{{!item.toName}}'>
-										<text class="blueColor">{{item.userInfo.nickName+': '}}</text>
+										<text class="blueColor">{{item.username+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>
 									</view>
 									<view wx:if='{{item.toName}}'>
-										<text class="blueColor">{{item.userInfo.nickName}}</text>
+										<text class="blueColor">{{item.username}}</text>
 										<text class="noblueColor"> 回复</text>
 										<text class="blueColor">{{item.toName+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>

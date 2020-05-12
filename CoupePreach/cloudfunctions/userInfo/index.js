@@ -6,7 +6,10 @@ cloud.init()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  const userInfoData = cloud.database().collection("userInfoData")
+
+  const db = cloud.database()
+  const _ = db.command
+  const userInfoData = db.collection("userInfoData")
   if (event.fun == "add") { // 存储个人信息
     let user = (await userInfoData.where({
       openid: wxContext.OPENID
@@ -25,7 +28,8 @@ exports.main = async (event, context) => {
           partner: event.userInfoData.partner,
           PriceOfCourse: event.userInfoData.PriceOfCourse,
           openid: wxContext.OPENID,
-          individualResume:event.userInfoData.individualResume
+          individualResume: event.userInfoData.individualResume,
+          distributionMember: event.userInfoData.distributionMember
         }
       })
     } else {
@@ -39,5 +43,18 @@ exports.main = async (event, context) => {
     return await userInfoData.where({
       openid: event.openid
     }).get()
+  } else if (event.fun == "update") {
+    if (event.update == "distributionMember") {
+      return await userInfoData.where({
+        openid: wxContext.OPENID,
+      }).update({
+        data: {
+          distributionMember: _.push({
+            openid: event.openid,
+            createTime: db.serverDate()
+          })
+        }
+      })
+    }
   }
 }

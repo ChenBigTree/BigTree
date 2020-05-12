@@ -192,7 +192,7 @@
 	font-size: 32rpx;
 	color: #B21016;
 	font-weight: 600;
-	margin: 5rpx 0;
+	margin: 5rpx 10px;
 }
 
 .btn {
@@ -201,7 +201,7 @@
 	border-radius: 10rpx;
 	height: 42rpx;
 	line-height: 42rpx;
-	margin: 12rpx 20rpx;
+	margin: 12rpx 10px 12rpx 0;
 }
 
 .recom-item {
@@ -259,6 +259,7 @@
 	display: inline-block;
 	vertical-align: middle;
 	max-height: 88.28px;
+	margin-right: 5px;
 }
 
 .info .time {
@@ -303,6 +304,7 @@
 	font-size: 14px;
 	text-align: center;
 	color: #6b6b6b;
+	margin-top: 30px;
 }
 
 .tag {

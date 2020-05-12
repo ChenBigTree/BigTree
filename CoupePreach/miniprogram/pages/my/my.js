@@ -28,16 +28,17 @@ Page({
         }).then((res) => {
           let userInfoData = {
             nickName: e.userInfo.nickName,
-            avatarUrl: e.userInfo.avatarUrl,
+            avatarUrl: e.userInfo.avatarUrl, 
             individualResume:'',
             city: e.userInfo.city,
-            isAdministrator: true, // 是否管理员
+            isAdministrator: false, // 是否管理员
             isTeacher: true, // 是否讲师
-            isDistributionMember: true, // 是否分销员
+            isDistributionMember: false, // 是否分销员
             fans: [], // 粉丝
             partner: [], // 伙伴
             PriceOfCourse: 50,
-            openid:res.result.openid
+            openid:res.result.openid,
+            distributionMember:[] // 购买的课程
           }
           app.globalData.userInfo = userInfoData
           this.setData({
@@ -85,6 +86,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("app.globalData.userInfo",app.globalData.userInfo)
     if (app.globalData.userInfo != undefined) {
       this.setData({
         userInfo: app.globalData.userInfo

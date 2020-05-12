@@ -9,9 +9,24 @@ Page({
   data: {
     tabs1: ['全部', '推荐', '最新', '热门'],
     wallData: "",
-    current_scroll: '1'
+    current_scroll: '1',
+    isShowListPage: false,
+    class: ''
   },
-
+  showListPage(e) {
+    console.log(e.currentTarget.dataset)
+    if (e.currentTarget.dataset.name != "listPage") {
+      this.setData({
+        class: "bottom",
+        current_scroll: e.currentTarget.dataset.key
+      })
+      this.listFun(e.currentTarget.dataset.key)
+    } else {
+      this.setData({
+        class: "top"
+      })
+    }
+  },
   handleChangeScroll({
     detail
   }) {
@@ -19,9 +34,16 @@ Page({
     this.setData({
       current_scroll: detail.key
     });
-    if (detail.key == 1) {
+    this.listFun(detail.key)
+  },
+  listFun(tagName) {
+    console.log('tagName', tagName)
+    if (tagName == undefined) {
+      return
+    }
+    if (tagName == 1) {
       this.getHomeAllData()
-    } else if (detail.key == 3) {
+    } else if (tagName == 3) {
       wx.cloud.callFunction({
         name: "stairway",
         data: {
@@ -43,12 +65,12 @@ Page({
           console.log(err)
         }
       })
-    } else if (detail.key == 2) {
+    } else if (tagName == 2) {
       // this.getHomeAllData()
       _this.setData({
         wallData: ""
       })
-    } else if (detail.key == 4) {
+    } else if (tagName == 4) {
       _this.setData({
         wallData: ''
       })
@@ -70,12 +92,16 @@ Page({
           console.log(err)
         }
       })
-    } else if (detail.key > 4) {
+    } else {
       _this.setData({
         wallData: ''
       })
-      let tag = _this.data.lists[detail.key - 5].tag
-      console.log(tag)
+      let tag = _this.data.lists[tagName - 5].tag
+      // } else if (fun == 'tag') {
+      //   tag = tagName
+      // }
+      console.log('tagName', tagName)
+      console.log("tag", tag)
       wx.cloud.callFunction({
         name: "stairway",
         data: {
@@ -166,8 +192,6 @@ Page({
    */
   onLoad: function (options) {
     _this = this
-    this.getHomeAllData()
-    this.lists() 
     console.log("app=>", app.globalData)
   },
 
@@ -183,7 +207,7 @@ Page({
    */
   onShow: function () {
     this.getHomeAllData()
-    this.lists() 
+    this.lists()
   },
 
   /**
