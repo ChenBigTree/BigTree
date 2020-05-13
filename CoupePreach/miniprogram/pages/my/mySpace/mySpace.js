@@ -15,12 +15,8 @@ Page({
     isSet: true,
     useInfo: "",
     price: 1,
+    isBuy: false
   },
-
-  toPay(e) { // 点击购买课程
-
-  },
-
   handleChange1({ // 用户修改自己课程的价格
     detail
   }) {
@@ -36,16 +32,29 @@ Page({
 
   toDetail(e) { // 跳转课程详情页
     console.log(e.currentTarget.dataset.id)
-    wx.navigateTo({
-      url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
-    })
+    if (!this.data.myUserInfo) {
+      this.setData({
+        dialogShow: true
+      })
+    } else {
+      if (this.data.isBuy) {
+        wx.navigateTo({
+          url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
+        })
+      } else {
+        wx.showToast({
+          title: "先购买再听课",
+          icon: "none"
+        })
+      }
+    }
   },
   set() {
     this.setData({
       isSet: !this.data.isSet
     })
   },
-
+  // onqg_5cHwV816egQzqPel1rDZRtA openid createTime
   // 购买功能
   toPay: function () {
     let that = this;
@@ -95,7 +104,7 @@ Page({
             fun: "update",
             update: "distributionMember",
             id: that.data.useInfo._id,
-            openid: that.data.useInfo.openid
+            useInfo: that.data.useInfo
           },
           success: res => {
             console.log("支付成功 修改个人资料", res)
@@ -115,8 +124,7 @@ Page({
       }
     })
   },
-  getMy() {
-
+  getMy() { //获取全局个人资料
     wx.cloud.callFunction({
       name: "userInfo",
       data: {
@@ -125,7 +133,7 @@ Page({
       success: res => {
         app.globalData.userInfo = res.result.data[0]
         this.setData({
-
+          myUserInfo: res.result.data[0]
         })
         console.log("获取全局个人资料", app.globalData.userInfo)
       },
@@ -135,7 +143,7 @@ Page({
     })
   },
 
-  getOne(openid) {
+  getOne(openid) { // 课程者信息
     wx.cloud.callFunction({
       name: "userInfo",
       data: {
@@ -150,37 +158,27 @@ Page({
             _this.setData({
               isShowPay: false,
               useInfo: res.result.data[0],
-              price: res.result.data[0].PriceOfCourse
+              isBuy: true
             })
             return
           }
         }
-        console.log("3")
         _this.setData({
           isShowPay: true,
           useInfo: res.result.data[0],
-          price: res.result.data[0].PriceOfCourse
+          isBuy: false
         })
         console.log("this.data.isShowPay", this.data.isShowPay)
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    _this = this
-    wx.showLoading({
-      title: '正在加载',
-    })
-    this.getOne(options.openid)
-
+  getRecomList(openid){ // 相关课程
     wx.cloud.callFunction({
       name: 'stairway',
       data: {
         fun: "get",
         get: "individual",
-        openid: options.openid
+        openid: openid
       }
     }).then(res => {
       console.log('相关课程==>', res.result)
@@ -195,6 +193,17 @@ Page({
       wx.hideLoading()
     })
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    _this = this
+    wx.showLoading({
+      title: '正在加载',
+    })
+    this.getOne(options.openid)
+    this.getRecomList(options.openid)
+  },
   onPageScroll(event) {
     this.setData({
       scrollTop: event.scrollTop
@@ -202,7 +211,6 @@ Page({
   },
 
   getUserInfo: function (e) {
-    console.log("进来了")
     wx.getUserInfo({
       success: e => {
         wx.cloud.callFunction({

@@ -13,21 +13,37 @@
 			<view class="title">音视频合成</view>
 			<view class="title">剪贴板</view>
 			<view class="title">小程序跳转小程序</view>
-			<view class="title"><navigator hover-class="none" url="./login/login">获取手机号</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="./login/login">获取手机号</navigator>
+			</view>
 			<view class="title" bindtap="PageByValue">导航栏</view>
 			<view class="title">小程序置顶</view>
 			<view class="listlist">完成</view>
 			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
-			<view class="title"><navigator hover-class="none" url="./sao/sao">扫一扫</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="./sao/sao">扫一扫</navigator>
+			</view>
 			<view class="title">
 				<navigator hover-class="none" url="../list/Render/Render">首次数据加载的渲染方法</navigator>
 			</view>
-			<view class="title"><navigator hover-class="none" url="./file/file">文件上传与下载</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./sao/sao">转发</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./home/home">如何发起http请求和请求注意事项</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="./file/file">文件上传与下载</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./sao/sao">转发</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./home/home">如何发起http请求和请求注意事项</navigator>
+			</view>
 			<view class="title">
 				<navigator hover-class="none" url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject）</navigator>
 			</view>
@@ -43,8 +59,12 @@
 			<view class="title">
 				<navigator hover-class="none" url="./verification/verification">验证手机号是否正确？邮箱等</navigator>
 			</view>
-			<view class="title"><navigator hover-class="none" url="./login/login">登录验证与获取用户信息</navigator></view>
-			<view class="title"><navigator hover-class="none" url="./login/login">收货地址</navigator></view>
+			<view class="title">
+				<navigator hover-class="none" url="./login/login">登录验证与获取用户信息</navigator>
+			</view>
+			<view class="title">
+				<navigator hover-class="none" url="./login/login">收货地址</navigator>
+			</view>
 		</van-tab>
 		<van-tab title="中级">
 			<view class="listlist">未完成</view>

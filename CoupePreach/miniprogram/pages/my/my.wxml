@@ -26,7 +26,7 @@
 		<view class="list" data-url="../my/mySpace/mySpace?openid={{userInfo.openid}}&&form='my'" bindtap="openConfirm">
 			<view>我的主页</view>
 		</view>
-		<view class="list" wx:if="{{userInfo.isAdministrator}}" data-url="../my/myClass/myClass" bindtap="openConfirm">
+		<view class="list" data-url="../my/myClass/myClass" bindtap="openConfirm">
 			<view>我的课程</view>
 		</view>
 		<view class="list" wx:if="{{userInfo.isAdministrator}}" data-url="../my/administrator/administrator" bindtap="openConfirm">

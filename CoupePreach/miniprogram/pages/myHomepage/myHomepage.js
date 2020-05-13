@@ -166,9 +166,7 @@ Page({
         batchTimes: batchTimes - 1
       })
     })
-    this.setData({
-      wallData: [],
-    })
+    
     this.getWallData()
     
     if (app.globalData.userInfo != undefined) {

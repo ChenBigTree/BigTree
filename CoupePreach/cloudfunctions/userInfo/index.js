@@ -35,6 +35,7 @@ exports.main = async (event, context) => {
     } else {
       return "用户已存在"
     }
+
   } else if (event.fun == "get_personal") { // 获取自己信息
     return await userInfoData.where({
       openid: wxContext.OPENID
@@ -49,12 +50,45 @@ exports.main = async (event, context) => {
         openid: wxContext.OPENID,
       }).update({
         data: {
+          isDistributionMember: true,
           distributionMember: _.push({
-            openid: event.openid,
+            nickName: event.useInfo.nickName,
+            avatarUrl: event.useInfo.avatarUrl,
+            city: event.useInfo.city,
+            isAdministrator: event.useInfo.isAdministrator,
+            isTeacher: event.useInfo.isTeacher,
+            isDistributionMember: event.useInfo.isDistributionMember,
+            fans: event.useInfo.fans,
+            partner: event.useInfo.partner,
+            PriceOfCourse: event.useInfo.PriceOfCourse,
+            openid: event.useInfo.openid,
+            individualResume: event.useInfo.individualResume,
+            distributionMember: event.useInfo.distributionMember,
             createTime: db.serverDate()
           })
         }
       })
+    } else if (event.update == "administrator") {
+
+      return await userInfoData.where({
+        openid: event.openid
+      }).update({
+        data: {
+          isAdministrator: Boolean(event.boolean)
+        }
+      })
+    }
+  } else if (event.fun == "get") {
+
+    if (event.get == "allAdministrator") {
+      return await userInfoData.where({
+        isAdministrator: true
+      }).get()
+    } else if (event.get == "searchUser") {
+      return await userInfoData.where({
+        isAdministrator: false,
+        nickName: new RegExp(event.keyWord, 'g')
+      }).get()
     }
   }
 }

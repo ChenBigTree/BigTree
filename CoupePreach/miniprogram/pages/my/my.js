@@ -28,8 +28,8 @@ Page({
         }).then((res) => {
           let userInfoData = {
             nickName: e.userInfo.nickName,
-            avatarUrl: e.userInfo.avatarUrl, 
-            individualResume:'',
+            avatarUrl: e.userInfo.avatarUrl,
+            individualResume: '',
             city: e.userInfo.city,
             isAdministrator: false, // 是否管理员
             isTeacher: true, // 是否讲师
@@ -37,8 +37,8 @@ Page({
             fans: [], // 粉丝
             partner: [], // 伙伴
             PriceOfCourse: 50,
-            openid:res.result.openid,
-            distributionMember:[] // 购买的课程
+            openid: res.result.openid,
+            distributionMember: [] // 购买的课程
           }
           app.globalData.userInfo = userInfoData
           this.setData({
@@ -50,7 +50,7 @@ Page({
           wx.cloud.callFunction({
             name: "userInfo",
             data: {
-              userInfoData:userInfoData,
+              userInfoData: userInfoData,
               fun: "add"
             },
             success(res) {
@@ -86,13 +86,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("app.globalData.userInfo",app.globalData.userInfo)
-    if (app.globalData.userInfo != undefined) {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-      console.log("获取全局的用户信息 =>", app.globalData.userInfo)
-    }
+    console.log("app.globalData.userInfo", app.globalData.userInfo)
+    // if (app.globalData.userInfo != undefined) {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.cloud.callFunction({
+            name: "userInfo",
+            data: {
+              fun: "get_personal"
+            }
+          }).then(res => {
+            app.globalData.userInfo = res.result.data[0]
+            _this.setData({
+              userInfo: app.globalData.userInfo
+            })
+          })
+        }
+      }
+    })
+
+    // console.log("获取全局的用户信息 =>", app.globalData.userInfo)
+    // }
   },
 
   /**

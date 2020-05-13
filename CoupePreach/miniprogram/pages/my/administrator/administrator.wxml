@@ -6,6 +6,6 @@
 		<navigator hover-class="none" url="../administrator/courseShelf/courseShelf">上下架管理</navigator>
 	</view>
 	<view class="list">
-		<navigator hover-class="none" url="../administrator/courseShelf/courseShelf">添加管理员</navigator>
+		<navigator hover-class="none" url="../administrator/addAdministrator/addAdministrator">添加管理员</navigator>
 	</view>
 </view>

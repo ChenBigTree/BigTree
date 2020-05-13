@@ -1,4 +1,6 @@
 // pages//my/myClass/myClass.js
+let app = getApp()
+let _this
 Page({
 
   /**
@@ -10,7 +12,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    _this = this
+    console.log("全局私人信息", app.globalData.userInfo)
+    let dis = app.globalData.userInfo.distributionMember
+    for (let i in dis) {
+      dis[i].time = `${new Date(dis[i].createTime).getFullYear()}-${(new Date(dis[i].createTime).getMonth()+1)>9?(new Date(dis[i].createTime).getMonth()+1):"0"+(new Date(dis[i].createTime).getMonth()+1)}-${new Date(dis[i].createTime).getDate()>9?new Date(dis[i].createTime).getDate():"0"+new Date(dis[i].createTime).getDate()}`
+    }
+    console.log("dis", dis)
+    this.setData({
+      myUserInfo: app.globalData.userInfo
+    })
   },
 
   /**

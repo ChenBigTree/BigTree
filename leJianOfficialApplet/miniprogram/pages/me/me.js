@@ -24,7 +24,7 @@ Page({
             city: e.userInfo.city
           }
           app.globalData.userInfo = userInfoData
-          this.setData({ 
+          this.setData({
             showLogin: !_this.data.showLogin,
             userInfo: userInfoData
           });
@@ -56,7 +56,6 @@ Page({
    */
   onLoad: function (options) {
     _this = this
-
     wx.cloud.callFunction({
       name: "administrator"
     }).then((res) => {
@@ -67,7 +66,7 @@ Page({
         })
       }
     })
-    
+
   },
 
   openConfirm: function (e) {
