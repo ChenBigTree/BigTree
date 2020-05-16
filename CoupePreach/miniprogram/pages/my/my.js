@@ -20,6 +20,8 @@ Page({
       })
     }
   },
+
+
   getUserInfo: function (e) {
     wx.getUserInfo({
       success: e => {

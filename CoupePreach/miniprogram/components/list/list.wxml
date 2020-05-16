@@ -1,0 +1,75 @@
+ <view class="container">
+ 	<!-- 头部导航栏 -->
+ 	<view class="scroll-view-wrap">
+ 		<scroll-view scroll-x="true" class="scroll-view-catalog" scroll-with-animation="true" scroll-left="{{scrollLeft}}">
+ 			<view class="big-box">
+ 				<view wx:key="index" class="scroll-view-item {{index === activeIndex ? 'active-catalog' : ''}}" wx:for="{{lists}}" bindtap="chooseCatalog" data-index="{{index}}">{{item.tag}}</view>
+ 			</view>
+ 		</scroll-view>
+ 		<view class="title-box">
+ 			<view class="image-box" data-name="listPage" catchtap="showListPage">
+ 				<image mode="widthFix" src="../../images/icon/san.png"></image>
+ 			</view>
+ 		</view>
+ 	</view>
+ 	<!-- 下拉列表 -->
+ 	<view class="listPage-box {{class}}" data-name="listPage-box" catchtap="showListPage">
+ 		<view class="listPage clearfix" data-name="listPage" catchtap="showListPage">
+ 			<view class="list-box" wx:for="{{lists}}" wx:key="index" data-key="{{index}}" catchtap="showListPage" data-name="{{index}}" title="{{item}}">
+ 				{{item.tag}}
+ 			</view>
+ 		</view>
+ 	</view>
+ 	<!-- 下部内容 -->
+ 	<view class="content-wrap">
+ 		<swiper class="content-swiper-wrap" bindchange="swiperChange" current="{{activeIndex}}">
+ 			<block>
+ 				<swiper-item class="clearfix content-swiper" wx:for="{{lists}}" wx:key="key">
+ 					<scroll-view class="clearfix" scroll-y="true" enable-flex="true">
+ 						<view class="li-1 clearfix fl" id="li-1" bindtap="c">
+ 							<view class="content-box" wx:for="{{li1}}" wx:key="key">
+ 								<view class="content-image">
+ 									<image mode="widthFix" src="{{item.image}}"></image>
+ 								</view>
+ 								<view class="content-text towTextOverflow">{{item.text}}</view>
+ 								<view class="xinxi clearfix">
+ 									<view class="image-tx fl">
+ 										<image mode="scaleToFill" src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4018557288,1217151095&fm=26&gp=0.jpg"></image>
+ 									</view>
+ 									<view class="name fl">大树</view>
+ 									<view class="vwDita fl">
+ 										<view class="vwDi">
+ 											<image src="../../images/icon/view.png"></image>
+ 											<text>0900</text>
+ 										</view>
+ 									</view>
+ 								</view>
+ 							</view>
+ 						</view>
+ 						<view class="li-2 clearfix fl" id="li-2">
+ 							<view class="content-box" wx:for="{{li2}}" wx:key="key">
+ 								<view class="content-image">
+ 									<image mode="widthFix" src="{{item.image}}"></image>
+ 								</view>
+ 								<view class="content-text towTextOverflow">{{item.text}}</view>
+ 								<view class="xinxi clearfix">
+ 									<view class="image-tx fl">
+ 										<image mode="scaleToFill" src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4018557288,1217151095&fm=26&gp=0.jpg"></image>
+ 									</view>
+ 									<view class="name fl">大树</view>
+ 									<view class="vwDita fl">
+ 										<view class="vwDi">
+ 											<image src="../../images/icon/view.png"></image>
+ 											<text>0900</text>
+ 										</view>
+ 									</view>
+ 								</view>
+ 							</view>
+ 						</view>
+
+ 					</scroll-view>
+ 				</swiper-item>
+ 			</block>
+ 		</swiper>
+ 	</view>
+ </view>

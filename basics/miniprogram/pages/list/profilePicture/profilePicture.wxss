@@ -1,0 +1,19 @@
+.image-box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #999;
+}
+
+.container {
+  width: 100%;
+  position: fixed;
+  bottom: 20px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.image-box>image {
+  width: 100%;
+}

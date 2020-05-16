@@ -6,12 +6,13 @@
 			</view>
 			<view class="me-name clearfix">
 				<open-data class="name oneOverflow" type="userNickName"></open-data>
-				<view class="fill-box fr clearfix" wx:if="{{userInfo.isDistributionMember}}">
+				<!-- 合伙人标志 -->
+				<!-- <view class="fill-box fr clearfix" wx:if="{{userInfo.isDistributionMember}}">
 					<view class="fill-image fl">
 						<image mode="withFix" class="image" src="../../images/icon/active_fill.png"></image>
 					</view>
-					<view class="fill-text fl">合伙人</view>
-				</view>
+					<view class="fill-text fl" >合伙人</view>
+				</view> -->
 			</view>
 		</view>
 
@@ -26,9 +27,9 @@
 		<view class="list" data-url="../my/mySpace/mySpace?openid={{userInfo.openid}}&&form='my'" bindtap="openConfirm">
 			<view>我的主页</view>
 		</view>
-		<view class="list" data-url="../my/myClass/myClass" bindtap="openConfirm">
+		<!-- <view class="list" data-url="../my/myClass/myClass" bindtap="openConfirm">
 			<view>我的课程</view>
-		</view>
+		</view> -->
 		<view class="list" wx:if="{{userInfo.isAdministrator}}" data-url="../my/administrator/administrator" bindtap="openConfirm">
 			<view>管理员入口</view>
 		</view>

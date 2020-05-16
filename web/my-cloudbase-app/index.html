@@ -16,9 +16,26 @@
             const app = tcb.init({
                 env: 'wx99155eb36a6a05c7-8oeqj'
             })
-            app.auth().signInAnonymously().then(() => {
-                console.log("登陆成功")
-            })
+            console.log(app.auth())
+            console.log(app.auth().getLoginState())
+
+            const loginState = app
+                .auth()
+                .getLoginState()
+                .then(loginState => {
+                    if (loginState) {
+                        console.log("登陆成功")
+                        // 登录态有效
+                    } else {
+                        // 没有登录态，或者登录态已经失效
+                        console.log("登录失败")
+                    }
+                });
+            // app.auth().signInAnonymously().then(() => {
+            //     console.log("登陆成功")
+            // }).catch(err => {
+            //     console.log("登录失败")
+            // })
             let db = app.database();
 
             let collection = db.collection('my-task');
@@ -48,7 +65,7 @@
                     .catch((e) => {
                         console.log("添加失败", err)
                     });
-                    
+
                 // ajax({
                 //     url: "https://v1.hitokoto.cn",
                 //     method: "get",
@@ -131,7 +148,7 @@
             //     console.log(arr);
             //     return arr.join('&');
             // }
-           
+
         }
 
     </script>

@@ -4,7 +4,11 @@ Page({
     active: 0
   },
   // 首页加载的渲染方法
-  
+  url(e){
+    wx.navigateTo({
+      url: e.currentTarget.dataset.url,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,32 +1,72 @@
 <view class="home">
-	<view class="title">
-		<!-- <w-tabs bind:onChange="handleChange" options="{{ tabs1 }}" /> -->
-		<!-- <v-tabs /> -->
-		<i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
-			<i-tab class="i-tab" wx:for="{{tabs1}}" wx:key="index" key="{{index+1}}" data-key="{{index+1}}" title="{{item}}"></i-tab>
-			<i-tab class="i-tab" wx:for="{{lists}}" wx:key="index" key="{{index+5}}" data-name="{{item.tag}}" title="{{item.tag}}"></i-tab>
-		</i-tabs>
+	<!-- 头部导航栏 -->
+	<view class="scroll-view-wrap">
+		<scroll-view scroll-x="true" class="scroll-view-catalog" scroll-with-animation="true" scroll-left="{{scrollLeft}}">
+			<view class="big-box">
+				<view wx:key="index" class="scroll-view-item {{index === activeIndex ? 'active-catalog' : ''}}" wx:for="{{lists}}" bindtap="chooseCatalog" data-index="{{index}}" data-name="{{item.tag}}">{{item.tag}}</view>
+			</view>
+		</scroll-view>
+
 		<view class="title-box">
-			<view class="image-box" data-name="listPage" bindtap="showListPage">
+			<view class="image-box" data-name="listPage" catchtap="showListPage">
 				<image mode="widthFix" src="../../images/icon/san.png"></image>
 			</view>
 		</view>
 	</view>
-
-	<view class="listPage-box {{class}}" data-name="listPage-box" bindtap="showListPage">
+	<!-- 下拉列表 -->
+	<view class="listPage-box {{class}}" data-name="listPage-box" catchtap="showListPage">
 		<view class="listPage clearfix" data-name="listPage" catchtap="showListPage">
-			<view class="list-box" wx:for="{{tabs1}}" wx:key="index" key="{{index+1}}" data-key="{{index+1}}" catchtap="showListPage" data-name="{{item}}" title="{{item}}">{{item}}
+			<view class="list-box" wx:for="{{lists}}" wx:key="index" data-index="{{index}}" catchtap="showListPage" data-name="{{item.tag}}">
+				{{item.tag}}
 			</view>
-			<view class="list-box" wx:for="{{lists}}" wx:key="index" key="{{index+5}}" data-key="{{index+5}}" catchtap="showListPage" data-name="{{item.tag}}" title="{{item.tag}}">{{item.tag}}</view>
 		</view>
 	</view>
-
-
-	<view class="top-circle">
-		<block wx:if="{{wallData != ''}}">
-  
+	<!-- <view class="top-circle"> -->
+	<view class="content-wrap">
+		<block wx:if="{{li1.length != ''}}">
+			<view class="li-1 clearfix fl" id="li-1">
+				<view class="content-box" wx:for="{{li1}}" wx:key="key" data-sid="{{item._id}}" bindtap="lookDetail">
+					<view class="content-image">
+						<image mode="widthFix" wx:if="{{item.images.length == 0 }}" src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg"></image>
+						<image mode="aspectFill" wx:else src="{{item.images[0]}}"></image>
+					</view>
+					<view class="content-text towTextOverflow">{{item.title==''?item.userInfo.nickName+'的精彩分享':item.title}}</view>
+					<view class="xinxi clearfix">
+						<view class="image-tx fl">
+							<image mode="scaleToFill" src="{{item.userInfo.avatarUrl}}"></image>
+						</view>
+						<view class="name fl">{{item.userInfo.nickName}}</view>
+						<view class="vwDita fl">
+							<view class="vwDi">
+								<image src="../../images/icon/view.png"></image>
+								<text>{{item.views}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="li-2 clearfix fl" id="li-2">
+				<view class="content-box" wx:for="{{li2}}" wx:key="key" data-sid="{{item._id}}" bindtap="lookDetail">
+					<view class="content-image">
+						<image mode="widthFix" wx:if="{{item.images.length == 0 }}" src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg"></image>
+						<image mode="aspectFill" wx:else src="{{item.images[0]}}"></image>
+					</view>
+					<view class="content-text towTextOverflow">{{item.title==''?item.userInfo.nickName+'的精彩分享':item.title}}</view>
+					<view class="xinxi clearfix">
+						<view class="image-tx fl">
+							<image mode="scaleToFill" src="{{item.userInfo.avatarUrl}}"></image>
+						</view>
+						<view class="name fl">{{item.userInfo.nickName}}</view>
+						<view class="vwDita fl">
+							<view class="vwDi">
+								<image src="../../images/icon/view.png"></image>
+								<text>{{item.views}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 		</block>
-
 		<view class="null" wx:else>暂无内容</view>
 	</view>
 </view>

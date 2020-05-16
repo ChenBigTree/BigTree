@@ -7,43 +7,102 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs1: ['全部', '推荐', '最新', '热门'],
+    cate1Info: [{
+      tag: '全部'
+    }, {
+      tag: '推荐'
+    }, {
+      tag: '最新'
+    }, {
+      tag: '热门'
+    }],
     wallData: "",
+    activeIndex: 0,
     current_scroll: '1',
     isShowListPage: false,
-    class: ''
+    class: 'bottom',
+    li1: [],
+    li2: [],
   },
-  showListPage(e) {
-    console.log(e.currentTarget.dataset)
+
+  chooseCatalog: function (event) {
+    this.setData({
+      activeIndex: event.currentTarget.dataset.index,
+      activeArr: event.currentTarget.dataset
+    })
+    _this.listFun()
+    // console.log("activeArr", this.data.activeArr)
+  },
+  calAllScrollItem() {
+    let query = wx.createSelectorQuery();
+    let nodeRef = query.selectAll(".scroll-view-item");
+
+    this.currentWidth = 0;
+    nodeRef.boundingClientRect().exec(ret => {
+      if (!ret || !ret.length) return;
+      this.setData({
+        calScrollItems: ret[0]
+      });
+    });
+  },
+
+  swiperChange: function (e) {
+    console.log(e.detail.current)
+    this.setData({
+      activeIndex: e.detail.current,
+    })
+    this.calcScrollLeft();
+  },
+  // 横滑同步距离计算
+  calcScrollLeft: function () {
+    if (this.data.activeIndex < 2) this.setData({
+      scrollLeft: 0
+    });
+    this.calcTextLength(this.data.activeIndex)
+  },
+
+  // 计算文本长度
+  calcTextLength: function (index = 0) {
+    if (!index || !this.data.cate1Info || !this.data.cate1Info.length) return 0
+    let length = 0;
+    const cate1Info = this.data.cate1Info;
+    console.log("cate1Info", cate1Info)
+    const currentWidth = this.data.calScrollItems[index].width;
+    for (let i = 0; i < index; i += 1) {
+      length += this.data.calScrollItems[i].width;
+    }
+    this.setData({
+      scrollLeft: length - ((wx.getSystemInfoSync().windowWidth - currentWidth) / 2)
+    });
+    return length;
+  },
+  showListPage(e) { // 点击头部导航栏获取数据
     if (e.currentTarget.dataset.name != "listPage") {
       this.setData({
         class: "bottom",
-        current_scroll: e.currentTarget.dataset.key
+        activeIndex: e.currentTarget.dataset.index,
+        activeArr: e.currentTarget.dataset
       })
-      this.listFun(e.currentTarget.dataset.key)
+      // console.log("activeArr", this.data.activeArr)
+      _this.listFun()
     } else {
       this.setData({
         class: "top"
       })
     }
   },
-  handleChangeScroll({
-    detail
-  }) {
-    console.log("detail.key", detail.key)
-    this.setData({
-      current_scroll: detail.key
-    });
-    this.listFun(detail.key)
-  },
-  listFun(tagName) {
-    console.log('tagName', tagName)
-    if (tagName == undefined) {
+
+  listFun() {
+    console.log("activeArr", this.data.activeArr)
+    let index = this.data.activeArr.index
+    if (index == undefined) {
       return
     }
-    if (tagName == 1) {
+    if (index == 0) {
       this.getHomeAllData()
-    } else if (tagName == 3) {
+    } else if (index == 1) {
+      console.log("推荐")
+    } else if (index == 2) {
       wx.cloud.callFunction({
         name: "stairway",
         data: {
@@ -57,23 +116,14 @@ Page({
             s[i].date = date
           }
           var arr2 = s.sort(_this.compare('time')).reverse();
-          _this.setData({
-            wallData: arr2
-          })
+
+          _this.liFun(arr2)
         },
         fail: err => {
           console.log(err)
         }
       })
-    } else if (tagName == 2) {
-      // this.getHomeAllData()
-      _this.setData({
-        wallData: ""
-      })
-    } else if (tagName == 4) {
-      _this.setData({
-        wallData: ''
-      })
+    } else if (index == 3) {
       wx.cloud.callFunction({
         name: "stairway",
         data: {
@@ -83,42 +133,31 @@ Page({
         success: res => {
           console.log("热门的前五条数据", res.result)
           var arr2 = res.result.data.sort(_this.compare('views')).reverse();
-          arr2 = arr2.slice(0, 2)
-          _this.setData({
-            wallData: arr2
-          })
+          arr2 = arr2.slice(0, 5)
+
+          _this.liFun(arr2)
         },
         fail: err => {
           console.log(err)
         }
       })
     } else {
-      _this.setData({
-        wallData: ''
-      })
-      let tag = _this.data.lists[tagName - 5].tag
-      // } else if (fun == 'tag') {
-      //   tag = tagName
-      // }
-      console.log('tagName', tagName)
-      console.log("tag", tag)
+
       wx.cloud.callFunction({
         name: "stairway",
         data: {
           fun: "get",
           get: "homeAssign",
-          tag: tag
+          tag: _this.data.activeArr.name
         },
         success: res => {
-          console.log(res.result.data)
+          console.log(_this.data.activeArr.name + "的数据", res.result.data)
           let s = res.result.data
           for (let i = 0; i < s.length; i++) {
             let date = `${new Date(s[i].time).getFullYear()}-${Number(new Date(s[i].time).getMonth() + 1) >10?Number(new Date(s[i].time).getMonth() + 1):'0'+Number(new Date(s[i].time).getMonth() + 1)}-${new Date(s[i].time).getDate()>10?new Date(s[i].time).getDate():'0'+new Date(s[i].time).getDate()}`
             s[i].date = date
           }
-          _this.setData({
-            wallData: s
-          })
+          _this.liFun(s)
         },
         fail: err => {
           console.log(err)
@@ -126,14 +165,8 @@ Page({
       })
     }
   },
-  handleChange(e) {
-    console.log(e.detail.value);
-  },
   // 获取全部动态
   getHomeAllData() {
-    _this.setData({
-      wallData: ''
-    })
     wx.cloud.callFunction({
       name: "stairway",
       data: {
@@ -147,14 +180,85 @@ Page({
           let date = `${new Date(s[i].time).getFullYear()}-${Number(new Date(s[i].time).getMonth() + 1) >10?Number(new Date(s[i].time).getMonth() + 1):'0'+Number(new Date(s[i].time).getMonth() + 1)}-${new Date(s[i].time).getDate()>10?new Date(s[i].time).getDate():'0'+new Date(s[i].time).getDate()}`
           s[i].date = date
         }
-        _this.setData({
-          wallData: s
-        })
+        _this.liFun(s)
       },
       fail: err => {
         console.log(err)
       }
     })
+  },
+  liFun(data) {
+    console.log(data)
+    let li1 = []
+    let li2 = []
+    if (data.length == 0) {
+      _this.setData({
+        li1: [],
+        li2: [],
+      })
+      return
+    }
+    for (let key in data) {
+      if (key % 2 == 0) {
+        li1.push(data[key])
+        _this.setData({
+          li1: li1
+        })
+      } else {
+        li2.push(data[key])
+        _this.setData({
+          li2: li2
+        })
+      }
+
+      if (li1.length + li2.length == data.length) {
+        console.log("li1", li1)
+        console.log("li2", li2)
+      }
+    }
+  },
+  height(s) { // 通过判断li1与li2的高度进行添加数据
+    const promise1 = new Promise((resolve) => {
+      let query = wx.createSelectorQuery();
+      query.select(`.li-1`).boundingClientRect().exec(ret => {
+        resolve(ret[0].height);
+      })
+    });
+    const promise2 = new Promise((resolve) => {
+      let query = wx.createSelectorQuery();
+      query.select(`.li-2`).boundingClientRect().exec(ret => {
+        _this.setData({
+          height2: ret[0].height
+        })
+        resolve(ret[0].height);
+      })
+    });
+    promise1.then((value1) => {
+      promise2.then((value2) => {
+        let li1 = []
+        let li2 = []
+        console.log("s==>", s)
+        for (let key in _this.data.wallData) {
+          if (key % 2 == 0) {
+            li1.push(_this.data.wallData[key])
+            _this.setData({
+              li1: li1
+            })
+          } else {
+            li2.push(_this.data.wallData[key])
+            _this.setData({
+              li2: li2
+            })
+          }
+
+          if (li1.length + li2.length == _this.data.wallData.length) {
+            console.log("li1", li1)
+            console.log("li2", li2)
+          }
+        }
+      })
+    });
+
   },
   lookDetail(e) { // 点击指定的动态进入详情
     console.log(e.currentTarget.dataset)
@@ -162,7 +266,7 @@ Page({
       url: '../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.sid,
     })
   },
-  compare(e) {
+  compare(e) { // 数据排序
     return function (a, b) {
       var value1 = a[e];
       var value2 = b[e];
@@ -170,6 +274,7 @@ Page({
     }
   },
   lists() { // 获取分类列表
+    let _this = this
     _this.setData({
       lists: ''
     })
@@ -182,7 +287,7 @@ Page({
       success: res => {
         console.log('分类列表', res.result.data)
         _this.setData({
-          lists: res.result.data,
+          lists: _this.data.cate1Info.concat(res.result.data)
         })
       },
     })
@@ -192,15 +297,14 @@ Page({
    */
   onLoad: function (options) {
     _this = this
+    this.calAllScrollItem()
     console.log("app=>", app.globalData)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示

@@ -1,4 +1,5 @@
 {
+  "navigationBarBackgroundColor": "#f2f2f2",
   "usingComponents": {
     "w-tabs": "../../components/w-tabs/index",
     "i-tabs":"../../components/tabs-iview/index",

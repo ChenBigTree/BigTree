@@ -13,7 +13,7 @@ Page({
     onEnded: !1,
     AudioPlayHidden: !1,
     AudioStarttime: "00:00",
-    AudioDuration: "0:00",
+    AudioDuration: "00:00",
     AudioLong: "",
     Msg: '',
     wallData: [],
@@ -66,7 +66,7 @@ Page({
   onLoad: function (options) {
     var that = this
     console.log('onload--options--->', options)
-    
+
     // return 
     if (options.free) {
       that.setData({
@@ -781,7 +781,7 @@ Page({
 
   audioPlay: function () {
     var a = this;
-    "0:00" == a.data.AudioDuration || 1 == a.data.onEnded ? a.onloadAudioManager() : backgroundAudioManager.play(),
+    "00:00" == a.data.AudioDuration || 1 == a.data.onEnded ? a.onloadAudioManager() : backgroundAudioManager.play(),
       a.backgroundAudioFunction(), a.setData({
         AudioPlayHidden: !0,
         ThumbAnimation: !0,
@@ -800,6 +800,39 @@ Page({
   backgroundAudioFunction: function () {
     var u = this;
     backgroundAudioManager.onTimeUpdate(function (a) {
+      // var t = backgroundAudioManager.currentTime
+      // let d = backgroundAudioManager.duration
+      // let maxNum = parseInt(d)
+      // let nowSecond = parseInt(t) < 9 ? "0" + parseInt(t) : parseInt(t)
+      // let nowMinute = 0
+      // console.log("maxNum==>", maxNum)
+      // console.log("nowMinute==>", nowMinute)
+      // // 正在播放时间
+      // let beginSecond = nowSecond
+      // let beginMinute = nowMinute > 9 ? nowMinute : "0" + nowMinute
+      // if (nowSecond > 59) {
+      //   nowMinute = nowMinute + 1
+      //   // beginSecond = 0
+      //   // if (Math.floor(maxNum / 60) == nowMinute) {
+      //   //   return
+      //   // }
+      // }
+      // let beginTime = beginMinute + ":" + beginSecond
+      // console.log("beginTime==>", beginTime)
+      // // 结束时间
+      // let endSecond = parseInt(maxNum / 60) > 9 ? parseInt(maxNum / 60) : "0" + parseInt(maxNum / 60)
+      // let endMinute = maxNum % 60 > 9 ? maxNum % 60 : "0" + maxNum % 60
+      // let endTime = endSecond + ":" + endMinute
+      // console.log("endTime==>", endTime)
+      // u.setData({
+      //   AudioDuration: (d / 60).toFixed(2),
+      //   // AudioOffset: e,
+      //   AudioStarttime: beginTime,
+      //   AudioMax: maxNum,
+      //   AudioLong: endTime
+      // });
+      // return
+
       var t = backgroundAudioManager.currentTime,
         e = parseInt(backgroundAudioManager.currentTime),
         n = parseInt(e / 60),
@@ -816,7 +849,44 @@ Page({
         AudioMax: i,
         AudioLong: parseInt(i / 60) + ":" + i % 60
       });
-    }), backgroundAudioManager.onEnded(function (a) {
+      return
+
+      var t = backgroundAudioManager.currentTime,
+        e = parseInt(t) < 9 ? "0" + parseInt(t) : parseInt(t),
+        n = parseInt(e / 60),
+        i = parseInt(backgroundAudioManager.duration),
+        o = parseInt(t) < 9 ? "0" + parseInt(t) : parseInt(t),
+        n = parseInt(t)
+      d = backgroundAudioManager.duration;
+      t = parseInt(100 * t / d);
+      console.log("e", e)
+      console.log("n", n)
+      console.log("o", o)
+      console.log("d", d)
+      if (e > 59) {
+        n = n + 1
+        if (Math.floor(i / 60) == n) {
+          return
+        }
+      }
+      let being = Number(n) > 9 ? Number(n) : "0" + Number(n) + ":" + e
+      console.log("being", being)
+      0 < e && wx.setNavigationBarTitle({
+        title: u.data.title
+      })
+      console.log("t==>", t)
+      console.log("i==>", i)
+      let I = parseInt(i / 60) > 9 ? parseInt(i / 60) : "0" + parseInt(i / 60)
+      let end = i % 60 > 9 ? i % 60 : "0" + i % 60
+      u.setData({
+        AudioDuration: (d / 60).toFixed(2),
+        AudioOffset: e,
+        AudioStarttime: o,
+        AudioMax: i,
+        AudioLong: I + ":" + end
+      });
+    })
+    backgroundAudioManager.onEnded(function (a) {
       u.setData({
         AudioPlayHidden: !1,
         ThumbAnimation: !1,

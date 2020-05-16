@@ -2,6 +2,12 @@
 <view class="page">
 	<!-- 头部信息 -->
 	<view class="head">
+
+		<!-- 设置按钮 -->
+		<view class="set" bindtap="set" wx:if="{{isShow}}">
+			<image mode="widthFix" src="../../../images/icon/set.png"></image>
+		</view>
+
 		<view class="vHead">
 			<view class="avatar">
 				<image src="{{useInfo.avatarUrl}}"></image>
@@ -42,38 +48,33 @@
 			</view>
 		</view>
 	</view>
-	<!-- 设置按钮 -->
-	<view class="set" bindtap="set" wx:if="{{isShow}}">
-		<image mode="widthFix" src="../../../images/icon/set.png"></image>
-	</view>
 	<!-- 课程列表 -->
 	<view class="recoms">
 		<i-sticky scrollTop="{{scrollTop}}">
 			<i-sticky-item i-class="i-sticky-demo-title">
 				<view slot="title" class="title-box clearfix">
 					<view class="title-text fl">课程列表</view>
-					<view class="title-price fr clearfix">
+					<!-- 购买价格 -->
+					<!-- <view class="title-price fr clearfix">
 						<block wx:if="{{isSet}}">
 							<view class="price fl">￥<text>{{useInfo.PriceOfCourse}}</text></view>
 							<block wx:if="{{isShowPay}}">
 								<view class="btn fr" wx:if="{{!isShow}}" bindtap="toPay">购买</view>
 							</block>
-							<!-- <view wx:if="{{isShow}}" class="price fl"></view> -->
 							<view wx:else class="price fl">已购买</view>
-							
 						</block>
 						<view wx:else class="input-number">
 							<i-input-number value="{{ price }}" min="0" max="1000" bindchange="handleChange1" />
 						</view>
-					</view>
+					</view> -->
 				</view>
 				<view slot="content">
 					<view class="recom-list" wx:if='{{recomList.length>0}}'>
 						<block wx:for='{{recomList}}' wx:key="key">
 							<view class="recom-item" bindtap="toDetail" data-index="{{index}}" data-id="{{item._id}}">
 								<view class="cover">
-									<image mode="heightFix" wx:if="{{item.images.length>0}}" src="{{item.images[0]}}"></image>
-									<image mode="heightFix" wx:else src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg"></image>
+									<image mode="widthFix" wx:if="{{item.images.length == 0 }}" src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg"></image>
+									<image mode="aspectFill" wx:else src="{{item.images[0]}}"></image>
 								</view>
 								<view class="text">
 									<view class="title">{{item.title?item.title:'精彩分享'}}</view>
@@ -106,22 +107,3 @@
 	<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>
 </view>
 <!--page-->
-
-<!--底部菜单-->
-<!-- <view class="footer">
-	<view class="fbtn" bindtap="toHome">
-		<view class="btnIcon">
-			<image src="/images/home.png"></image>
-		</view>
-		<view class="btnText">主页</view>
-	</view>
-	<view class="fbtn">
-		<view class="btnIcon">
-			<image src="/images/like.png"></image>
-		</view>
-		<view class="btnText">关注</view>
-	</view>
-	<view class="subBtn" bindtap="toPay">
-		<view class="txtBtn">{{btnSel[selIndex].item}}（¥{{btnSel[selIndex].price}}/次）</view>
-	</view>
-</view> -->

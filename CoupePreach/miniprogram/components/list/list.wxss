@@ -1,7 +1,29 @@
-page,
-.home {
+page {
   width: 100%;
   height: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.fit-iphonex {
+  height: calc(100% - 68rpx);
+}
+
+.fit-iphonex::after {
+  content: " ";
+  position: fixed;
+  bottom: 0 !important;
+  height: 68rpx !important;
+  width: 100%;
+  background: #fff;
 }
 
 .scroll-view-item {
@@ -16,6 +38,7 @@ page,
 .scroll-view-catalog {
   height: 45px;
   width: 100%;
+  /* font-size: 16px; */
   white-space: nowrap;
   display: flex;
   box-sizing: border-box;
@@ -66,13 +89,13 @@ page,
   height: 100%;
   position: fixed;
   left: 0px;
-  z-index: 9;
+  z-index: 9999;
   transition: top 0.5s linear;
 }
 
 .top {
   top: 0;
-  background:rgba(#000, #000, #000, 0.5);
+  background: #f2f2f2;
 }
 
 .bottom {
@@ -112,35 +135,49 @@ page,
 .content-wrap {
   flex: 1;
   width: 100%;
-  height: calc(100% - 46px);
   box-sizing: border-box;
+  background: #999;
   padding: 5px;
+}
+
+/* .content-swiper{
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+} */
+.content-swiper-wrap {
+  height: 100%;
+}
+
+.scroll-view-content {
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
 }
 
 .content-box {
   width: calc(100% - 20rpx);
-  background: #f6f6f6;
+  background: #fff;
   box-sizing: border-box;
   margin: 10rpx 10rpx 20rpx;
-  vertical-align: top;
-  box-shadow: 0 0 3px #999;
-  border-radius: 5px;
-  overflow: hidden;
+  vertical-align:top;
+}
+
+scroll-view {
+  height: 100%;
 }
 
 .content-image {
   width: 100%;
   max-height: 190px;
+  overflow: hidden;
 }
-
-.li-2,
-.li-1 {
+.li-2,.li-1{
   width: calc(100% / 2);
 }
-
 .content-image>image {
   width: 100%;
-  max-height: 190px;
+  height: 100%;
 }
 
 .content-text {
@@ -183,17 +220,11 @@ page,
   display: flex;
   flex-direction: row;
   justify-content: left;
-  width: 100rpx;
-  height: 34rpx;
-  position: relative;
 }
 
 .vwDi {
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .vwDi text {
@@ -224,11 +255,4 @@ page,
 
 .fr {
   float: right;
-}
-
-.null {
-  font-size: 14px;
-  text-align: center;
-  padding: 30px 0;
-  color: #6b6b6b;
 }

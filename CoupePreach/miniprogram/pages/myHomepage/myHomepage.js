@@ -1,7 +1,7 @@
 // pages/community/speech.js
 const app = getApp()
 let _this
-var that 
+var that
 Page({
   data: {
     curriculumArr: [],
@@ -49,7 +49,7 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
+  getUserInfo: function (e) { // 存储未登录信息
     console.log("进来了")
     wx.getUserInfo({
       success: e => {
@@ -98,7 +98,7 @@ Page({
       }
     })
   },
-  login() {
+  login() { // 获取登录的信息
     if (app.globalData.userInfo) {
       that.setData({
         userInfo: app.globalData.userInfo
@@ -151,10 +151,8 @@ Page({
       })
     })
   },
-
   onShow: function () {
     this.login()
-
     const db = wx.cloud.database()
     db.collection('circle').count().then(res => {
       console.log(res.total)
@@ -166,9 +164,7 @@ Page({
         batchTimes: batchTimes - 1
       })
     })
-    
-    this.getWallData()
-    
+
     if (app.globalData.userInfo != undefined) {
       this.setData({
         userInfo: app.globalData.userInfo
@@ -479,7 +475,7 @@ Page({
   toEdit() {
     console.log('toEdit')
     this.openConfirm()
-    
+
     return
     wx.showActionSheet({
       itemList: ['发布动态', '发布课程'],

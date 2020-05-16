@@ -67,6 +67,7 @@
 			</view>
 		</van-tab>
 		<van-tab title="中级">
+			<view class="title" data-url="./profilePicture/profilePicture" bindtap="url">上传头像</view>
 			<view class="listlist">未完成</view>
 			<view class="title"> 如何解决小程序异步请求问题？</view>
 			<view class="title">如何获取本地定位信息,解析地址获取经纬度</view>

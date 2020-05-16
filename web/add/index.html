@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../my-cloudbase-app/tcb.js"></script>
+    <script>
+
+        const app = tcb.init({
+            env: 'wx99155eb36a6a05c7-8oeqj'  // 此处填入您的环境ID
+        });
+        var auth = app.auth();
+
+        async function login() {
+            await auth.signInAnonymously();
+            // 匿名登录成功检测登录状态isAnonymous字段为true
+            const loginState = await auth.getLoginState();
+            console.log(loginState.isAnonymous); // true
+        }
+
+        login();
+
+        // await app.auth().signInAnonymously().then(() => {
+        //     console.log("登陆成功")
+        // }).catch(err => {
+        //     console.log("登录失败")
+        // })
+    </script>
+</body>
+
+</html>

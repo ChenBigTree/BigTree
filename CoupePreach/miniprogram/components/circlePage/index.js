@@ -19,7 +19,6 @@ Component({
   pageLifetimes: {
     show: function () {
       this.getAllData()
-      // console.log("页面展示时执行")
     },
   },
   /**
@@ -84,7 +83,7 @@ Component({
         return false
       } else if (e.currentTarget.dataset.name == "下架") {
         this.fun('update', 'down', e.currentTarget.dataset.id)
-      } 
+      }
     },
     fun(fun, update, id) { // 获取更新后的数据
       let _this = this
