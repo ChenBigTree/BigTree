@@ -84,7 +84,7 @@
 										</i-tag>
 
 										<i-tag class="i-tags fr" wx:if="{{isShow}}" name="{{item.tag}}" color="yellow" type="border">
-											{{item.isShow.isPass== true && item.isShow.isApply==true ? '已上架': item.isShow.isPass == false && item.isShow.isApply == false ? '未上架' : item.isShow.isPass == false && item.isShow.isApply == true ? '待审核' : '不通过' }}
+											{{ item.isShow.isApply==true ? '已上架':  '未上架' }}
 										</i-tag>
 									</view>
 									<view class="info">

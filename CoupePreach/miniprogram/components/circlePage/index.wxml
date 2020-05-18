@@ -9,7 +9,7 @@
 				<view class="col" data-sid="{{itemName._id}}" bindtap="lookDetail">
 					<view class="clearfix">
 						<view class="username oneTextOverflow">{{itemName.userInfo.nickName}}</view>
-						<text class="isPutaway" data-name="{{itemName.isShow.isPass== true && itemName.isShow.isApply==true ? '下架': itemName.isShow.isPass == false && itemName.isShow.isApply == false ? '上架' : itemName.isShow.isPass == false && itemName.isShow.isApply == true ? '待审核' : '不通过' }}" data-id="{{itemName._id}}" catchtap="getData">{{itemName.isShow.isPass== true && itemName.isShow.isApply==true ? '下架': itemName.isShow.isPass == false && itemName.isShow.isApply == false ? '上架' : itemName.isShow.isPass == false && itemName.isShow.isApply == true ? '待审核' : '不通过' }}</text>
+						<text class="isPutaway" data-name="{{ itemName.isShow.isApply==true ? '下架': '上架'  }}" data-id="{{itemName._id}}" catchtap="getData">{{ itemName.isShow.isApply==true ? '下架':  '上架'  }}</text>
 					</view>
 					<!-- bindlongtap="copyText" -->
 					<view class="content" data-text="{{itemName.content}}">
@@ -21,7 +21,7 @@
 							<view class="communityPage-li-imgli-none">
 								<image src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg" mode="widthFix" style="width:100%;"></image>
 							</view>
-							<view class="community-li-title-none tweTextOverflow" >{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</view>
+							<view class="community-li-title-none tweTextOverflow">{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</view>
 							<view class="community-li-title-time">{{itemName.date}}</view>
 							<view class="community-li-title-avatar">
 								<image class="userIcon" src='{{itemName.userInfo.avatarUrl}}'></image>

@@ -14,7 +14,7 @@
 		</view>
 	</view>
 	<!-- 下拉列表 -->
-	<view class="listPage-box {{class}}" data-name="listPage-box" catchtap="showListPage">
+	<view class="listPage-box {{class}}" data-name="listPage-box" catchtap="showListPage"  ontouchmove="cc">
 		<view class="listPage clearfix" data-name="listPage" catchtap="showListPage">
 			<view class="list-box" wx:for="{{lists}}" wx:key="index" data-index="{{index}}" catchtap="showListPage" data-name="{{item.tag}}">
 				{{item.tag}}

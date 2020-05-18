@@ -45,7 +45,7 @@ exports.main = async (event, context) => {
       openid: event.openid
     }).get()
   } else if (event.fun == "update") {
-    if (event.update == "distributionMember") {
+    if (event.update == "distributionMember") { // 添加所购买的课程信息
       return await userInfoData.where({
         openid: wxContext.OPENID,
       }).update({
@@ -68,13 +68,30 @@ exports.main = async (event, context) => {
           })
         }
       })
-    } else if (event.update == "administrator") {
+    } else if (event.update == "administrator") { // 添加管理员
 
       return await userInfoData.where({
         openid: event.openid
       }).update({
         data: {
           isAdministrator: Boolean(event.boolean)
+        }
+      })
+    } else if (event.update == "headPortrait") { // 更换头像
+      await cloud.database().collection("circle").where({
+        _openid: wxContext.OPENID
+      }).update({
+        data: {
+          userInfo:{
+            avatarUrl: event.avatarUrl
+          }
+        }
+      })
+      return await userInfoData.where({
+        openid: wxContext.OPENID
+      }).update({
+        data: {
+          avatarUrl: event.avatarUrl
         }
       })
     }

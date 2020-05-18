@@ -37,16 +37,17 @@ Page({
         dialogShow: true
       })
     } else {
-      if (this.data.isBuy) {
+      // 先购买再听课
+      // if (this.data.isBuy) {
         wx.navigateTo({
           url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
         })
-      } else {
-        wx.showToast({
-          title: "先购买再听课",
-          icon: "none"
-        })
-      }
+      // } else {
+      //   wx.showToast({
+      //     title: "先购买再听课",
+      //     icon: "none"
+      //   })
+      // }
     }
   },
   set() {

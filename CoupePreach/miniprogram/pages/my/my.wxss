@@ -47,12 +47,6 @@ page,
   position: relative;
 }
 
-/* .fill-box {
-  position: absolute;
-  right: -140rpx;
-  top: 0;
-} */
-
 .me-list {
   width: calc(100% - 60rpx);
   padding: 40rpx 30rpx;

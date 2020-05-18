@@ -24,7 +24,11 @@ Page({
     li1: [],
     li2: [],
   },
-
+  cc() {
+    this.setData({
+      class: "bottom"
+    })
+  },
   chooseCatalog: function (event) {
     this.setData({
       activeIndex: event.currentTarget.dataset.index,
@@ -120,6 +124,7 @@ Page({
           _this.liFun(arr2)
         },
         fail: err => {
+          wx.hideLoading()
           console.log(err)
         }
       })
@@ -161,6 +166,7 @@ Page({
         },
         fail: err => {
           console.log(err)
+          wx.hideLoading()
         }
       })
     }
@@ -183,6 +189,7 @@ Page({
         _this.liFun(s)
       },
       fail: err => {
+        wx.hideLoading()
         console.log(err)
       }
     })
@@ -210,56 +217,56 @@ Page({
           li2: li2
         })
       }
-
-      if (li1.length + li2.length == data.length) {
-        console.log("li1", li1)
-        console.log("li2", li2)
-      }
+      wx.hideLoading()
+      // if (li1.length + li2.length == data.length) {
+      //   console.log("li1", li1)
+      //   console.log("li2", li2)
+      // }
     }
   },
-  height(s) { // 通过判断li1与li2的高度进行添加数据
-    const promise1 = new Promise((resolve) => {
-      let query = wx.createSelectorQuery();
-      query.select(`.li-1`).boundingClientRect().exec(ret => {
-        resolve(ret[0].height);
-      })
-    });
-    const promise2 = new Promise((resolve) => {
-      let query = wx.createSelectorQuery();
-      query.select(`.li-2`).boundingClientRect().exec(ret => {
-        _this.setData({
-          height2: ret[0].height
-        })
-        resolve(ret[0].height);
-      })
-    });
-    promise1.then((value1) => {
-      promise2.then((value2) => {
-        let li1 = []
-        let li2 = []
-        console.log("s==>", s)
-        for (let key in _this.data.wallData) {
-          if (key % 2 == 0) {
-            li1.push(_this.data.wallData[key])
-            _this.setData({
-              li1: li1
-            })
-          } else {
-            li2.push(_this.data.wallData[key])
-            _this.setData({
-              li2: li2
-            })
-          }
+  // height(s) { // 通过判断li1与li2的高度进行添加数据
+  //   const promise1 = new Promise((resolve) => {
+  //     let query = wx.createSelectorQuery();
+  //     query.select(`.li-1`).boundingClientRect().exec(ret => {
+  //       resolve(ret[0].height);
+  //     })
+  //   });
+  //   const promise2 = new Promise((resolve) => {
+  //     let query = wx.createSelectorQuery();
+  //     query.select(`.li-2`).boundingClientRect().exec(ret => {
+  //       _this.setData({
+  //         height2: ret[0].height
+  //       })
+  //       resolve(ret[0].height);
+  //     })
+  //   });
+  //   promise1.then((value1) => {
+  //     promise2.then((value2) => {
+  //       let li1 = []
+  //       let li2 = []
+  //       console.log("s==>", s)
+  //       for (let key in _this.data.wallData) {
+  //         if (key % 2 == 0) {
+  //           li1.push(_this.data.wallData[key])
+  //           _this.setData({
+  //             li1: li1
+  //           })
+  //         } else {
+  //           li2.push(_this.data.wallData[key])
+  //           _this.setData({
+  //             li2: li2
+  //           })
+  //         }
+  //         wx.hideLoading()
+  //         // if (li1.length + li2.length == _this.data.wallData.length) {
+  //         //   console.log("li1", li1)
+  //         //   console.log("li2", li2)
+  //         // }
+  //       }
+  //     })
+  //   });
 
-          if (li1.length + li2.length == _this.data.wallData.length) {
-            console.log("li1", li1)
-            console.log("li2", li2)
-          }
-        }
-      })
-    });
-
-  },
+  // },
   lookDetail(e) { // 点击指定的动态进入详情
     console.log(e.currentTarget.dataset)
     wx.navigateTo({
@@ -275,9 +282,6 @@ Page({
   },
   lists() { // 获取分类列表
     let _this = this
-    _this.setData({
-      lists: ''
-    })
     wx.cloud.callFunction({
       name: 'projectClassify',
       data: {
@@ -286,10 +290,14 @@ Page({
       },
       success: res => {
         console.log('分类列表', res.result.data)
+        wx.hideLoading()
         _this.setData({
           lists: _this.data.cate1Info.concat(res.result.data)
         })
       },
+      fail: err => {
+        wx.hideLoading()
+      }
     })
   },
   /**
@@ -312,6 +320,9 @@ Page({
   onShow: function () {
     this.getHomeAllData()
     this.lists()
+    wx.showLoading({
+      title: '正在加载中',
+    })
   },
 
   /**

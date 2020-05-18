@@ -1,8 +1,9 @@
 <view class="me">
 	<view class="me-message-box">
 		<view class="me-message" wx:if="{{userInfo}}">
-			<view class="avatar-box">
-				<open-data class="avatar" type="userAvatarUrl"></open-data>
+			<view class="avatar-box" data-url="{{userInfo.avatarUrl}}" bindtap="imageFun">
+				<image class="avatar" mode="widthFix" src="{{userInfo.avatarUrl}}"></image>
+				<!-- <open-data  type="userAvatarUrl"></open-data> -->
 			</view>
 			<view class="me-name clearfix">
 				<open-data class="name oneOverflow" type="userNickName"></open-data>
@@ -27,9 +28,12 @@
 		<view class="list" data-url="../my/mySpace/mySpace?openid={{userInfo.openid}}&&form='my'" bindtap="openConfirm">
 			<view>我的主页</view>
 		</view>
+		<view class="list" data-url="../my/teacher/teacher" bindtap="openConfirm">
+			<view>申请成为讲师</view>
+		</view>
 		<!-- <view class="list" data-url="../my/myClass/myClass" bindtap="openConfirm">
-			<view>我的课程</view>
-		</view> -->
+					<view>我的课程</view>
+				</view> -->
 		<view class="list" wx:if="{{userInfo.isAdministrator}}" data-url="../my/administrator/administrator" bindtap="openConfirm">
 			<view>管理员入口</view>
 		</view>

@@ -27,15 +27,13 @@ exports.main = async (event, context) => {
     } else if (event.get == "homeAll") { // 首页获取全部已同意上架的所有数据
       return await cloud.database().collection("circle").where({
         isShow: {
-          isApply: true,
-          isPass: true
+          isApply: true
         }
       }).get()
     } else if (event.get == "homeAssign") { // 首页获取指定标签的已同意上架的热门数据前五条
       return await cloud.database().collection("circle").where({
         isShow: {
-          isApply: true,
-          isPass: true
+          isApply: true
         },
         tag: event.tag
       }).get()
@@ -53,8 +51,7 @@ exports.main = async (event, context) => {
           data: (await cloud.database().collection("circle").where({
             _openid: event.openid,
             isShow: {
-              isApply: true,
-              isPass: true
+              isApply: true
             }
           }).get()),
           isF: false
@@ -63,47 +60,40 @@ exports.main = async (event, context) => {
     }
 
   } else if (event.fun == "update") {
-    let data = cloud.database().collection("circle").doc(event.id)
-    if (event.update == "yes") { // 管理员通过用户申请动态上架
-      return await data.update({
+    let data1 = cloud.database().collection("circle").doc(event.id)
+    let data2 = cloud.database().collection("userInfoData").doc(event.id)
+    if (event.update == "yes") { // 管理员通过讲师入住
+      return await data2.update({
         data: {
-          isShow: {
-            isApply: true,
-            isPass: true
-          }
+          isTeacher: true
         }
       })
-    } else if (event.update == "no") { // 管理员不通过用户申请动态上架
-      return await data.update({
+    } else if (event.update == "no") { // 管理员不通过讲师入住
+      return await data2.update({
         data: {
-          isShow: {
-            isApply: false,
-            isPass: true
-          }
+          isTeacher: false
         }
       })
     } else if (event.update == "up") { // 用户提出申请动态上架
-      return await data.update({
+      return await data1.update({
         data: {
           isShow: {
-            isApply: true,
-            isPass: false
+            isApply: true
           }
         }
       })
     } else if (event.update == "down") { // 用户提出申请动态下架
-      return await data.update({
+      return await data1.update({
         data: {
           isShow: {
-            isApply: false,
-            isPass: false
+            isApply: false
           }
         }
       })
-    } else if (event.update == "dianzan"){
-      return data.update({
-        data:{
-          zans:event.zansArr
+    } else if (event.update == "dianzan") {
+      return await data1.update({
+        data: {
+          zans: event.zansArr
         }
       })
     }

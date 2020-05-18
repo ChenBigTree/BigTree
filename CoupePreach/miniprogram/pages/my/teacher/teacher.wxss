@@ -1,0 +1,33 @@
+.teacher {
+  padding: 10px;
+}
+
+.center {
+  margin-top: 50rpx;
+}
+
+.text {
+  font-size: 42rpx;
+}
+
+.phone,
+.sendSms {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+#btn {
+  width: 60rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  background: #ff6700;
+}
+
+.countdown-btn {
+  width: 260rpx;
+  height: 84rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

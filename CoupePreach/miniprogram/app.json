@@ -14,8 +14,10 @@
     "pages/my/administrator/courseShelf/courseShelf",
     "pages/my/mySpace/mySpace",
     "pages/my/myClass/myClass",
+    "pages/my/teacher/teacher",
     "pages/my/toPay/toPay",
-    "pages/my/administrator/addAdministrator/addAdministrator"
+    "pages/my/administrator/addAdministrator/addAdministrator",
+    "pages/my/showImage"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -33,7 +35,7 @@
         "selectedIconPath": "images/icon/首页1.png"
       },
       {
-        "text": "个人主页",
+        "text": "我的课程",
         "pagePath": "pages/myHomepage/myHomepage",
         "iconPath": "images/icon/partner2.png",
         "selectedIconPath": "images/icon/partner1.png"

@@ -528,8 +528,7 @@ Page({
           //tab: tab,
           isTop: false,
           isShow: {
-            isPass: false,
-            isApply: false
+            isPass: false
           }
         },
         success: res => {
