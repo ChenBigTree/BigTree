@@ -147,7 +147,7 @@ page,
   width: 100%;
   font-size: 28rpx;
   box-sizing: border-box;
-  padding: 10rpx;
+  padding:14rpx 10rpx;
   max-height: 90rpx;
 }
 

@@ -1,14 +1,26 @@
 <view class="teacher">
-	<view class="text">讲师入驻</view>
-	<view class="center">
-		<view class="phone clearfix">
-			<view class="name fl">手机号</view>
-			<input class="input1 fl" placeholder="输入手机号"></input>
+	<block wx:if="{{!userInfo.isTeacher}}">
+		<view class="text">讲师入驻</view>
+		<view class="center">
+			<view class="phone clearfix">
+				<text space="nbsp" class="name fl">姓   名</text>
+				<input class="input1 fl" type="text" data-name="input" value="{{name}}" bindinput="getphoneValFun" placeholder="请填写真实姓名"></input>
+			</view>
+			<view class="phone clearfix">
+				<view class="name fl">手机号</view>
+				<input class="input1 fl" type="number" data-name="input1" value="{{phoneVal}}" bindinput="getphoneValFun" placeholder="请填写手机号"></input>
+			</view>
+			<view class="sendSms clearfix">
+				<view class="name fl">验证码</view>
+				<input class="input2 fl" type="number" data-name="input2" value="{{Verification_Code}}" bindinput="getphoneValFun" placeholder="请填写验证码"></input>
+				<view class="yzm"><button type="primary" bindtap="sendSms" disabled="{{disabled}}" bindtap="sendSms" plain="true" size="mini">{{time}}</button></view>
+			</view>
+			<view class="tj">
+				<button type="primary" bindtap="tj" disabled="{{disabledTJ}}">提交审核</button>
+			</view>
 		</view>
-		<view class="sendSms clearfix">
-			<view class="name fl">验证码</view>
-			<input class="input2 fl" placeholder="输入验证码"></input>
-			<button bindtap="sendSms" type="primary" disabled="{{disabled}}" plain="true" class="countdown-btn">{{time}}</button>
-		</view>
+	</block>
+	<view class="texts" wx:else>
+		<text>您已成为讲师</text>
 	</view>
 </view>

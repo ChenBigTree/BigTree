@@ -30,22 +30,24 @@ Page({
       imageUrl: "cloud://ywzh-quvhk.7977-ywzh-quvhk-1301465733/pgy.png",
     } //转发样式
   },
-  handleChange({
-    detail
-  }) {
-    console.log(detail)
-    this.setData({
-      current: detail.key
-    });
-  },
+  // handleChange({
+  //   detail
+  // }) {
+  //   console.log(detail)
+  //   this.setData({
+  //     current: detail.key
+  //   });
+  // },
   openConfirm: function (e) {
+    console.log(e.currentTarget.dataset.url)
+    // return
     if (!_this.data.userInfo) {
       _this.setData({
         dialogShow: true
       })
     } else {
       wx.navigateTo({
-        url: './speechAdd/speechAdd',
+        url: e.currentTarget.dataset.url,
       })
     }
   },

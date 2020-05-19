@@ -4,28 +4,24 @@
 	<block wx:for="{{someData}}" wx:key="index">
 		<navigator class="nurse" hover-class="none" url="../../../myHomepage/speechDetail/speechDetail?id={{item._id}}">
 			<view class="left">
-				<image src="{{item.userInfo.avatarUrl}}"></image>
+				<image src="{{item.avatarUrl}}"></image>
 			</view>
 			<view class="right">
-				<view class="nameView">
-					<view class="name oneTextOverflow">{{item.userInfo.nickName}}</view>
+				<view class="like">
+					<view class="texts oneTextOverflow">微信名：{{item.nickName}}</view>
 				</view>
 				<view class="like">
-					<text class="texts towTextOverflow">{{item.title}}</text>
-					<view class="vTitle">
-						<view class="tag">
-							<i-tag class="i-tags" wx:if="{{item.tag}}" name="{{item.tag}}" color="green">
-								{{item.tag}}
-							</i-tag>
-						</view>
-					</view>
+					<text class="texts oneTextOverflow">名字：{{item.name}}</text>
+				</view>
+				<view class="like">
+					<text class="texts oneTextOverflow">联系电话：{{item.phoneVal}}</text>
 				</view>
 			</view>
 			<view class="btn">
-				<view class="text" data-id="{{item._id}}" data-state="yes" catchtap="handle">通过</view>
-				<view class="text" data-id="{{item._id}}" data-state="no" catchtap="handle">不通过</view>
+				<view class="text yes" data-id="{{item._id}}" data-state="yes" data-openid="{{item.openid}}" catchtap="handle">通过</view>
+				<view class="text" data-id="{{item._id}}" data-state="no" data-openid="{{item.openid}}" catchtap="handle">不通过</view>
 			</view>
 		</navigator>
 	</block>
-	<view class="null" wx:if="{{someData.length<=0}}">暂无内容</view>
+	<view class="null" wx:if="{{someData.length<=0}}">暂无申请</view>
 </view>

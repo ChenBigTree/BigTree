@@ -8,7 +8,31 @@ Page({
   data: {
     inputValue: '',
     class: '',
-    isHad: true
+    isHad: true,
+    isShow: true,
+  },
+
+  phoneInput(e) {
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  // 项目分类
+  btn1(e) {
+    let name = e.currentTarget.dataset.name
+    console.log(name)
+    return
+    if (name == "add2") {
+      _this.caozuoFun("add", _this.data.input, "", "添加")
+    } else if (name == "textbtn") {
+      _this.caozuoFun("update", _this.data.input, _this.data.id, "更新")
+    } else if (name == "text") {
+      _this.setData({
+        input: e.currentTarget.dataset.text,
+        id: e.currentTarget.dataset.id,
+        isBtn: true
+      })
+    }
   },
   operationAdm(e) { // 删除/添加管理员
     if (e.currentTarget.dataset.btn == "del") {
@@ -22,13 +46,19 @@ Page({
         },
       })
     } else {
-      this.operationFun(e.currentTarget.dataset.openid, true, "添加")
       _this.setData({
         class: "top",
         inputValue: "",
         searchUser: "",
         isHad: true
       })
+      // this.btn1("添加")
+
+      _this.setData({
+        isShow: !_this.data.isShow
+      })
+      return
+      this.operationFun(e.currentTarget.dataset.openid, true, "添加")
     }
   },
   operationFun(openid, boolean, tis) {

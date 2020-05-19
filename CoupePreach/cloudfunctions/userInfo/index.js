@@ -82,9 +82,16 @@ exports.main = async (event, context) => {
         _openid: wxContext.OPENID
       }).update({
         data: {
-          userInfo:{
+          userInfo: {
             avatarUrl: event.avatarUrl
           }
+        }
+      })
+      await cloud.database().collection("teacherDataList").where({
+        openid: wxContext.OPENID
+      }).update({
+        data: {
+          avatarUrl: event.avatarUrl
         }
       })
       return await userInfoData.where({

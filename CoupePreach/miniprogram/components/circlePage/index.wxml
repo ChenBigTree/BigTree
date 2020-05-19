@@ -1,4 +1,3 @@
-<!--components/circlePage/index.wxml-->
 <view class="top-circle">
 	<block wx:if='{{wallData.length>0}}'>
 		<view class="circle" wx:for="{{wallData}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexN">

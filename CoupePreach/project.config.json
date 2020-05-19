@@ -118,6 +118,13 @@
 					"id": -1,
 					"name": "pages/my/teacher/teacher",
 					"pathName": "pages/my/teacher/teacher",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/administrator/courseShelf/courseShelf",
+					"pathName": "pages/my/administrator/courseShelf/courseShelf",
 					"scene": null
 				}
 			]

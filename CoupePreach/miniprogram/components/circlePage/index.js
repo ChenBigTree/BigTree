@@ -25,7 +25,7 @@ Component({
    * 组件挂载之前执行
    */
   attached: function () {
-    // this.getAllData()
+    this.getAllData()
     // console.log("组件挂载之前执行")
   },
 
@@ -41,9 +41,6 @@ Component({
   methods: {
     getAllData() { // 我的所有动态
       let _this = this
-      _this.setData({
-        wallData: ''
-      })
       wx.cloud.callFunction({
         name: "stairway",
         data: {
@@ -78,15 +75,20 @@ Component({
     getData(e) { // 用户提交上下架
       console.log(e.currentTarget.dataset.name)
       if (e.currentTarget.dataset.name == "上架") {
+        wx.showToast({
+          title: '上架成功',
+        })
         this.fun('update', 'up', e.currentTarget.dataset.id)
-      } else if (e.currentTarget.dataset.name == "待审核") {
-        return false
       } else if (e.currentTarget.dataset.name == "下架") {
+        wx.showToast({
+          title: '下架成功',
+        })
         this.fun('update', 'down', e.currentTarget.dataset.id)
       }
     },
     fun(fun, update, id) { // 获取更新后的数据
       let _this = this
+
       wx.cloud.callFunction({
         name: 'stairway',
         data: {

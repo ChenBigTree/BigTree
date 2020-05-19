@@ -20,7 +20,6 @@ Page({
       })
     }
   },
-
   imageFun(e) { // 查看图片，点击打开新页面展示图片内容
     wx.navigateTo({
       url: './showImage?url=' + e.currentTarget.dataset.url,
@@ -68,7 +67,7 @@ Page({
             individualResume: '',
             city: e.userInfo.city,
             isAdministrator: false, // 是否管理员
-            isTeacher: true, // 是否讲师
+            isTeacher: false, // 是否讲师
             isDistributionMember: false, // 是否分销员
             fans: [], // 粉丝
             partner: [], // 伙伴

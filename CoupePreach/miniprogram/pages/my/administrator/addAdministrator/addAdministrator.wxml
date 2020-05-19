@@ -12,7 +12,7 @@
 							<image mode="scaleToFill" src="{{item.avatarUrl}}"></image>
 						</view>
 						<text class="name fl">用户名：{{item.nickName}}</text>
-						<view class="btn fl add" data-openid="{{item.openid}}" data-btn="add"  bindtap="operationAdm">添加</view>
+						<view class="btn fl add" data-openid="{{item.openid}}" data-name="{{item.nickName}}" data-btn="add" bindtap="operationAdm">添加</view>
 					</view>
 				</view>
 			</block>
@@ -29,5 +29,14 @@
 
 	<view class="addBtn" data-name="listPage" bindtap="showListPage">
 		<image mode="widthFix" src="../../../../images/icon/add1.png"></image>
+	</view>
+</view>
+
+<view class="addPage" hidden="{{isShow}}">
+	<view class="addPage-center clearfix">
+		<input placeholder="请输入管理员{{}}手机号" value="{{phone}}" bindinput="phoneInput"></input>
+		<view class="fl" data-name="qx" bindtap="btn1">取消</view>
+		<view class="fr" data-name="add2" hidden="{{isBtn}}" bindtap="btn1">确定</view>
+		<view class="fr" data-name="textbtn" hidden="{{!isBtn}}" bindtap="btn1">更新</view>
 	</view>
 </view>
