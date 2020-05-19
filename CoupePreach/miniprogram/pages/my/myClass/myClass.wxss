@@ -1,0 +1,54 @@
+.null {
+  font-size: 14px;
+  text-align: center;
+  padding: 30px 0;
+  color: #6b6b6b;
+}
+
+.myClass-box {
+  padding: 20rpx 0;
+  margin: 0 25rpx;
+}
+
+.nurseItem {
+  width: calc((100% - 25rpx) / 2);
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  background: #fff;
+  height: 320rpx;
+  margin: 20rpx 0;
+  border-radius: 20rpx;
+  box-shadow: 0 3px 6px #aaa;
+}
+
+.nurseItem:nth-child(2n) {
+  margin-left: 25rpx;
+}
+
+.nurseAvatar {
+  display: flex;
+  justify-content: center;
+  margin: 10rpx;
+}
+
+.nurseAvatar image {
+  margin-top: 20rpx;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+
+.nurseName {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.nurseTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: rgb(163, 163, 163);
+}

@@ -16,6 +16,10 @@ page {
   left: 315rpx;
 }
 
+.tag {
+  margin-top: 20rpx;
+}
+
 .vwAuthor {
   display: flex;
   flex-direction: row;
@@ -44,6 +48,11 @@ page {
 .vwDi {
   display: flex;
   align-items: center;
+  margin-top: 5px;
+}
+
+.vwDi text {
+  margin-left: 3px;
 }
 
 .vwDi image {
@@ -190,7 +199,6 @@ page {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 8rpx;
 }
 
 .li-img-one {
@@ -277,8 +285,6 @@ page {
 }
 
 .circle {
-  width: 100%;
-  height: 100%;
   margin-top: 16rpx;
   margin-bottom: 16rpx;
   font-family: Arial, sans-serif;
@@ -310,7 +316,7 @@ page {
 .col {
   display: flex;
   flex-direction: column;
-  margin-left: 16rpx;
+  margin: 0 16rpx;
   width: 100%;
 }
 
@@ -576,6 +582,7 @@ page {
   align-items: center;
   border-bottom: 1rpx solid #2f3336;
   padding: 12rpx 6rpx 8rpx 6rpx;
+  border-radius: 5px;
 }
 
 .zan-border {

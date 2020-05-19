@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isShowImage: false
   },
   openConfirm: function (e) {
     if (_this.data.userInfo == null) {
@@ -20,6 +20,41 @@ Page({
       })
     }
   },
+  imageFun(e) { // 查看图片，点击打开新页面展示图片内容
+    wx.navigateTo({
+      url: './showImage?url=' + e.currentTarget.dataset.url,
+    })
+    return
+    wx.hideTabBar()
+
+    this.setData({
+      showImage: e.currentTarget.dataset.url,
+      isShowImage: true
+    })
+
+    if (e.currentTarget.dataset.name == "image-text") {
+      this.data.isShowImage == false ? wx.showTabBar() : wx.hideTabBar()
+      wx.chooseImage({
+        count: 1, // 默认9
+        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success(res) {
+          const src = res.tempFilePaths[0];
+          console.log("src==>", src)
+          //  获取裁剪图片资源后，给data添加src属性及其值
+          wx.navigateTo({
+            url: `/components/cropper/cropper?src=${src}`,
+          })
+        }
+      })
+    } else if (e.currentTarget.dataset.name == "imagePage") {
+      this.data.isShowImage == false ? wx.hideTabBar() : wx.showTabBar()
+      this.setData({
+        isShowImage: false
+      })
+    }
+  },
+
   getUserInfo: function (e) {
     wx.getUserInfo({
       success: e => {
@@ -27,15 +62,18 @@ Page({
           name: "login"
         }).then((res) => {
           let userInfoData = {
-            openid: res.result.openid,
             nickName: e.userInfo.nickName,
             avatarUrl: e.userInfo.avatarUrl,
+            individualResume: '',
             city: e.userInfo.city,
-            isAdministrator: true, // 是否管理员
-            isTeacher: true, // 是否讲师
-            isDistributionMember: true, // 是否分销员
+            isAdministrator: false, // 是否管理员
+            isTeacher: false, // 是否讲师
+            isDistributionMember: false, // 是否分销员
             fans: [], // 粉丝
             partner: [], // 伙伴
+            PriceOfCourse: 50,
+            openid: res.result.openid,
+            distributionMember: [] // 购买的课程
           }
           app.globalData.userInfo = userInfoData
           this.setData({
@@ -83,12 +121,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (app.globalData.userInfo != undefined) {
-      this.setData({
-        userInfo: app.globalData.userInfo
-      })
-      console.log("获取全局的用户信息 =>", app.globalData.userInfo)
-    }
+    console.log("app.globalData.userInfo", app.globalData.userInfo)
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.cloud.callFunction({
+            name: "userInfo",
+            data: {
+              fun: "get_personal"
+            }
+          }).then(res => {
+            app.globalData.userInfo = res.result.data[0]
+            _this.setData({
+              userInfo: app.globalData.userInfo
+            })
+          })
+        }
+      }
+    })
+
   },
 
   /**

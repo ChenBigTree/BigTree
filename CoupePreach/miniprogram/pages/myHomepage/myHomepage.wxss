@@ -115,7 +115,7 @@
   z-index: 99;
 } */
 
-.header > text:nth-child(2) {
+.header>text:nth-child(2) {
   font-size: 14pt;
 }
 
@@ -318,12 +318,12 @@
   /* animation: heartBeat 1.2s; */
 }
 
-.zan-pinglun > .iconfont {
+.zan-pinglun>.iconfont {
   display: inline-block;
   width: 60pt;
 }
 
-.zan-pinglun > .icon-xin {
+.zan-pinglun>.icon-xin {
   border-right: 1rpx solid #353535;
 }
 
@@ -480,29 +480,32 @@
   padding-right: 10rpx;
 }
 
-.communityPage-li-img-none{
+.communityPage-li-img-none {
   position: relative;
 }
-.communityPage-li-imgli-none{
+
+.communityPage-li-imgli-none {
   display: block;
-  vertical-align: top;
+  /* vertical-align: top; */
   width: 100%;
   margin-bottom: 7rpx;
 }
-.community-li-title-none{
+
+.community-li-title-none {
   color: #aea24e;
   font-weight: bold;
   font-size: 16px;
   position: absolute;
   width: 400rpx;
-  text-align: center;  
+  text-align: center;
   top: 80rpx;
   left: 20rpx;
   overflow: hidden;
-  white-space:nowrap; 
-  text-overflow:ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.community-li-title-time{
+
+.community-li-title-time {
   color: #333;
   font-size: 12px;
   position: absolute;
@@ -511,25 +514,29 @@
   top: 130rpx;
   left: 20rpx;
 }
-.community-li-title-avatar{
+
+.community-li-title-avatar {
   position: absolute;
   width: 164rpx;
   text-align: center;
   top: 162rpx;
   left: 286rpx;
 }
-.uploadImg{
+
+.uploadImg {
   border-radius: 10rpx;
   position: absolute;
-  top:115rpx;
-  left:255rpx;
+  top: 115rpx;
+  left: 255rpx;
 }
-.community-li-title-avatar > image{
+
+.community-li-title-avatar>image {
   width: 90rpx;
   height: 90rpx;
   border-radius: 50%;
 }
-.community-li-title-name{
+
+.community-li-title-name {
   color: #333;
   font-size: 11px;
   position: absolute;
@@ -537,4 +544,20 @@
   text-align: center;
   top: 250rpx;
   left: 286rpx;
+}
+
+.js {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F6F6F6;
+}
+
+.js .btn {
+  padding: 10px 15px;
+  border: 1px solid #Ff6700;
+  border-radius: 5px;
+  color: #ff6700;
 }

@@ -1,4 +1,4 @@
-<view class="top-circle" wx:if='{{wallData.length>0}}'  data-name="isform" catchtap="showform">
+<view class="top-circle" wx:if='{{wallData.length>0}}' data-name="isform" catchtap="showform">
 	<view class="circle" style="width:100%;margin-top:0;">
 		<!-- 如果没有上传图片 -->
 		<view class="li-imgs" wx:if="{{wallData[0].images.length==0}}" data-playState="pause" bindtap="audioPause">
@@ -23,7 +23,7 @@
 		</view>
 		<!-- 如果有上传图片 -->
 		<view class="li-imgs" style="width:100%;margin-top:0;" wx:if="{{wallData[0].images.length>0}}" data-playState="pause" bindtap="audioPause">
-			<swiper class="swiper" indicator-dots="{{false}}" style="height:422rpx;;width:100%;padding:0;">
+			<swiper class="swiper" indicator-dofts="{{false}}" style="height:422rpx;;width:100%;padding:0;">
 				<block wx:for="{{wallData[0].images}}" wx:key="index" wx:for-item="it">
 					<swiper-item>
 						<image src="{{it}}" mode="aspectFill" style="height:422rpx;width:100%;" />
@@ -42,21 +42,23 @@
 			</view>
 			<view class="proright">{{AudioLong}}</view>
 		</view>
-
-		<view class="vwAuthor">
-			<view class="vwAvr">
-				<image class="vwAvatar" src="{{wallData[0].userInfo.avatarUrl}}"></image>
-			</view>
-			<view class="vwAuthorTitle"> 
-				<view class="vwName">{{wallData[0].userInfo.nickName}}</view>
-				<view class="vwDita">
-					<view class="vwDi">
-						<image src="../../../images/icon/view.png"></image>
-						<text>{{wallData[0].views}}</text>
+		
+		<navigator hover-class="none" url="../../my/mySpace/mySpace?openid={{wallData[0]._openid}}&&form='speechDetail'">
+			<view class="vwAuthor">
+				<view class="vwAvr">
+					<image class="vwAvatar" src="{{wallData[0].userInfo.avatarUrl}}"></image>
+				</view>
+				<view class="vwAuthorTitle">
+					<view class="vwName">{{wallData[0].userInfo.nickName}}</view>
+					<view class="vwDita">
+						<view class="vwDi">
+							<image src="../../../images/icon/view.png"></image>
+							<text>{{wallData[0].views>9?wallData[0].views:'0'+wallData[0].views}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
+		</navigator>
 
 		<view class="vTitle">
 			<text>{{wallData[0].title==''?wallData[0].userInfo.nickName+'的精彩分享':wallData[0].title}}</text>
@@ -127,15 +129,15 @@
 						<view wx:if='{{wallData[0].zans.length<=0}}' class="r"></view>
 
 						<view class="comments">
-							<view wx:for="{{wallData[0].comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
+							<view wx:for="{{wallData[0].comments}}" wx:key='index' catchtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
 
 								<view class="tt-row" wx:if='{{!item.toName}}'>
-									<text class="blueColor">{{item.userInfo.nickName+' : '}}</text>
+									<text class="blueColor">{{item.username+' : '}}</text>
 									<text class="noblueColor">{{item.comment}}</text>
 								</view>
 
 								<view wx:if='{{item.toName}}'>
-									<text class="blueColor">{{item.userInfo.nickName}}</text>
+									<text class="blueColor">{{item.username}}</text>
 									<text class="noblueColor"> 回复</text>
 									<text class="blueColor">{{item.toName+': '}}</text>
 									<text class="noblueColor">{{item.comment}}</text>

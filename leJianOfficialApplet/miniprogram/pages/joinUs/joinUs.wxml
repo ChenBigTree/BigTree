@@ -1,8 +1,8 @@
-<view class="tj" wx:if="{{isShow}}">
+<view class="tj" wx:if="{{!isShow}}">
 	<text>{{text}}</text>
 	<button wx:if="{{isShowBut}}" class="But" bindtap="But">重新提交</button>
 </view>
-<view wx:if="{{!isShow}}" class="joinUs">
+<view wx:if="{{isShow}}" class="joinUs">
 	<view class="joinUs-header">
 		<image mode="widthFix" src="../icon/joinUs.jpg"></image>
 	</view>

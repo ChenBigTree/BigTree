@@ -1,4 +1,7 @@
 {
   "usingComponents": {
-    "w-tabs": "../../components/w-tabs/index"}
+    "w-tabs": "../../components/w-tabs/index",
+    "i-tabs":"../../components/tabs-iview/index",
+    "i-tab":"../../components/tab-iview/index"
+  }
 }

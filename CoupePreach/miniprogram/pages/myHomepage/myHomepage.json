@@ -4,6 +4,7 @@
     "i-tabs": "../../components/tabs/index",
     "i-tab": "../../components/tab/index",
     "circlePage": "../../components/circlePage/index",
+    "mp-auth": "../../components/auth/dialog",
     "curriculumPage": "../../components/curriculumPage/index"
   }
 }

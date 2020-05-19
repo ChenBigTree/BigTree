@@ -1,0 +1,6 @@
+<view class="image-box" wx:if="{{imageSrc}}">
+  <image mode="widthFix" src="{{imageSrc}}" bindtap="secImage"/>
+</view>
+<view class="container">
+  <button class="btn" type="primary" catchtap='upload'>上传照片</button>
+</view>

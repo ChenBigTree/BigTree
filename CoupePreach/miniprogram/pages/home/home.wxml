@@ -1,6 +1,104 @@
 <view class="home">
 	<view class="title">
-		<w-tabs bind:onChange="handleChange" options="{{ tabs1 }}" />
+		<!-- <w-tabs bind:onChange="handleChange" options="{{ tabs1 }}" /> -->
+		<!-- <v-tabs /> -->
+		<i-tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
+			<i-tab class="i-tab" wx:for="{{tabs1}}" wx:key="index" key="{{index+1}}" data-key="{{index+1}}" title="{{item}}"></i-tab>
+			<i-tab class="i-tab" wx:for="{{lists}}" wx:key="index" key="{{index+5}}" data-name="{{item.tag}}" title="{{item.tag}}"></i-tab>
+		</i-tabs>
+		<view class="title-box">
+			<view class="image-box" data-name="listPage" bindtap="showListPage">
+				<image mode="widthFix" src="../../images/icon/san.png"></image>
+			</view>
+		</view>
 	</view>
-	
+
+	<view class="listPage-box {{class}}" data-name="listPage-box" bindtap="showListPage">
+		<view class="listPage clearfix" data-name="listPage" catchtap="showListPage">
+			<view class="list-box" wx:for="{{tabs1}}" wx:key="index" key="{{index+1}}" data-key="{{index+1}}" catchtap="showListPage" data-name="{{item}}" title="{{item}}">{{item}}
+			</view>
+			<view class="list-box" wx:for="{{lists}}" wx:key="index" key="{{index+5}}" data-key="{{index+5}}" catchtap="showListPage" data-name="{{item.tag}}" title="{{item.tag}}">{{item.tag}}</view>
+		</view>
+	</view>
+
+
+	<view class="top-circle">
+		<block wx:if="{{wallData != ''}}">
+
+			<view class="circle" wx:for="{{wallData}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexN">
+				<view class="row">
+					<navigator hover-class="none" url="../my/mySpace/mySpace?openid={{itemName._openid}}&&form='speechDetail'">
+						<image class="userhead" src="{{itemName.userInfo.avatarUrl}}"></image>
+					</navigator>
+					<view class="col" data-sid="{{itemName._id}}" bindtap="lookDetail">
+						<view class="clearfix">
+							<view class="username towTextOverflow">{{itemName.userInfo.nickName}}</view>
+						</view>
+						<view class="content" data-text="{{itemName.content}}">
+							<text>{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</text>
+						</view>
+						<!-- 如果没有上传图片 -->
+						<view class="li-imgs" wx:if="{{itemName.images.length==0}}">
+							<view class="communityPage-li-img-none" style="width:100%;">
+								<view class="communityPage-li-imgli-none">
+									<image src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg" mode="widthFix" style="width:100%;"></image>
+								</view>
+								<view class="community-li-title-none">{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</view>
+								<view class="community-li-title-time">{{itemName.date}}</view>
+								<view class="community-li-title-avatar">
+									<image class="userIcon" src='{{itemName.userInfo.avatarUrl}}'></image>
+								</view>
+								<view class="community-li-title-name">{{itemName.userInfo.nickName}}</view>
+								<view class="uploadImg">
+									<image mode="aspectFit" style="width:120rpx;height:120rpx;" src="../../images/icon/play.png"></image>
+								</view>
+							</view>
+						</view>
+
+						<!-- 如果有上传图片 -->
+						<view class="li-imgs" wx:if="{{itemName.images.length>0}}">
+							<view class="communityPage-li-img-none" style="width:100%;">
+								<image src="{{itemName.images[0]}}" mode="aspectFill" style="height:354rpx;width:630rpx;" />
+								<view class="uploadImg">
+									<image mode="aspectFit" style="width:120rpx;height:120rpx;" src="../../images/icon/play.png"></image>
+								</view>
+							</view>
+						</view>
+
+						<view class='timeArea'>
+							<text>{{itemName.date}}</text>
+						</view>
+						<view class="comm-zan">
+							<!-- 点赞 -->
+							<view wx:if='{{itemName.zans.length>0}}'>
+								<view class="zan">
+									<image class="love-icon" src="../../images/icon/love-icon.png"></image>
+									<text class="like"  wx:for="{{itemName.zans}}" wx:key="index">{{item.name}},</text>
+								</view>
+							</view>
+							<!-- 留言 -->
+							<view wx:if='{{itemName.comments.length>0}}'>
+								<view class="comments">
+									<view wx:for="{{itemName.comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
+										<view class="tt-row" wx:if='{{!item.toName}}'>
+											<text class="blueColor">{{item.username+': '}}</text>
+											<text class="noblueColor">{{item.comment}}</text>
+										</view>
+										<view wx:if='{{item.toName}}'>
+											<text class="blueColor">{{item.username}}</text>
+											<text class="noblueColor"> 回复</text>
+											<text class="blueColor">{{item.toName+': '}}</text>
+											<text class="noblueColor">{{item.comment}}</text>
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+
+		<view class="null" wx:else>暂无内容</view>
+	</view>
 </view>

@@ -55,6 +55,13 @@
 					"id": -1,
 					"name": "pages/list/file/file",
 					"pathName": "pages/list/file/file",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/profilePicture/profilePicture",
+					"pathName": "pages/list/profilePicture/profilePicture",
 					"scene": null
 				}
 			]

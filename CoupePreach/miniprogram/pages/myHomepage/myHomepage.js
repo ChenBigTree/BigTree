@@ -1,5 +1,7 @@
 // pages/community/speech.js
 const app = getApp()
+let _this
+var that
 Page({
   data: {
     curriculumArr: [],
@@ -12,7 +14,6 @@ Page({
     showFooter: true,
     ifManage: false,
     statusBarHeight: app.globalData.statusBarHeight,
-    wallData: [],
     showZan: -1, //显示点赞按钮
     showPinLun: false,
     nmAvator: '/images/pyq/ng.jpg',
@@ -29,18 +30,77 @@ Page({
       imageUrl: "cloud://ywzh-quvhk.7977-ywzh-quvhk-1301465733/pgy.png",
     } //转发样式
   },
-  handleChange({
-    detail
-  }) {
-    console.log(detail)
-    this.setData({
-      current: detail.key
-    });
+  // handleChange({
+  //   detail
+  // }) {
+  //   console.log(detail)
+  //   this.setData({
+  //     current: detail.key
+  //   });
+  // },
+  openConfirm: function (e) {
+    console.log(e.currentTarget.dataset.url)
+    // return
+    if (!_this.data.userInfo) {
+      _this.setData({
+        dialogShow: true
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url,
+      })
+    }
   },
+  getUserInfo: function (e) { // 存储未登录信息
+    console.log("进来了")
+    wx.getUserInfo({
+      success: e => {
+        wx.cloud.callFunction({
+          name: "login"
+        }).then((res) => {
+          let userInfoData = {
+            nickName: e.userInfo.nickName,
+            avatarUrl: e.userInfo.avatarUrl,
+            individualResume: '',
+            city: e.userInfo.city,
+            isAdministrator: false, // 是否管理员
+            isTeacher: true, // 是否讲师
+            isDistributionMember: false, // 是否分销员
+            fans: [], // 粉丝
+            partner: [], // 伙伴
+            PriceOfCourse: 50,
+            openid: res.result.openid,
+            distributionMember: [] // 购买的课程
+          }
+          app.globalData.userInfo = userInfoData
+          _this.setData({
+            showLogin: !_this.data.showLogin,
+            userInfo: userInfoData
+          });
+          console.log("app=>", app.globalData)
 
-  onLoad: function (options) {
-
-    var that = this
+          wx.cloud.callFunction({
+            name: "userInfo",
+            data: {
+              userInfoData: userInfoData,
+              fun: "add"
+            },
+            success(res) {
+              console.log("存储成功 ==>", res)
+            },
+            fail: err => {
+              console.log("存储失败 ==>", err)
+            }
+          })
+          console.log("userInfoData==>", userInfoData)
+        })
+        if (_this.userInfoReadyCallback) {
+          _this.userInfoReadyCallback(res)
+        }
+      }
+    })
+  },
+  login() { // 获取登录的信息
     if (app.globalData.userInfo) {
       that.setData({
         userInfo: app.globalData.userInfo
@@ -62,11 +122,15 @@ Page({
         }
       })
     }
+  },
+  onLoad: function (options) {
+    _this = this;
+    that = this
 
     wx.cloud.callFunction({
       name: 'login'
     }).then(res => {
-      console.log("that.data.openid",res.result.openid)
+      console.log("that.data.openid", res.result.openid)
       that.setData({
         openid: res.result.openid
       })
@@ -77,20 +141,20 @@ Page({
           method: "get",
           openid: res.result.openid
         },
-        success:res=>{
+        success: res => {
           console.log('我的课程 成功==>', res.result.data)
           that.setData({
             curriculumArr: res.result.data
           })
         },
-        fail:err=>{
-          console.log("我的课程 失败==>",err)
+        fail: err => {
+          console.log("我的课程 失败==>", err)
         }
       })
     })
   },
-
   onShow: function () {
+    this.login()
     const db = wx.cloud.database()
     db.collection('circle').count().then(res => {
       console.log(res.total)
@@ -102,10 +166,13 @@ Page({
         batchTimes: batchTimes - 1
       })
     })
-    this.setData({
-      wallData:[],
-    })
-    this.getWallData()
+
+    if (app.globalData.userInfo != undefined) {
+      this.setData({
+        userInfo: app.globalData.userInfo
+      })
+      console.log("获取全局的用户信息 =>", app.globalData.userInfo)
+    }
   },
 
   //监听屏幕滚动 判断上下滚动
@@ -172,7 +239,7 @@ Page({
           return a.createTime.getTime() - b.createTime.getTime()
         })
       }
-      console.log("res.data ==>",res.data)
+      console.log("res.data ==>", res.data)
       var data = res.data.sort(function (a, b) {
         return b.createTime.getTime() - a.createTime.getTime()
       })
@@ -200,12 +267,12 @@ Page({
     })
   },
 
-  getUserInfo: function (e) {
-    console.log(e) ///////******** */
-    this.setData({
-      userInfo: e.detail.userInfo,
-    })
-  },
+  // getUserInfo: function (e) {
+  //   console.log(e) ///////******** */
+  //   this.setData({
+  //     userInfo: e.detail.userInfo,
+  //   })
+  // },
 
   lookDetail(e) {
     console.log(e.currentTarget.dataset) ///////////******* */
@@ -409,9 +476,8 @@ Page({
 
   toEdit() {
     console.log('toEdit')
-    wx.navigateTo({
-      url: './speechAdd/speechAdd',
-    })
+    this.openConfirm()
+
     return
     wx.showActionSheet({
       itemList: ['发布动态', '发布课程'],
@@ -461,7 +527,6 @@ Page({
   deletePyq(e) {
     console.log(e.currentTarget.dataset.item)
     console.log(e.currentTarget.dataset.index)
-    var that = this
     var item = e.currentTarget.dataset.item
     const db = wx.cloud.database()
     wx.showModal({
@@ -541,7 +606,6 @@ Page({
   },
 
   bindShare(e) {
-    var that = this
     var item = e.currentTarget.dataset.item
     console.log(item)
     var imageUrl = "cloud://apppgy-72vrx.6170-apppgy-72vrx-1301199205/pgy.jpg"
@@ -560,7 +624,6 @@ Page({
   },
 
   onShareAppMessage: function (e) {
-    var that = this
     var item = e.target.dataset.item
     var desc = item.content.slice(0, 10)
     var imageUrl = "cloud://apppgy-72vrx.6170-apppgy-72vrx-1301199205/pgy.jpg"

@@ -1,4 +1,3 @@
-<!--components/circlePage/index.wxml-->
 <view class="top-circle">
 	<block wx:if='{{wallData.length>0}}'>
 		<view class="circle" wx:for="{{wallData}}" wx:key="index" wx:for-item="itemName" wx:for-index="indexN">
@@ -8,12 +7,12 @@
 				</view>
 				<view class="col" data-sid="{{itemName._id}}" bindtap="lookDetail">
 					<view class="clearfix">
-						<view class="username towTextOverflow">{{itemName.userInfo.nickName}}</view>
-						<text class="isPutaway" data-id="{{itemName._id}}" catchtap="getData">{{itemName.isShow.isPass== true && itemName.isShow.isApply==true ? "下架": itemName.isShow.isPass == false && itemName.isShow.isApply == false ? "上架" : itemName.isShow.isPass == false && itemName.isShow.isApply == true ? "待审核" : "不通过" }}</text>
+						<view class="username oneTextOverflow">{{itemName.userInfo.nickName}}</view>
+						<text class="isPutaway" data-name="{{ itemName.isShow.isApply==true ? '下架': '上架'  }}" data-id="{{itemName._id}}" catchtap="getData">{{ itemName.isShow.isApply==true ? '下架':  '上架'  }}</text>
 					</view>
 					<!-- bindlongtap="copyText" -->
 					<view class="content" data-text="{{itemName.content}}">
-						<text>{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</text>
+						<text class="threeTextOverflow">{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</text>
 					</view>
 					<!-- 如果没有上传图片 -->
 					<view class="li-imgs" wx:if="{{itemName.images.length==0}}">
@@ -21,8 +20,8 @@
 							<view class="communityPage-li-imgli-none">
 								<image src="http://gjbar.oss-cn-shenzhen.aliyuncs.com/images/speech/backimg.jpg" mode="widthFix" style="width:100%;"></image>
 							</view>
-							<view class="community-li-title-none">{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</view>
-							<view class="community-li-title-time">{{itemName.time}}</view>
+							<view class="community-li-title-none tweTextOverflow">{{itemName.title==''?itemName.userInfo.nickName+'的精彩分享':itemName.title}}</view>
+							<view class="community-li-title-time">{{itemName.date}}</view>
 							<view class="community-li-title-avatar">
 								<image class="userIcon" src='{{itemName.userInfo.avatarUrl}}'></image>
 							</view>
@@ -42,34 +41,26 @@
 						</view>
 					</view>
 					<view class='timeArea'>
-						<text>{{itemName.time}}</text>
-
-						<!-- <view class='timeArea-right'>
-							<image class="dd-icon" src="/images/view.png"></image>
-							<text>{{itemName.views}}</text>
-
-						</view> -->
+						<text>{{itemName.date}}</text>
 					</view>
 					<view class="comm-zan">
 						<!-- 点赞 -->
-						<view wx:if='{{itemName.zans.length>0}}'>
-							<view class="r"></view>
+						<view wx:if='{{itemName.zans.length>0}}' wx:for="{{itemName.zans}}" wx:key="index">
 							<view class="zan">
 								<image class="love-icon" src="../../images/icon/love-icon.png"></image>
-								<text class="like">{{itemName.zanText}}</text>
+								<text class="like">{{item.name}}</text>
 							</view>
 						</view>
 						<!-- 留言 -->
 						<view wx:if='{{itemName.comments.length>0}}'>
-							<view wx:if='{{itemName.zans.length<=0}}' class="r"></view>
 							<view class="comments">
 								<view wx:for="{{itemName.comments}}" wx:key='index' bindtap="bindComment" data-index="{{index}}" data-indexN="{{indexN}}" data-name="{{item.username}}">
 									<view class="tt-row" wx:if='{{!item.toName}}'>
-										<text class="blueColor">{{item.userInfo.nickName+': '}}</text>
+										<text class="blueColor">{{item.username+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>
 									</view>
 									<view wx:if='{{item.toName}}'>
-										<text class="blueColor">{{item.userInfo.nickName}}</text>
+										<text class="blueColor">{{item.username}}</text>
 										<text class="noblueColor"> 回复</text>
 										<text class="blueColor">{{item.toName+': '}}</text>
 										<text class="noblueColor">{{item.comment}}</text>

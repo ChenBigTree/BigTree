@@ -36,7 +36,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -76,6 +76,48 @@
 					"id": -1,
 					"name": "pages/myHomepage/forumManager/forumManager",
 					"pathName": "pages/myHomepage/forumManager/forumManager",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/administrator/courseShelf/courseShelf",
+					"pathName": "pages/my/administrator/courseShelf/courseShelf",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/mySpace/mySpace",
+					"pathName": "pages/my/mySpace/mySpace",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "pages/my/myClass/myClass",
+					"pathName": "pages/my/myClass/myClass",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/administrator/addAdministrator/addAdministrator",
+					"pathName": "pages/my/administrator/addAdministrator/addAdministrator",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/home/home",
+					"pathName": "pages/home/home",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/teacher/teacher",
+					"pathName": "pages/my/teacher/teacher",
 					"query": "",
 					"scene": null
 				},

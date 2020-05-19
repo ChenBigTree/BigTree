@@ -83,7 +83,7 @@ Page({
     var day = date.getDate(); //日
     console.log(year + '-' + month + '-' + day)
     this.setData({
-      time: year + '-' + month + '-' + day
+      time: year + '-' + month > 9 ? month : ("0" + month) + '-' + day > 9 ? day : ("0" + day)
     })
   },
   /**
@@ -138,10 +138,10 @@ Page({
       name: 'projectClassify',
       data: {
         collectionName: 'curriculumClassify',
-        fun:"get"
+        fun: "get"
       },
       success: res => {
-  
+
         console.log('集合', res.result.data)
         this.setData({
           lists: res.result.data,
@@ -156,7 +156,7 @@ Page({
     backgroundAudioManager.stop()
   },
   onShow() {
-    
+
   },
   initRecord: function () {
     recorderManager.onStart(() => {
@@ -451,14 +451,15 @@ Page({
   },
 
   saveData: function (sData) {
-    //return new Promise((resolve, reject) => {
+
     let that = this
     const db = wx.cloud.database()
+    console.log("that.data.userInfo", that.data.userInfo)
     if (this.data.curriculumId) {
       db.collection('chapters').add({
         data: {
           type: 'speech',
-          userInfo:that.data.userInfo.userInfoData,
+          userInfo: that.data.userInfo,
           createTime: db.serverDate(),
           content: that.data.textareaTxt,
           title: that.data.title,
@@ -488,12 +489,12 @@ Page({
               icon: 'success'
             })
             if (that.data.curriculumId) {
-              console.log("跳转forumManager",that.data.userInfo)
+              console.log("跳转forumManager", that.data.userInfo)
               wx.reLaunch({
                 url: '../forumManager/forumManager?id=' + that.data.curriculumId,
               })
             } else {
-              console.log("跳转myHomepage1",that.data.userInfo)
+              console.log("跳转myHomepage1", that.data.userInfo)
               wx.reLaunch({
                 url: '../myHomepage/myHomepage',
               })
@@ -513,7 +514,7 @@ Page({
         data: {
           tag: this.data.tag,
           type: 'speech',
-          userInfo:that.data.userInfo.userInfoData,
+          userInfo: that.data.userInfo,
           createTime: db.serverDate(),
           content: that.data.textareaTxt,
           title: that.data.title,
@@ -526,9 +527,8 @@ Page({
           dakas: [],
           //tab: tab,
           isTop: false,
-          isShow:{
-            isPass:false,
-            isApply:false
+          isShow: {
+            isPass: false
           }
         },
         success: res => {
@@ -538,7 +538,7 @@ Page({
             title: '提交成功',
             icon: 'success'
           })
-          console.log("跳转myHomepage2",that.data.userInfo.userInfoData)
+          console.log("跳转myHomepage2", that.data.userInfo)
           wx.reLaunch({
             url: '../myHomepage',
           })
@@ -567,7 +567,7 @@ Page({
         return
       }
       if (this.data.showClassify) {
-        if(this.data.tag==''){
+        if (this.data.tag == '') {
           wx.showToast({
             title: '标签不能为空',
             icon: 'none',

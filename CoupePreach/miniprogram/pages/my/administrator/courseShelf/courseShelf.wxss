@@ -5,17 +5,22 @@
   flex-direction: row;
   background: #fff;
   justify-content: top;
-  padding-top: 40rpx;
+  padding: 13rpx 0;
   border-bottom: solid 1rpx rgb(212, 212, 212);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .left {
   margin-left: 30rpx;
+  width: 110rpx;
+  height: 110rpx;
 }
 
 .left image {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
 }
 
@@ -33,6 +38,7 @@
 
 .name {
   font-weight: bold;
+  font-size: 16px;
 }
 
 .keshi {
@@ -44,12 +50,13 @@
 
 .company {
   color: rgb(126, 126, 126);
-  font-size: small;
+  font-size: 28rpx;
 }
 
 .like {
   color: rgb(167, 167, 167);
-  font-size: small;
+  font-size: 28rpx;
+  margin: 14rpx 6rpx;
 }
 
 .vTitle {
@@ -59,14 +66,21 @@
 
 .texts {
   color: #333;
-  padding: 10rpx 0;
+  display: block;
 }
 
 .btn {
-  line-height: 110px;
-  font-size: 14px;
-  padding: 0 10px;
+  font-size: 28rpx;
+  padding: 0 20rpx;
   color: #2d8cf0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.yes {
+  margin-bottom: 10px;
 }
 
 .btn.gray {
@@ -74,8 +88,35 @@
 }
 
 .btn .text {
-  display: inline-block;
-  padding: 10px;
+  width: 100%;
+  padding: 10rpx;
+  box-sizing: border-box;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.towTextOverflow {
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.oneTextOverflow {
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.null {
+  text-align: center;
+  font-size: 14px;
+  color: #6b6b6b;
+  padding: 20px 0;
 }

@@ -13,7 +13,8 @@
     "pages/list/sao/sao",
     "pages/list/file/file",
     "pages/list/getphone/getphone",
-    "pages/list/dataManipulation/dataManipulation"
+    "pages/list/dataManipulation/dataManipulation",
+    "pages/list/profilePicture/profilePicture"
   ],
   "window": {
     "backgroundColor": "#fff",
