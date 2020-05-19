@@ -45,9 +45,11 @@
   justify-content: center;
   align-items: center;
 }
-.essay-box{
+
+.essay-box {
   background: #f6f7f9;
 }
+
 .center-center {
   width: 80%;
   height: 85%;
@@ -88,10 +90,7 @@
 .toast>.hitokoto {
   margin-bottom: 20rpx;
 }
-.essay{
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
+
 .essay-date {
   width: 100%;
   text-align: center;
@@ -100,12 +99,25 @@
   color: #999;
 }
 
+.essay-box:last-child {
+  padding-bottom: 10px;
+}
+
+.essay-beauty {
+  /* margin: 0 auto; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .beauty-box {
   width: 90%;
-  margin-left: 5%;
   height: 100px;
   background: #fff;
   display: flex;
+  margin: 5px 0;
+  border-radius: 5px;
 }
 
 .time {
@@ -136,24 +148,32 @@
 
 .article {
   flex: 4;
-  height: 170rpx;
   overflow: hidden;
-  padding: 40rpx 20rpx;
+  padding: 0 20rpx;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nr {
+  height: 80rpx;
+  margin-top: 10px;
 }
 
 .image-box {
   flex: 2;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 
-.image-box>image{
+.image-box>image {
   width: 90%;
   height: 90%;
   margin: auto 0;
 }
+
 .input {
   color: #000;
 }

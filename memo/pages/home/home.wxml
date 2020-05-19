@@ -24,23 +24,24 @@
   </view>
   <!-- 尾部美文框 -->
   <view class="essay">
-    <view class="essay-box" wx:for="ArticleList" wx:key="key" wx:if="{{item != []}}">
-      <view class="essay-date">· 2020年08月 ·</view>
+    <view class="essay-box" wx:for="{{ArticleList}}" wx:key="key" wx:if="{{item.length == 0 ? false : true}}">
+      <view class="essay-date">· {{item[0].time.year}}年{{item[0].time.month>9?item[0].time.month:"0"+item[0].time.month}}月 ·</view>
       <view class="essay-beauty">
-        <view class="beauty-box">
+        <view class="beauty-box" wx:for="{{item}}" wx:for-item="itemName" wx:key="key">
           <view class="time">
-            <text>28</text>
-            <text>周五</text>
-            <text>17:54</text>
+            <text>{{itemName.time.ri>9?itemName.time.ri:"0"+itemName.time.ri}}</text>
+            <text>周{{itemName.time.day}}</text>
+            <text>{{itemName.time.hours>9?itemName.time.hours:"0"+itemName.time.hours}}:{{itemName.time.min>9?itemName.time.min:"0"+itemName.time.min}}</text>
           </view>
-          <view class="article towTextOverflow">
-            <input  placeholder-class="input" placeholder="请输入标题"></input>
-            <view class="nr">承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。</view>
+          <view class="article ">
+            <input placeholder-class="input" placeholder="请输入标题"></input>
+            <view class="nr towTextOverflow">承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。</view>
           </view>
           <view class="image-box">
             <image mode="scaleToFill" src="http://img2.imgtn.bdimg.com/it/u=2462146637,4274174245&fm=26&gp=0.jpg"></image>
           </view>
         </view>
+
       </view>
     </view>
   </view>

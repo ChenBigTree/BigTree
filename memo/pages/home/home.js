@@ -74,7 +74,7 @@ Page({
             i: i
           },
           success: res => {
-            console.log(res.result.data)
+            // console.log(res.result.data)
             arr[i] = res.result.data
             let index = 0
             arr.forEach(function() {

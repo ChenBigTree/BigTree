@@ -14,7 +14,8 @@ exports.main = async(event, context) => {
     return await cloud.database().collection("memo-ArticleList").add({
       data: {
         ops: event.test,
-        time: event.time
+        time: event.time,
+        text: event.text
       },
     })
   } else if (event.fun == "get") {
