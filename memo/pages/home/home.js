@@ -85,7 +85,7 @@ Page({
               _this.setData({
                 ArticleList: arr
               })
-              console.log("arr==>", arr)
+              console.log("this.data.ArticleList==>", _this.data.ArticleList)
             }
           },
           fail: err => {

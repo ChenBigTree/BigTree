@@ -24,15 +24,22 @@
   </view>
   <!-- 尾部美文框 -->
   <view class="essay">
-    <view class="essay-date">
-      <view class="dian">·</view>2020年08月
-      <view class="dian">·</view> </view>
-    <view class="essay-beauty">
-      <view class="beauty-box">
-        <view class="time"></view>
-        <view class="article"></view>
-        <view class="image-box">
-          <!-- <image mode="widthFix" src="http://img2.imgtn.bdimg.com/it/u=2462146637,4274174245&fm=26&gp=0.jpg"></image> -->
+    <view class="essay-box" wx:for="ArticleList" wx:key="key" wx:if="{{item != []}}">
+      <view class="essay-date">· 2020年08月 ·</view>
+      <view class="essay-beauty">
+        <view class="beauty-box">
+          <view class="time">
+            <text>28</text>
+            <text>周五</text>
+            <text>17:54</text>
+          </view>
+          <view class="article towTextOverflow">
+            <input  placeholder-class="input" placeholder="请输入标题"></input>
+            <view class="nr">承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。</view>
+          </view>
+          <view class="image-box">
+            <image mode="scaleToFill" src="http://img2.imgtn.bdimg.com/it/u=2462146637,4274174245&fm=26&gp=0.jpg"></image>
+          </view>
         </view>
       </view>
     </view>
