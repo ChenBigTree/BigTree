@@ -74,7 +74,7 @@ Page({
             i: i
           },
           success: res => {
-            console.log(res.result.data)
+            // console.log(res.result.data)
             arr[i] = res.result.data
             let index = 0
             arr.forEach(function() {
@@ -85,7 +85,7 @@ Page({
               _this.setData({
                 ArticleList: arr
               })
-              console.log("arr==>", arr)
+              console.log("this.data.ArticleList==>", _this.data.ArticleList)
             }
           },
           fail: err => {

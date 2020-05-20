@@ -115,12 +115,12 @@ Page({
                 flag = false
                 image_index++;
                 // 一个个的传值
-                _this.upImageFun(res.delta.ops[i].insert.image, res.delta)
+                _this.upImageFun(res.delta.ops[i].insert.image, res.delta, res.text)
                 // console.log('图片成功上传',res.delta.ops[i].insert.image)
               }
             };
             if (flag) {
-              _this.setDataBase(res.delta)
+              _this.setDataBase(res.delta, res.text)
             }
             /*4-14：方法一：将富文本编辑器的内容渲染到页面上*/
             /**
@@ -142,7 +142,7 @@ Page({
   },
 
   // 上传图片
-  upImageFun(path, delta) {
+  upImageFun(path, delta, text) {
     // console.log("delta==>", delta)
     // 上传到云存储 一个个的上传
     wx.cloud.uploadFile({
@@ -166,15 +166,7 @@ Page({
                   i++
                 }
               }
-              _this.setDataBase(delta)
-              /**
-               * res.fileList[0]{
-               *  fileID ：文件ID
-               * tempFileURL: '', 临时文件网络链接
-               * maxAge: 120 * 60 * 1000, 有效期
-               * }
-               * * */
-
+              _this.setDataBase(delta, text)
             },
           })
         }
@@ -185,7 +177,7 @@ Page({
     })
   },
 
-  setDataBase(delta) {
+  setDataBase(delta, text) {
     console.log("执行")
     var date = new Date();
     var year = date.getFullYear()
@@ -194,11 +186,23 @@ Page({
     var hours = date.getHours()
     var min = date.getMinutes()
     var day = date.getDay()
-    day = day == 0 ? "日" : day == 1 ? "一" : day == 2 ? "二" : day == 3 ? "三" : day == 4 ? "四" : day == 5 ? "五" : "六"
+    day = day == 0 ? "日" : day == 1 ? "一" : day == 2 ? "二" : day == 3 ? "三" : day == 4 ? "四" : day == 5 ? "五" : "六";
+    // console.log("delta", delta)
+    // let image = null
+    // for (let i in delta.ops) {
+    //   console.log(delta.ops[i].insert.image)
+    //   if (delta.ops[i].insert.image){
+    //     image = delta.ops[i].insert.image.fileID
+    //     return
+    //   }
+    // }
+    // console.log("image", image)
+    // return
     wx.cloud.callFunction({
       name: "memo-ArticleList",
       data: {
         test: delta,
+        text: text,
         fun: "add",
         time: {
           year: year,
