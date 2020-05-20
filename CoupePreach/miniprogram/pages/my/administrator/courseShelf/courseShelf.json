@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "i-tag": "../../../../components/tag/index"
-  }
+  },
+  "navigationBarTitleText": "讲师列表"
 }

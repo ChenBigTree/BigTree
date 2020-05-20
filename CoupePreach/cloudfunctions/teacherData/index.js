@@ -27,12 +27,21 @@ exports.main = async (event, context) => {
       }
     })
   } else if (event.fun == "get") {
-    return await teacherDataList.where({
-      state: {
-        isDispose: false,
-        isPass: false
-      }
-    }).get()
+    if (event.get == "pending") {
+      return await teacherDataList.where({
+        state: {
+          isDispose: false,
+          isPass: false
+        }
+      }).get()
+    } else if (event.get == "allData") {
+      return await teacherDataList.where({
+        state: {
+          isDispose: true,
+          isPass: true
+        }
+      }).get()
+    }
   } else if (event.fun == "update") {
     if (event.update == "yes") {
       await cloud.database().collection("userInfoData").where({
@@ -47,9 +56,21 @@ exports.main = async (event, context) => {
           state: {
             isDispose: true,
             isPass: true
-          }
+          },
+          passTime: new Date().valueOf(),
         }
       })
+    } else if (event.update == "del") {
+      await cloud.database().collection("userInfoData").where({
+        openid: event.openid
+      }).update({
+        data: {
+          isTeacher: false
+        }
+      })
+      return await teacherDataList.where({
+        openid: event.openid
+      }).remove()
     } else {
       return await teacherDataList.doc(event.id).update({
         data: {

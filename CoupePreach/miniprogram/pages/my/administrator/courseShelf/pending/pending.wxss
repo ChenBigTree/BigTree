@@ -1,19 +1,15 @@
-page {
-  box-sizing: border-box;
-  padding: 10px 15px;
-}
-
+/* pages/wenzhen/RecomManage.wxss */
+/* pages/index.wxss */
 .nurse {
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
   background: #fff;
   justify-content: top;
   padding: 13rpx 0;
-  border: solid 1rpx rgb(212, 212, 212);
-  border-radius: 5px;
+  border-bottom: solid 1rpx rgb(212, 212, 212);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 0 0 5px #999;
 }
 
 .left {
@@ -60,7 +56,7 @@ page {
 .like {
   color: rgb(167, 167, 167);
   font-size: 28rpx;
-  /* margin: 14rpx 6rpx; */
+  margin: 14rpx 6rpx;
 }
 
 .vTitle {
@@ -76,6 +72,7 @@ page {
 .btn {
   font-size: 28rpx;
   padding: 0 20rpx;
+  color: #2d8cf0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -92,13 +89,11 @@ page {
 
 .btn .text {
   width: 100%;
-  padding: 15rpx 25rpx;
+  padding: 10rpx;
   box-sizing: border-box;
+  border: 1px solid #ddd;
   border-radius: 8rpx;
   text-align: center;
-  box-shadow: 0 0 5px #555;
-  color: #f2f2f2;
-  background: red;
 }
 
 .towTextOverflow {
@@ -124,50 +119,4 @@ page {
   font-size: 28rpx;
   color: #6b6b6b;
   padding: 40rpx 0;
-}
-
-.pending {
-  width: 120rpx;
-  height: 120rpx;
-  border: 1px solid #999;
-  position: fixed;
-  bottom: 50rpx;
-  right: 50rpx;
-  font-size: 24rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx #666;
-}
-
-.image-box {
-  width: 70rpx;
-  height: 70rpx;
-  overflow: hidden;
-}
-
-.image-box image {
-  width: 100%;
-  height: 100%;
-}
-
-.pending-box {
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.num {
-  position: absolute;
-  top: -25rpx;
-  right: -25rpx;
-  color: #fff;
-  background: #DC444A;
-  border-radius: 50%;
-  box-shadow: 0 0 10rpx #DC444A;
-  width: 50rpx;
-  height: 50rpx;
-  text-align: center;
-  line-height: 50rpx;
 }

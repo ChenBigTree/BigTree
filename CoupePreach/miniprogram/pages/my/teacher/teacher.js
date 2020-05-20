@@ -1,5 +1,4 @@
 // pages/joinUs/joinUs.js
-var wait = 10; // 设置全局变量的time
 var Utils = require("../../../utils/util")
 var app = getApp()
 var _this;
@@ -78,8 +77,8 @@ Page({
     _this.Countdown();
 
     _this.getValidCode()
-    console.log('验证码为：', _this.data.vcode)
-    // return
+    
+    // return console.log('验证码为：', _this.data.vcode)
     let code = []
     code[0] = _this.data.vcode
     let phone = _this.data.phoneVal
@@ -99,10 +98,10 @@ Page({
     })
   },
   // 发送通知管理员
-  sendSmss() {
+  sendSmss(phone) {
+  //  return console.log("已发送管理员手机号通知",phone)
     let code = []
-    code[0] = _this.data.name
-    let phone = 15089600646
+    code[0] = "“"+_this.data.name+"”"
     wx.cloud.callFunction({
       name: "SMS",
       data: {
@@ -161,8 +160,25 @@ Page({
     this.setData({
       disabledTJ: true,
     })
-    wx.showLoading()
-    this.sendSmss()
+    wx.showLoading({
+      title:"加载中"
+    })
+    wx.cloud.callFunction({ // 获取所有管理员手机号
+      name: "userInfo",
+      data: {
+        fun: "get",
+        get: "allAdministrator"
+      }
+    }).then(res => {
+      console.log("allAdministrator", res.result.data)
+      let adm = res.result.data
+      for (let i in adm) {
+        _this.sendSmss(adm[i].phone)
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+    // return
     wx.cloud.callFunction({
       name: "teacherData",
       data: {
@@ -193,14 +209,15 @@ Page({
       }
     })
   },
-  // 发送验证码的倒计时fn
-  Countdown: function (e) {
+
+  Countdown: function (e) { // 发送验证码的倒计时fn
+    let wait = 60
     if (wait == 0) {
       _this.setData({
         time: "发送验证码",
         disabled: false
       })
-      wait = 10;
+      wait = 60;
     } else {
       if (wait < 10) {
         _this.setData({

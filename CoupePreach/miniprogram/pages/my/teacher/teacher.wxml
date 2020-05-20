@@ -11,9 +11,13 @@
 				<input class="input1 fl" type="number" data-name="input1" value="{{phoneVal}}" bindinput="getphoneValFun" placeholder="请填写手机号"></input>
 			</view>
 			<view class="sendSms clearfix">
-				<view class="name fl">验证码</view>
-				<input class="input2 fl" type="number" data-name="input2" value="{{Verification_Code}}" bindinput="getphoneValFun" placeholder="请填写验证码"></input>
-				<view class="yzm"><button type="primary" bindtap="sendSms" disabled="{{disabled}}" bindtap="sendSms" plain="true" size="mini">{{time}}</button></view>
+				<view class="name1 fl">验证码</view>
+				<view class="cccbox">
+					<input class="input2 fl" type="number" data-name="input2" value="{{Verification_Code}}" bindinput="getphoneValFun" placeholder="请填写验证码" />
+					<view class="yzm">
+						<button type="primary" bindtap="sendSms" disabled="{{disabled}}" bindtap="sendSms" plain="true" size="mini">{{time}}</button>
+					</view>
+				</view>
 			</view>
 			<view class="tj">
 				<button type="primary" bindtap="tj" disabled="{{disabledTJ}}">提交审核</button>

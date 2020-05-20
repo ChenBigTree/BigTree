@@ -74,7 +74,8 @@ exports.main = async (event, context) => {
         openid: event.openid
       }).update({
         data: {
-          isAdministrator: Boolean(event.boolean)
+          isAdministrator: Boolean(event.boolean),
+          phone:event.phone
         }
       })
     } else if (event.update == "headPortrait") { // 更换头像

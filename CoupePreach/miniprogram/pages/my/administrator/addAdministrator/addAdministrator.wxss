@@ -29,27 +29,27 @@
 }
 
 .addBtn {
-  width: 80rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  text-align: center;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   border: 1px solid #999;
   box-shadow: 0 0 6rpx #999;
   position: fixed;
-  bottom: 40rpx;
-  right: 40rpx;
-  margin: auto 0;
+  bottom: 60rpx;
+  right: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
 }
 
 .addBtn>image {
   width: 50%;
-  margin-top: 20rpx;
 }
 
 .input-box {
   border: 1px solid #999;
-  padding: 10rpx 20rpx;
+  padding:  20rpx;
   border-radius: 10rpx;
   position: relative;
 }
@@ -64,7 +64,7 @@ input {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 10rpx 10rpx 10rpx 20rpx;
+  padding: 20rpx 10rpx 10rpx 20rpx;
   font-size: 28rpx;
 }
 
@@ -73,9 +73,11 @@ input {
 }
 
 .result {
-  height: 100rpx;
+  height: 140rpx;
   border: 1px solid #999;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
 }
 
 .head-img {
@@ -93,12 +95,17 @@ input {
 
 .name {
   width: calc(100% - 240rpx);
-  line-height: 60rpx;
-  margin: 20rpx 0;
+  line-height: 50rpx;
   font-size: 28rpx;
 }
-
-.result>.btn {
+.btn-box{
+  width: 120rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.result>.btn-box>.btn,.add {
   border: 1px solid #999;
   border-radius: 8px;
   width: 100rpx;
@@ -106,16 +113,21 @@ input {
   text-align: center;
   line-height: 50rpx;
   font-size: 28rpx;
-  margin-top: 22.5rpx;
   color: #fff;
 }
-
+.result>.btn-box>.btn:first-child{
+  margin-bottom: 8rpx;
+}
 .add {
   background: #ff6700;
 }
 
 .del {
   background: #ab2e2e;
+}
+
+.updata {
+  background: #60C5F1;
 }
 
 .null {

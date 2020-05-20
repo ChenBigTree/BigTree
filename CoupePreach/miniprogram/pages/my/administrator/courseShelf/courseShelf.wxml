@@ -1,8 +1,8 @@
 <!--pages/wenzhen/RecomManage.wxml-->
 <!--pages/index.wxml-->
 <view class="page">
-	<block wx:for="{{someData}}" wx:key="index">
-		<navigator class="nurse" hover-class="none" url="../../../myHomepage/speechDetail/speechDetail?id={{item._id}}">
+	<block class="nurse-box" wx:for="{{allData}}" wx:key="index">
+		<view class="nurse">
 			<view class="left">
 				<image src="{{item.avatarUrl}}"></image>
 			</view>
@@ -16,12 +16,26 @@
 				<view class="like">
 					<text class="texts oneTextOverflow">联系电话：{{item.phoneVal}}</text>
 				</view>
+				<view class="like">
+					<text class="texts oneTextOverflow">申请时间：{{item.timeDate}} </text>
+				</view>
 			</view>
 			<view class="btn">
-				<view class="text yes" data-id="{{item._id}}" data-state="yes" data-openid="{{item.openid}}" catchtap="handle">通过</view>
-				<view class="text" data-id="{{item._id}}" data-state="no" data-openid="{{item.openid}}" catchtap="handle">不通过</view>
+				<view class="text" data-name="{{item.name}}" data-state="del" data-openid="{{item.openid}}" catchtap="handle">删除</view>
 			</view>
-		</navigator>
+		</view>
 	</block>
-	<view class="null" wx:if="{{someData.length<=0}}">暂无申请</view>
+	<view class="null" wx:if="{{allData.length<=0}}">暂无申请</view>
+
+	<navigator hover-class="none" url="./pending/pending">
+		<view class="pending">
+			<view class="pending-box">
+				<view class="image-box">
+					<image mode="widthFix" src="../../../../images/icon/pending.png"></image>
+				</view>
+				<view class="num">{{pendingDataNum.length>9?pendingDataNum.length:"0"+pendingDataNum.length}}</view>
+				<view class="pending-text">待处理</view>
+			</view>
+		</view>
+	</navigator>
 </view>
