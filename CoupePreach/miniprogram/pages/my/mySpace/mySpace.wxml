@@ -36,7 +36,7 @@
 		<view class="introduce">
 			<!-- <view class="introduce-title">自我简介:</view> -->
 			<block wx:if="{{isSet}}">
-				<view class="introduce-content {{hidden?'hidden':''}}" wx:if="{{useInfo.individualResume!=''}}">{{useInfo.individualResume}}</view>
+				<view class="introduce-content {{hidden?'hidden':''}}" wx:if="{{useInfo.individualResume!=''}}">{{individualResume}}</view>
 				<view class="introduce-content null" wx:else>这个人什么也没留下……</view>
 
 				<view class="icon">
@@ -44,7 +44,7 @@
 				</view>
 			</block>
 			<view class="textarea-box" wx:else>
-				<textarea bindblur="bindTextAreaBlur" auto-height maxlength="-1" placeholder="请填写修改的简介" value="{{useInfo.individualResume}}"></textarea>
+				<textarea bindinput="bindTextAreaBlur" auto-height maxlength="-1" placeholder="请填写修改的简介" value="{{useInfo.individualResume}}"></textarea>
 			</view>
 		</view>
 	</view>
@@ -89,7 +89,7 @@
 									</view>
 									<view class="info">
 										<view class="views">
-											<image mode="widthFix" src="../../../images/icon/view.png"></image><text>{{item.views}}</text>
+											<image mode="widthFix" src="../../../images/icon/view.png"></image><text>{{item.views > 9?item.views:"0"+item.views}}</text>
 										</view>
 										<view class="time">{{item.time}}</view>
 									</view>

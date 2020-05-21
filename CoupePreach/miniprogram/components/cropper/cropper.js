@@ -57,6 +57,7 @@ Component({
     touchStart(e) {
       // this.cropper.touchStart(e)
       const isReduction = this.data.isReduction;
+      console.log("isReduction=>",isReduction)
       this.cropper.touchStart({
         touches: e.touches.filter(i => i.x !== undefined)
       });
@@ -133,11 +134,9 @@ Component({
         src = this.data.src;
 
       cropperOpt.boundStyle.color = "#04b00f";
-
       this.setData({
         cropperOpt
       })
-
       this.cropper = new WeCropper(cropperOpt)
         .on('ready', (ctx) => {
           if (src) {

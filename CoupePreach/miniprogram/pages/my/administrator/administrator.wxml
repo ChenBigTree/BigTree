@@ -8,5 +8,4 @@
 	<view class="list">
 		<navigator hover-class="none" url="../administrator/addAdministrator/addAdministrator">管理管理员</navigator>
 	</view>
-	<view class="list" bindtap="DeleteLibrary">删库</view>
 </view>

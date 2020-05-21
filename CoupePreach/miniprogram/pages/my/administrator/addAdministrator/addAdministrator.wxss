@@ -33,7 +33,6 @@
   height: 100rpx;
   border-radius: 50%;
   border: 1px solid #999;
-  box-shadow: 0 0 6rpx #999;
   position: fixed;
   bottom: 60rpx;
   right: 60rpx;
@@ -41,6 +40,7 @@
   justify-content: center;
   align-items: center;
   background: #f3f3f3;
+  box-shadow: 0 0 10rpx #999;
 }
 
 .addBtn>image {
@@ -73,16 +73,17 @@ input {
 }
 
 .result {
-  height: 140rpx;
+  height: 170rpx;
   border: 1px solid #999;
-  border-radius: 8px;
+  border-radius: 16rpx;
   display: flex;
   align-items: center;
+  box-shadow: 0 0 10rpx #999;
 }
 
 .head-img {
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   overflow: hidden;
   border-radius: 5px;
   margin: 10rpx 20rpx 10rpx;
@@ -94,7 +95,7 @@ input {
 }
 
 .name {
-  width: calc(100% - 240rpx);
+  width: calc(100% - 260rpx);
   line-height: 50rpx;
   font-size: 28rpx;
 }
@@ -116,7 +117,7 @@ input {
   color: #fff;
 }
 .result>.btn-box>.btn:first-child{
-  margin-bottom: 8rpx;
+  margin-bottom: 16rpx;
 }
 .add {
   background: #ff6700;
@@ -124,10 +125,12 @@ input {
 
 .del {
   background: #ab2e2e;
+  box-shadow: 0 0 10rpx #999;
 }
 
 .updata {
   background: #60C5F1;
+  box-shadow: 0 0 10rpx #999;
 }
 
 .null {

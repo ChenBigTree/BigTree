@@ -15,7 +15,9 @@ Page({
   },
   updateFun(fun, id, openid, update) {
     let _this = this
-    wx.showLoading()
+    wx.showLoading({
+      title:'加载中'
+    })
     wx.cloud.callFunction({
       name: "teacherData",
       data: {

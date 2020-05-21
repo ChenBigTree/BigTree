@@ -81,9 +81,10 @@ Page({
     var year = date.getFullYear(); //年
     var month = date.getMonth() + 1; //月
     var day = date.getDate(); //日
-    console.log(year + '-' + month + '-' + day)
+    month = month > 9 ? month : "0" + month
+    day = day > 9 ? day : "0" + day
     this.setData({
-      time: year + '-' + month > 9 ? month : ("0" + month) + '-' + day > 9 ? day : ("0" + day)
+      time: year + '-' + month + '-' + day
     })
   },
   /**

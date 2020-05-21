@@ -1,15 +1,22 @@
-/* pages/wenzhen/RecomManage.wxss */
-/* pages/index.wxss */
+page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx 30rpx;
+  background: #F6F6F6;
+}
+
 .nurse {
-  display: flex;
-  flex-direction: row;
+  box-sizing: border-box;
   background: #fff;
   justify-content: top;
   padding: 13rpx 0;
-  border-bottom: solid 1rpx rgb(212, 212, 212);
+  border: solid 1rpx rgb(212, 212, 212);
+  border-radius: 10rpx;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  box-shadow: 0 0 10rpx #999;
+  margin-bottom: 20rpx;
 }
 
 .left {
@@ -30,39 +37,12 @@
   padding-right: 20rpx;
 }
 
-.nameView {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.name {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.keshi {
-  color: #999;
-  font-size: small;
-  margin-left: 10rpx;
-  font-weight: bold;
-}
-
-.company {
-  color: rgb(126, 126, 126);
-  font-size: 28rpx;
-}
-
 .like {
   color: rgb(167, 167, 167);
   font-size: 28rpx;
   margin: 14rpx 6rpx;
 }
 
-.vTitle {
-  color: #fff;
-  margin: 0rpx 20rpx 10rpx 15rpx;
-}
 
 .texts {
   color: #333;
@@ -79,14 +59,6 @@
   align-items: center;
 }
 
-.yes {
-  margin-bottom: 10px;
-}
-
-.btn.gray {
-  color: #333;
-}
-
 .btn .text {
   width: 100%;
   padding: 10rpx;
@@ -94,15 +66,15 @@
   border: 1px solid #ddd;
   border-radius: 8rpx;
   text-align: center;
+  color: #f3f3f3;
+  box-shadow: 0 0 10rpx #999;
 }
-
-.towTextOverflow {
-  text-align: justify;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.yes {
+  margin-bottom: 10px;
+  background: #6BD089;
+}
+.no{
+  background: #FFCD42;
 }
 
 .oneTextOverflow {

@@ -1,12 +1,7 @@
 // components/cropper/cropper.js
-
 import WeCropper from './we-cropper.js'
-
 const app = getApp()
-
-
 const device = wx.getSystemInfoSync()
-console.log(device);
 const width = device.windowWidth
 const height = device.windowHeight - 50
 Component({

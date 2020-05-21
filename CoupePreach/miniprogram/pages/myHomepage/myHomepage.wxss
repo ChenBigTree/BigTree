@@ -27,7 +27,11 @@
 .tab-no {
   padding: 8rpx 5rpx;
 }
-
+.btns{
+  color: #2D8CF0;
+  text-align: center;
+  margin: 15rpx 0;
+}
 .share-btn {
   position: absolute;
   bottom: 106rpx;
@@ -102,18 +106,13 @@
 }
 
 .r-right {
-  top: 20rpx;
-  right: 10px;
-  position: absolute;
-  z-index: 99;
+  margin-right: 4px;
 }
 
-/* .r-right {
-  top: 284rpx;
-  right: 74rpx;
-  position: fixed;
-  z-index: 99;
-} */
+
+.r-right {
+  margin-right: 4px;
+}
 
 .header>text:nth-child(2) {
   font-size: 14pt;

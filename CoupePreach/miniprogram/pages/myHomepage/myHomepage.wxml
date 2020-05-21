@@ -3,13 +3,14 @@
 
 	<include src="/pages/common/footermenu.wxml"></include>
 	<view class='header'>
-		<view class='r-right'>
-			<text catchtap="openConfirm" data-url="./speechAdd/speechAdd" class="iconfont icon-xiangji"></text></view>
+		<!-- <view class='r-right'>
+			<text catchtap="openConfirm" data-url="./speechAdd/speechAdd" class="iconfont icon-xiangji"></text>
+		</view> -->
 	</view>
-
 	<view class="top-relate">
 		<image class="img-top" mode="widthFix" src="https://6c6a-ljyhr-0y7bz-1301345086.tcb.qcloud.la/pgy/pgy.png?sign=0a90fc0e8ddf8d2036f7d397772c75e5&t=1587102250"> </image>
 	</view>
+	<view class="btns" data-url="./speechAdd/speechAdd" bindtap="openConfirm"><text  class='iconfont icon-xiangji r-right'></text>添加内容</view>
 	<!-- <i-tabs current="{{ current }}" bindchange="handleChange">
 	<i-tab key="tab1" title="动态"></i-tab>
 	<i-tab key="tab2" title="课程"></i-tab>
@@ -28,9 +29,7 @@
 	</view>
 </block>
 <view class="js" wx:else>
-	<!-- <navigator url="../my/teacher/teacher"> -->
-	<view class="btn" data-url="../my/teacher/teacher" bindtap="openConfirm">前往申请成为讲师</view>
-	<!-- </navigator> -->
+	<view class="btn" data-url="{{isPassBtn ? '../my/teacher/teacher':''}}" bindtap="openConfirm">{{stateText}}</view>
 </view>
 <!-- 授权框 -->
 <mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>

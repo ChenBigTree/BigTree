@@ -120,6 +120,12 @@
 					"pathName": "pages/my/teacher/teacher",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/administrator/courseShelf/pending/pending",
+					"pathName": "pages/my/administrator/courseShelf/pending/pending",
+					"scene": null
 				}
 			]
 		}

@@ -41,6 +41,10 @@ exports.main = async (event, context) => {
           isPass: true
         }
       }).get()
+    } else if (event.get == "getMi") {
+      return await teacherDataList.where({
+        openid: wxContext.OPENID
+      }).get()
     }
   } else if (event.fun == "update") {
     if (event.update == "yes") {
@@ -70,7 +74,14 @@ exports.main = async (event, context) => {
       })
       return await teacherDataList.where({
         openid: event.openid
-      }).remove()
+      }).update({
+        data: {
+          state: {
+            isDispose: false,
+            isPass: true
+          }
+        }
+      })
     } else {
       return await teacherDataList.doc(event.id).update({
         data: {
@@ -81,5 +92,9 @@ exports.main = async (event, context) => {
         }
       })
     }
+  } else if (event.fun == "remove") {
+    return await teacherDataList.where({
+      openid: wxContext.OPENID
+    }).remove()
   }
 }

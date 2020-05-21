@@ -2,10 +2,10 @@
 
 .cropper-wrapper {
   position: relative;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   height: 100%;
 }
 
@@ -33,7 +33,11 @@
   top: 0;
   left: 0;
 }
-
+.cropper-box{
+  width: 100%;
+  height: calc(100% - 100rpx);
+  overflow: hidden;
+}
 .cropper-buttons .btn {
   padding: 10rpx 50rpx;
 }

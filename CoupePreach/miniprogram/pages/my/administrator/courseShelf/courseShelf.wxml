@@ -27,13 +27,13 @@
 	</block>
 	<view class="null" wx:if="{{allData.length<=0}}">暂无申请</view>
 
-	<navigator hover-class="none" url="./pending/pending">
+	<navigator hover-class="none"  url="./pending/pending">
 		<view class="pending">
 			<view class="pending-box">
 				<view class="image-box">
 					<image mode="widthFix" src="../../../../images/icon/pending.png"></image>
 				</view>
-				<view class="num">{{pendingDataNum.length>9?pendingDataNum.length:"0"+pendingDataNum.length}}</view>
+				<view class="num" wx:if="{{pendingDataNum.length}}">{{pendingDataNum.length>9?pendingDataNum.length:"0"+pendingDataNum.length}}</view>
 				<view class="pending-text">待处理</view>
 			</view>
 		</view>

@@ -1,5 +1,5 @@
 <view class="teacher">
-	<block wx:if="{{!userInfo.isTeacher}}">
+	<block wx:if="{{getMi.length == 0}}">
 		<view class="text">讲师入驻</view>
 		<view class="center">
 			<view class="phone clearfix">
@@ -24,7 +24,7 @@
 			</view>
 		</view>
 	</block>
-	<view class="texts" wx:else>
-		<text>您已成为讲师</text>
+	<view class="js" wx:else>
+		<view class="btn" bindtap="openConfirm">{{stateText}}</view>
 	</view>
 </view>

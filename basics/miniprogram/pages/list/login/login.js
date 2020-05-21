@@ -7,7 +7,24 @@ Page({
   data: {
     dialogShow: false
   },
+  getPhoneNumber(e) {
+    console.log(e)
+    // console.log("敏感数据对应的云 ID",e.detail.errMsg)
+    // console.log("加密算法的初始向量",e.detail.iv)
+    // console.log("完整用户信息的加密数据",e.detail.encryptedData)
 
+    wx.cloud.callFunction({
+      name:"getPhone",
+      data:{
+        cloudID:e.detail.cloudID
+      },
+      success:res=>{
+        console.log("获取手机号",res.result.list[0].data.phoneNumber)
+      },fail:err=>{
+        console.log(err)
+      }
+    })
+  },
   // 获取用户信息
   openConfirm: function () {
     this.setData({
@@ -30,14 +47,14 @@ Page({
       }
     })
   },
-   // 获取收货地址
-   address(){
+  // 获取收货地址
+  address() {
     wx.chooseAddress({
-      success(res){
+      success(res) {
         console.log(res)
       }
     })
-   },
+  },
   /**
    * 生命周期函数--监听页面加载
    */

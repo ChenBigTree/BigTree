@@ -39,13 +39,29 @@ Page({
   //   });
   // },
   openConfirm: function (e) {
-    console.log(e.currentTarget.dataset.url)
-    // return
     if (!_this.data.userInfo) {
       _this.setData({
         dialogShow: true
       })
     } else {
+      console.log(e.currentTarget.dataset.url)
+      if (this.data.isPassBtn) {
+        if (this.data.stateText == "申请不通过，请申请或者咨询15089600646！" || this.data.stateText == "讲师资格已移除，请重新申请") {
+          wx.cloud.callFunction({
+            name: "teacherData",
+            data: {
+              fun: "remove"
+            },
+          }).then(res => {
+            wx.navigateTo({
+              url: e.currentTarget.dataset.url,
+            })
+            console.log("重新申请成功", res.result)
+          }).catch(err => {
+            console.log("重新申请失败", err)
+          })
+        } 
+      }
       wx.navigateTo({
         url: e.currentTarget.dataset.url,
       })
@@ -111,13 +127,19 @@ Page({
         success(res) {
           if (res.authSetting['scope.userInfo']) {
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-            wx.getUserInfo({
-              success(res) {
-                that.setData({
-                  userInfo: res.userInfo
+            if (res.authSetting['scope.userInfo']) {
+              wx.cloud.callFunction({
+                name: "userInfo",
+                data: {
+                  fun: "get_personal"
+                }
+              }).then(res => {
+                app.globalData.userInfo = res.result.data[0]
+                _this.setData({
+                  userInfo: app.globalData.userInfo
                 })
-              }
-            })
+              })
+            }
           }
         }
       })
@@ -130,7 +152,7 @@ Page({
     wx.cloud.callFunction({
       name: 'login'
     }).then(res => {
-      console.log("that.data.openid", res.result.openid)
+      console.log("that.data.openid", this.data.userInfo)
       that.setData({
         openid: res.result.openid
       })
@@ -157,14 +179,54 @@ Page({
     this.login()
     const db = wx.cloud.database()
     db.collection('circle').count().then(res => {
-      console.log(res.total)
+      console.log("ssss", res.total)
       const total = res.total
       // 计算需分几次取
       const batchTimes = Math.ceil(total / 10)
-      console.log(batchTimes)
+      console.log("batchTimes==>", batchTimes)
       this.setData({
         batchTimes: batchTimes - 1
       })
+    })
+
+    wx.cloud.callFunction({
+      name: "teacherData",
+      data: {
+        fun: "get",
+        get: "getMi"
+      }
+    }).then((res) => {
+      console.log("1", res.result.data)
+      let stateText;
+      let state;
+      let isPassBtn
+      if (res.result.data.length == 0) {
+        stateText = "前往申请成为讲师",
+          isPassBtn = true
+      } else {
+        state = res.result.data[0].state
+        if (state.isDispose == false && state.isPass == false) {
+          stateText = "您的申请待处理"
+          isPassBtn = false
+        } else if (state.isDispose == false && state.isPass == true) {
+          stateText = "讲师资格已移除，请重新申请"
+          isPassBtn = true
+        } else if (state.isDispose == true && state.isPass == false) {
+          stateText = "申请不通过，请申请或者咨询15089600646！"
+          isPassBtn = true
+        } else {
+          stateText = "通过"
+          isPassBtn = false
+        }
+      }
+      _this.setData({
+        stateText,
+        state,
+        isPassBtn
+      })
+      console.log("提示", stateText)
+    }).catch((err) => {
+      console.log("1", err)
     })
 
     if (app.globalData.userInfo != undefined) {
@@ -224,7 +286,7 @@ Page({
       isTop: false
     }).get().then(res => {
       console.log('getwallData ==>', res)
-      //return
+
       var zanText
       for (let i = 0; i < res.data.length; i++) {
         res.data[i].time = this.parseTime(res.data[i].createTime.getTime())
@@ -266,13 +328,6 @@ Page({
       showMore: !showMore
     })
   },
-
-  // getUserInfo: function (e) {
-  //   console.log(e) ///////******** */
-  //   this.setData({
-  //     userInfo: e.detail.userInfo,
-  //   })
-  // },
 
   lookDetail(e) {
     console.log(e.currentTarget.dataset) ///////////******* */

@@ -1,0 +1,3 @@
+<view class="canvas-box">
+	<canvas canvas-id="canvas" class="canvas-view" bindtouchstart="start" bindtouchmove="move" bindtouchend="end" style=""></canvas>
+</view> 

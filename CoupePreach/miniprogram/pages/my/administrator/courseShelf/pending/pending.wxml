@@ -19,7 +19,7 @@
 			</view>
 			<view class="btn">
 				<view class="text yes" data-id="{{item._id}}" data-state="yes" data-openid="{{item.openid}}" catchtap="handle">通过</view>
-				<view class="text" data-id="{{item._id}}" data-state="no" data-openid="{{item.openid}}" catchtap="handle">不通过</view>
+				<view class="text no" data-id="{{item._id}}" data-state="no" data-openid="{{item.openid}}" catchtap="handle">不通过</view>
 			</view>
 		</navigator>
 	</block>

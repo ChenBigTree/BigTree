@@ -75,7 +75,7 @@ exports.main = async (event, context) => {
       }).update({
         data: {
           isAdministrator: Boolean(event.boolean),
-          phone:event.phone
+          phone: event.phone
         }
       })
     } else if (event.update == "headPortrait") { // 更换头像
@@ -100,6 +100,14 @@ exports.main = async (event, context) => {
       }).update({
         data: {
           avatarUrl: event.avatarUrl
+        }
+      })
+    } else if (event.update == "individual") {
+      return await userInfoData.where({
+        openid: event.openid
+      }).update({
+        data: {
+          individualResume: event.individualResume
         }
       })
     }

@@ -9,7 +9,7 @@
 		"newFeature": true,
 		"enhance": true
 	},
-	"appid": "wx99155eb36a6a05c7",
+	"appid": "wxafa3ec7cc695fda2",
 	"projectname": "basics",
 	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
@@ -62,6 +62,20 @@
 					"id": -1,
 					"name": "pages/list/profilePicture/profilePicture",
 					"pathName": "pages/list/profilePicture/profilePicture",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/login/login",
+					"pathName": "pages/list/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/canvas/canvas",
+					"pathName": "pages/list/canvas/canvas",
 					"scene": null
 				}
 			]
