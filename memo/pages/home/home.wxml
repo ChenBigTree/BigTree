@@ -1,4 +1,5 @@
 <view class="home">
+  <!-- <view bindtap="remove">删库</view> -->
   <view class="header">
     <view class="header-day">{{date}}</view>
     <navigator url="../addMemo/addMemo">
@@ -35,10 +36,11 @@
           </view>
           <view class="article ">
             <input placeholder-class="input" placeholder="请输入标题"></input>
-            <view class="nr towTextOverflow">承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。承君此诺，必守一生。</view>
+            <view class="nr towTextOverflow">{{itemName.text}}</view>
           </view>
           <view class="image-box">
-            <image mode="scaleToFill" src="http://img2.imgtn.bdimg.com/it/u=2462146637,4274174245&fm=26&gp=0.jpg"></image>
+            <image mode="scaleToFill" wx:if="{{itemName.imageFirst == ''}}" src="../icon/1.jpg"></image>
+            <image mode="scaleToFill" wx:else src="{{itemName.imageFirst}}"></image>
           </view>
         </view>
 

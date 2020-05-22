@@ -1,4 +1,5 @@
 <!--pages/html/html.wxml-->
 <view class="html">
   <rich-text nodes='{{html}}'></rich-text>
+  <image src="../../"></image>
 </view>
