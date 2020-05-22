@@ -1,14 +1,22 @@
-// miniprogram/pages/list/list.js
+// pages/list/canvas/canvas.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    active: 0
+
   },
-  // 首页加载的渲染方法
-  
-  navigateTo(e){
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url,
-    })
+  start(){
+    console.log("按下")
+    let canvas = wx.createCanvasContext('canvas',this)
+    console.log("canvas==>",canvas)
+  },
+  move(){
+    console.log("移动")
+  },
+  end(){
+    console.log("抬起")
   },
   /**
    * 生命周期函数--监听页面加载
@@ -64,20 +72,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  // 页面传值
-  PageByValue(){
-    wx.navigateTo({
-      url: '../list/PageByValue/PageByValue?text=来自首页传来的值',
-      events:{
-        someEvent: data=> {
-          console.log(data)
-        }
-      },
-      success(res){
-        res.eventChannel.emit('someEvent', { data: '通过监听器传list页面的参数' })
-      }
-    })
-  },
-
+  }
 })

@@ -17,12 +17,21 @@
   display: flex;
   align-items: center;
   padding: 30rpx;
-  display: flex;
   border-bottom: 1px solid #666;
+}
+
+.cccbox {
+  flex: 3;
+  display: flex;
+  align-items: center;
 }
 
 .input2 {
   flex: 2;
+}
+
+.name1 {
+  flex: 1;
 }
 
 .name {
@@ -42,7 +51,7 @@ button[disabled][type='primary'] {
 
 .yzm {
   margin: 0;
-  height: 30px;
+  height: 60rpx;
 }
 
 .yzm button {
@@ -67,12 +76,18 @@ button[disabled][type='primary'] {
   padding: 0;
 }
 
-.texts {
+.js {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36rpx;
-  font-weight: 700;
+  background: #F6F6F6;
+}
+
+.js .btn {
+  padding: 10px 15px;
+  border: 1px solid #Ff6700;
+  border-radius: 5px;
+  color: #ff6700;
 }

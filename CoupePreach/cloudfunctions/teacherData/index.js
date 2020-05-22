@@ -27,12 +27,25 @@ exports.main = async (event, context) => {
       }
     })
   } else if (event.fun == "get") {
-    return await teacherDataList.where({
-      state: {
-        isDispose: false,
-        isPass: false
-      }
-    }).get()
+    if (event.get == "pending") {
+      return await teacherDataList.where({
+        state: {
+          isDispose: false,
+          isPass: false
+        }
+      }).get()
+    } else if (event.get == "allData") {
+      return await teacherDataList.where({
+        state: {
+          isDispose: true,
+          isPass: true
+        }
+      }).get()
+    } else if (event.get == "getMi") {
+      return await teacherDataList.where({
+        openid: wxContext.OPENID
+      }).get()
+    }
   } else if (event.fun == "update") {
     if (event.update == "yes") {
       await cloud.database().collection("userInfoData").where({
@@ -47,6 +60,25 @@ exports.main = async (event, context) => {
           state: {
             isDispose: true,
             isPass: true
+          },
+          passTime: new Date().valueOf(),
+        }
+      })
+    } else if (event.update == "del") {
+      await cloud.database().collection("userInfoData").where({
+        openid: event.openid
+      }).update({
+        data: {
+          isTeacher: false
+        }
+      })
+      return await teacherDataList.where({
+        openid: event.openid
+      }).update({
+        data: {
+          state: {
+            isDispose: false,
+            isPass: true
           }
         }
       })
@@ -60,5 +92,9 @@ exports.main = async (event, context) => {
         }
       })
     }
+  } else if (event.fun == "remove") {
+    return await teacherDataList.where({
+      openid: wxContext.OPENID
+    }).remove()
   }
 }

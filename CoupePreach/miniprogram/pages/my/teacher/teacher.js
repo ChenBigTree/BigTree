@@ -1,8 +1,9 @@
 // pages/joinUs/joinUs.js
-var wait = 10; // 设置全局变量的time
 var Utils = require("../../../utils/util")
 var app = getApp()
 var _this;
+let wait = 60
+let isWait = false
 Page({
 
   /**
@@ -43,7 +44,21 @@ Page({
       })
     }
   },
-
+  openConfirm() {
+    if (this.data.stateText == "申请不通过，请！" || this.data.stateText == "讲师资格已移除，请重新申请") {
+      wx.cloud.callFunction({
+        name: "teacherData",
+        data: {
+          fun: "remove"
+        },
+      }).then(res => {
+        console.log("重新申请成功")
+        _this.getMi()
+      }).catch(err => {
+        console.log("重新申请失败", err)
+      })
+    }
+  },
   // 获取六位验证码
   getValidCode() {
     let codes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -75,11 +90,12 @@ Page({
       Utils.showModal("手机号码不正确");
       return false;
     }
+    isWait = true
     _this.Countdown();
 
     _this.getValidCode()
-    console.log('验证码为：', _this.data.vcode)
-    // return
+
+    // return console.log('验证码为：', _this.data.vcode)
     let code = []
     code[0] = _this.data.vcode
     let phone = _this.data.phoneVal
@@ -99,10 +115,10 @@ Page({
     })
   },
   // 发送通知管理员
-  sendSmss() {
+  sendSmss(phone) {
+    // return console.log("已发送管理员手机号通知", phone)
     let code = []
-    code[0] = _this.data.name
-    let phone = 15089600646
+    code[0] = "“" + _this.data.name + "”"
     wx.cloud.callFunction({
       name: "SMS",
       data: {
@@ -161,8 +177,25 @@ Page({
     this.setData({
       disabledTJ: true,
     })
-    wx.showLoading()
-    this.sendSmss()
+    wx.showLoading({
+      title: "加载中"
+    })
+    wx.cloud.callFunction({ // 获取所有管理员手机号
+      name: "userInfo",
+      data: {
+        fun: "get",
+        get: "allAdministrator"
+      }
+    }).then(res => {
+      console.log("allAdministrator", res.result.data)
+      let adm = res.result.data
+      for (let i in adm) {
+        _this.sendSmss(adm[i].phone)
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+    // return
     wx.cloud.callFunction({
       name: "teacherData",
       data: {
@@ -193,33 +226,35 @@ Page({
       }
     })
   },
-  // 发送验证码的倒计时fn
-  Countdown: function (e) {
-    if (wait == 0) {
-      _this.setData({
-        time: "发送验证码",
-        disabled: false
-      })
-      wait = 10;
-    } else {
-      if (wait < 10) {
+
+  Countdown: function (e) { // 发送验证码的倒计时fn
+    if (isWait) {
+      if (wait == 0) {
         _this.setData({
-          time: "重新发送 0" + wait,
-          disabled: true
+          time: "发送验证码",
+          disabled: false
         })
-        wait--;
-        setTimeout(function () {
-          _this.Countdown()
-        }, 1000)
+        wait = 60;
       } else {
-        _this.setData({
-          time: "重新发送 " + wait,
-          disabled: true
-        })
-        wait--;
-        setTimeout(function () {
-          _this.Countdown()
-        }, 1000)
+        if (wait < 10) {
+          _this.setData({
+            time: "重新发送 0" + wait,
+            disabled: true
+          })
+          wait--;
+          setTimeout(function () {
+            _this.Countdown()
+          }, 1000)
+        } else {
+          _this.setData({
+            time: "重新发送 " + wait,
+            disabled: true
+          })
+          wait--;
+          setTimeout(function () {
+            _this.Countdown()
+          }, 1000)
+        }
       }
     }
   },
@@ -234,7 +269,22 @@ Page({
       userInfo: app.globalData.userInfo
     })
   },
-
+  getMi() {
+    wx.cloud.callFunction({
+      name: "teacherData",
+      data: {
+        fun: "get",
+        get: "getMi"
+      }
+    }).then(res => {
+      console.log("本人申请数据", res.result.data)
+      _this.setData({
+        getMi: res.result.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -246,7 +296,46 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getMi()
+    wx.cloud.callFunction({
+      name: "teacherData",
+      data: {
+        fun: "get",
+        get: "getMi"
+      }
+    }).then((res) => {
+      console.log("1", res.result.data)
+      let stateText;
+      let state;
+      let isPassBtn
+      if (res.result.data.length == 0) {
+        stateText = "前往申请成为讲师",
+          isPassBtn = true
+      } else {
+        state = res.result.data[0].state
+        if (state.isDispose == false && state.isPass == false) {
+          stateText = "您的申请待处理"
+          isPassBtn = false
+        } else if (state.isDispose == false && state.isPass == true) {
+          stateText = "讲师资格已移除，请重新申请"
+          isPassBtn = true
+        } else if (state.isDispose == true && state.isPass == false) {
+          stateText = "申请不通过，请重试！"
+          isPassBtn = true
+        } else {
+          stateText = "您已成为我们讲师！"
+          isPassBtn = false
+        }
+      }
+      _this.setData({
+        stateText,
+        state,
+        isPassBtn
+      })
+      console.log("提示", stateText)
+    }).catch((err) => {
+      console.log("1", err)
+    })
   },
 
   /**
@@ -260,7 +349,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wait = 60
+    isWait = false
   },
 
   /**

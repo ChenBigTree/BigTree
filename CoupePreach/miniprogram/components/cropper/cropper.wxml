@@ -1,9 +1,11 @@
 <view class="cropper-wrapper">
-	<canvas class="cropper" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="overflow: hidden;width:{{cropperOpt.width * 2}}rpx;height:{{cropperOpt.height * 2}}rpx;background-color: rgba(0, 0, 0, 1)" canvas-id="{{cropperOpt.id}}">
-		<!-- <cover-image src='/images/rotate.png' class='rotate' catchtap='rotate'></cover-image> -->
-	</canvas>
-	<canvas class="cropper" disable-scroll="true" style="overflow: hidden;position: fixed; top: -{{cropperOpt.width * cropperOpt.pixelRatio * 2}}rpx; left: -{{(cropperOpt.height * cropperOpt.pixelRatio) * 2}}rpx; width:{{cropperOpt.width * cropperOpt.pixelRatio * 2}}rpx;height:{{cropperOpt.height * cropperOpt.pixelRatio * 2}}rpx;" canvas-id="{{cropperOpt.targetId}}">
-	</canvas>
+	<view class="cropper-box">
+		<canvas class="cropper" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" style="width:{{cropperOpt.width }}px;height:{{cropperOpt.height + 3}}px;background-color: rgba(0, 0, 0, 0.8)" canvas-id="{{cropperOpt.id}}">
+			<!-- <cover-image src='/images/rotate.png' class='rotate' catchtap='rotate'></cover-image> -->
+		</canvas>
+		<canvas class="cropper" disable-scroll="true" style="overflow: hidden;position: fixed; top: -{{cropperOpt.width * cropperOpt.pixelRatio * 2}}rpx; left: -{{(cropperOpt.height * cropperOpt.pixelRatio) * 2}}rpx; width:{{cropperOpt.width * cropperOpt.pixelRatio * 2}}rpx;height:{{cropperOpt.height * cropperOpt.pixelRatio * 2}}rpx;" canvas-id="{{cropperOpt.targetId}}">
+		</canvas>
+	</view>
 	<view class="cropper-buttons" style="zIndex:666">
 		<view class='btn ' catchtap='cancel'>取消</view>
 		<view class='btn  {{!isReduction?"disable":""}}' catchtap='reduction'>还原</view>

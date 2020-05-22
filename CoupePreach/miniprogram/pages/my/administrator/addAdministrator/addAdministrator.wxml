@@ -2,7 +2,7 @@
 	<view class="listPage-box {{class}}" data-name="listPage-box" bindtap="showListPage">
 		<view class="listPage clearfix" data-name="listPage" catchtap="showListPage">
 			<view class="input-box">
-				<input placeholder="请输入用户微信名..." bindinput="input" />
+				<input placeholder="请输入用户微信名..." value="{{inputValue}}" bindinput="input" />
 				<view class="search" catchtap="searchFun">搜索</view>
 			</view>
 			<block wx:if="{{isHad}}">
@@ -12,19 +12,26 @@
 							<image mode="scaleToFill" src="{{item.avatarUrl}}"></image>
 						</view>
 						<text class="name fl">用户名：{{item.nickName}}</text>
-						<view class="btn fl add" data-openid="{{item.openid}}" data-name="{{item.nickName}}" data-btn="add" bindtap="operationAdm">添加</view>
+						<view class="btn fl add" data-openid="{{item.openid}}" data-nickName="{{item.nickName}}" data-name="listPage-box" data-btn="add" catchtap="showListPage">添加</view>
 					</view>
 				</view>
 			</block>
 			<view class="null" wx:else>暂无内容</view>
 		</view>
 	</view>
-	<view class="list result clearfix" wx:for="{{allAdministrator}}" wx:key="key">
+	<!-- 管理员列表 -->
+	<view class="list result clearfix" wx:for="{{allAdministrator}}" wx:key="key" ontouchmove="touchmove">
 		<view class="head-img fl">
 			<image mode="scaleToFill" src="{{item.avatarUrl}}"></image>
 		</view>
-		<text class="name fl">用户名：{{item.nickName}}</text>
-		<view class="btn del fl" data-openid="{{item.openid}}" data-nickName="{{item.nickName}}" data-btn="del" bindtap="operationAdm">删除</view>
+		<view class="name fl">
+			<view>管理员：{{item.nickName}}</view>
+			<view>手机号：{{item.phone}}</view>
+		</view>
+		<view class="btn-box clearfix fl">
+			<view class="btn updata fl" data-openid="{{item.openid}}" data-nickName="{{item.nickName}}" data-btn="updataPhone" bindtap="operationAdm">更号</view>
+			<view class="btn del fl" data-openid="{{item.openid}}" data-nickName="{{item.nickName}}" data-btn="del" bindtap="operationAdm">删除</view>
+		</view>
 	</view>
 
 	<view class="addBtn" data-name="listPage" bindtap="showListPage">
@@ -34,9 +41,9 @@
 
 <view class="addPage" hidden="{{isShow}}">
 	<view class="addPage-center clearfix">
-		<input placeholder="请输入管理员{{}}手机号" value="{{phone}}" bindinput="phoneInput"></input>
+		<input placeholder="{{adminName}}" type="number"  value="{{phone}}" bindinput="phoneInput"></input>
 		<view class="fl" data-name="qx" bindtap="btn1">取消</view>
-		<view class="fr" data-name="add2" hidden="{{isBtn}}" bindtap="btn1">确定</view>
-		<view class="fr" data-name="textbtn" hidden="{{!isBtn}}" bindtap="btn1">更新</view>
+		<view class="fr" data-name="add2" wx:if="{{isBtn}}" bindtap="btn1">确定</view>
+		<view class="fr" data-name="updataPhone" wx:if="{{!isBtn}}" bindtap="btn1">更新</view>
 	</view>
 </view>

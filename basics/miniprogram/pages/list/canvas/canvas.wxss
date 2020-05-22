@@ -1,0 +1,11 @@
+.canvas-view {
+  display: block;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #999
+}
+.canvas-box{
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+}

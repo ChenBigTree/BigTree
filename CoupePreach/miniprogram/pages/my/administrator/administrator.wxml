@@ -6,10 +6,6 @@
 		<navigator hover-class="none" url="../administrator/courseShelf/courseShelf">讲师管理</navigator>
 	</view>
 	<view class="list">
-		<navigator hover-class="none" url="../administrator/addAdministrator/addAdministrator">添加管理员</navigator>
+		<navigator hover-class="none" url="../administrator/addAdministrator/addAdministrator">管理管理员</navigator>
 	</view>
-	<view class="list">
-		<navigator hover-class="none" bindtap="getPhone">获取手机号</navigator>
-	</view>
-	<view class="list" bindtap="DeleteLibrary">删库</view>
 </view>

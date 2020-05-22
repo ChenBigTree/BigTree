@@ -1,5 +1,6 @@
 let _this
 let app = getApp()
+var Utils = require("../../../../utils/util")
 Page({
 
   /**
@@ -10,6 +11,9 @@ Page({
     class: '',
     isHad: true,
     isShow: true,
+    phone: "",
+    isBtn: true,
+    adminName: ""
   },
 
   phoneInput(e) {
@@ -20,21 +24,61 @@ Page({
   // 项目分类
   btn1(e) {
     let name = e.currentTarget.dataset.name
+    var checkVal = Utils.Verification.phone;
     console.log(name)
-    return
     if (name == "add2") {
-      _this.caozuoFun("add", _this.data.input, "", "添加")
-    } else if (name == "textbtn") {
-      _this.caozuoFun("update", _this.data.input, _this.data.id, "更新")
-    } else if (name == "text") {
+      var doIpone = checkVal.test(_this.data.phone)
+      if (this.data.phone == "") {
+        wx.showToast({
+          title: '手机号不能为空',
+          icon: "none"
+        })
+        return
+      }
+      if (doIpone) {
+        this.operationFun(_this.data.openid, true, "添加")
+       
+      } else {
+        wx.showToast({
+          title: '手机号格式不正确',
+          icon: "none"
+        })
+        return
+      }
+    } else if (name == "qx") {
       _this.setData({
-        input: e.currentTarget.dataset.text,
-        id: e.currentTarget.dataset.id,
-        isBtn: true
+        inputValue: "",
+        searchUser: "",
+        openid: '',
+        adminName: "",
+        isShow: true,
+        phone: "",
+        isBtn: true,
       })
+    } else if (name == "updataPhone") {
+      console.log("更新管理员手机号")
+      var doIpone = checkVal.test(_this.data.phone)
+      if (this.data.phone == "") {
+        wx.showToast({
+          title: '手机号不能为空',
+          icon: "none"
+        })
+        return
+      }
+      if (doIpone) {
+        this.operationFun(_this.data.openid, true, "更改")
+       
+      } else {
+        wx.showToast({
+          title: '手机号格式不正确',
+          icon: "none"
+        })
+        return
+      }
     }
   },
-  operationAdm(e) { // 删除/添加管理员
+  operationAdm(e) { // 删除管理员 / 更改管理员号
+    console.log("e.currentTarget.dataset.btn", e.currentTarget.dataset.btn)
     if (e.currentTarget.dataset.btn == "del") {
       wx.showModal({
         content: "确定删除" + e.currentTarget.dataset.nickname + "管理员?",
@@ -45,38 +89,38 @@ Page({
           }
         },
       })
-    } else {
-      _this.setData({
-        class: "top",
-        inputValue: "",
-        searchUser: "",
-        isHad: true
+    } else if (e.currentTarget.dataset.btn == "updataPhone") {
+      this.setData({
+        isBtn: false,
+        isShow: false,
+        openid:e.currentTarget.dataset.openid,
+        adminName: "更改管理员" + "“" + e.currentTarget.dataset.nickname + "”" + "的手机号",
       })
-      // this.btn1("添加")
-
-      _this.setData({
-        isShow: !_this.data.isShow
-      })
-      return
-      this.operationFun(e.currentTarget.dataset.openid, true, "添加")
     }
   },
   operationFun(openid, boolean, tis) {
-    console.log("openid, boolean, tis", openid, boolean, tis)
     wx.cloud.callFunction({
       name: "userInfo",
       data: {
         fun: "update",
         update: "administrator",
         openid: openid,
-        boolean: boolean
+        boolean: boolean,
+        phone: _this.data.phone
       }
     }).then(res => {
       wx.showToast({
         title: tis + '成功',
         icon: "none"
       })
-
+      _this.setData({
+        inputValue: "",
+        searchUser: "",
+        openid: "",
+        adminName: "",
+        isShow: true,
+        phone: ""
+      })
       _this.allAdministrator()
 
     }).catch(err => {
@@ -89,22 +133,48 @@ Page({
   },
   showListPage(e) { // 显示/隐藏搜索框
     if (e.currentTarget.dataset.name != "listPage") {
-      this.setData({
-        class: "bottom",
-      })
+      console.log(e.currentTarget.dataset)
+      if (e.currentTarget.dataset.btn == "add") {
+        this.setData({
+          class: "bottom",
+          inputValue: "",
+          searchUser: "",
+          isHad: true,
+          openid: e.currentTarget.dataset.openid,
+          adminName: "请输入管理员" + "“" + e.currentTarget.dataset.nickname + "”" + "的手机号",
+          isShow: !_this.data.isShow,
+        })
+      } else {
+        this.setData({
+          class: "bottom",
+        })
+      }
     } else {
       this.setData({
         class: "top"
       })
     }
   },
-  input(e) {
+  input(e) { // 输入用户名
     this.setData({
       inputValue: e.detail.value
     })
   },
+ 
+  touchmove() {  // 滑动的内容时触发
+    this.setData({
+      class: "bottom"
+    })
+  },
   searchFun() { // 搜索查询用户列表
     console.log("输入框的值", this.data.inputValue)
+    if(this.data.inputValue == ""){
+      wx.showToast({
+        title: '用户微信名不能为空',
+        icon:"none"
+      })
+      return
+    }
     wx.cloud.callFunction({
       name: "userInfo",
       data: {

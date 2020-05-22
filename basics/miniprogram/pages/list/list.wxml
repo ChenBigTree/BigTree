@@ -11,63 +11,45 @@
 			<view class="title">图像处理</view>
 			<view class="title">上传文件监听</view>
 			<view class="title">音视频合成</view>
-			<view class="title">剪贴板</view>
+			<view class="title" bindtap="navigateTo" data-url="">剪贴板</view>
 			<view class="title">小程序跳转小程序</view>
-			<view class="title">
-				<navigator hover-class="none" url="./login/login">获取手机号</navigator>
-			</view>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">获取手机号</view>
 			<view class="title" bindtap="PageByValue">导航栏</view>
 			<view class="title">小程序置顶</view>
 			<view class="listlist">完成</view>
 			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
-			<view class="title">
-				<navigator hover-class="none" url="./sao/sao">扫一扫</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./sao/sao">扫一扫
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="../list/Render/Render">首次数据加载的渲染方法</navigator>
+			<view class="title" bindtap="navigateTo" data-url="../list/Render/Render">首次数据加载的渲染方法
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./file/file">文件上传与下载</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./file/file">文件上传与下载 </view>
+			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库增删改查
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库增删改查</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库模糊匹配查询
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./dataManipulation/dataManipulation">数据库模糊匹配查询</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./sao/sao">转发
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./sao/sao">转发</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./home/home">如何发起http请求和请求注意事项
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./home/home">如何发起http请求和请求注意事项</navigator>
+			<view class="title" bindtap="navigateTo" data-url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject）
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject）</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./pictures/pictures">如何从本地选择图片或者拍照上传图片
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./pictures/pictures">如何从本地选择图片或者拍照上传图片</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./remdom/remdom">获取六位随机数？
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./remdom/remdom">获取六位随机数？</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./home/home">如何实现小程序下拉刷新?触底加载
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./home/home"> 如何实现小程序下拉刷新?触底加载</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./verification/verification">验证手机号是否正确？邮箱等
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./verification/verification">验证手机号是否正确？邮箱等</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">登录验证与获取用户信息
 			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./login/login">登录验证与获取用户信息</navigator>
-			</view>
-			<view class="title">
-				<navigator hover-class="none" url="./login/login">收货地址</navigator>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">收货地址
 			</view>
 		</van-tab>
 		<van-tab title="中级">
-			<view class="title" data-url="./profilePicture/profilePicture" bindtap="url">上传头像</view>
+			<view class="title" bindtap="navigateTo" data-url="./profilePicture/profilePicture" bindtap="url">上传头像</view>
 			<view class="listlist">未完成</view>
 			<view class="title"> 如何解决小程序异步请求问题？</view>
 			<view class="title">如何获取本地定位信息,解析地址获取经纬度</view>
@@ -89,6 +71,7 @@
 		</van-tab>
 		<van-tab title="高级">
 			<view class="listlist">未完成</view>
+			<view class="title" data-url="./canvas/canvas"> 小程序画布</view>
 			<view class="title"> 组件间的共享特性怎么处理？</view>
 			<view class="title">生成自定义海报</view>
 			<view class="title">小程序如何使用字体图标</view>

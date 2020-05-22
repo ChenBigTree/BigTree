@@ -16,7 +16,7 @@
 			</view>
 			<open-data class="name" type="userNickName"></open-data>
 			<view class="txtBox">
-				<view class="title">
+				<view class="title towTextOverflow">
 					{{title}}
 				</view>
 				<view class="date">

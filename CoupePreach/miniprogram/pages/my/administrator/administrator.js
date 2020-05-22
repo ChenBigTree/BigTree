@@ -8,20 +8,20 @@ Page({
 
   },
   // 删库
-  DeleteLibrary() {
-    wx.cloud.callFunction({
-      name: 'DeleteLibrary',
-      data: {
-        libraryName: "teacherDataList"
-      },
-      success: res => {
-        console.log(res, "删库成功")
-      },
-      fail: err => {
-        console.log(err)
-      }
-    })
-  },
+  // DeleteLibrary() {
+  //   wx.cloud.callFunction({
+  //     name: 'DeleteLibrary',
+  //     data: {
+  //       libraryName: "teacherDataList"
+  //     },
+  //     success: res => {
+  //       console.log(res, "删库成功")
+  //     },
+  //     fail: err => {
+  //       console.log(err)
+  //     }
+  //   })
+  // },
   getPhone() {},
   /**
    * 生命周期函数--监听页面加载

@@ -24,7 +24,7 @@ Page({
     li1: [],
     li2: [],
   },
-  cc() {
+  touchmove() {
     this.setData({
       class: "bottom"
     })

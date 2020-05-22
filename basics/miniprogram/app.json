@@ -14,6 +14,7 @@
     "pages/list/file/file",
     "pages/list/getphone/getphone",
     "pages/list/dataManipulation/dataManipulation",
+    "pages/list/canvas/canvas",
     "pages/list/profilePicture/profilePicture"
   ],
   "window": {

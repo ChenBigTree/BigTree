@@ -123,8 +123,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/my/administrator/courseShelf/courseShelf",
-					"pathName": "pages/my/administrator/courseShelf/courseShelf",
+					"name": "pages/my/administrator/courseShelf/pending/pending",
+					"pathName": "pages/my/administrator/courseShelf/pending/pending",
 					"scene": null
 				}
 			]

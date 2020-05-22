@@ -15,7 +15,8 @@ Page({
     isSet: true,
     useInfo: "",
     price: 1,
-    isBuy: false
+    isBuy: false,
+    individualResume: ""
   },
   handleChange1({ // 用户修改自己课程的价格
     detail
@@ -29,7 +30,12 @@ Page({
       hidden: !this.data.hidden
     })
   },
-
+  bindTextAreaBlur(e) {
+    console.log(e.detail.value)
+    this.setData({
+      individualResume: e.detail.value
+    })
+  },
   toDetail(e) { // 跳转课程详情页
     console.log(e.currentTarget.dataset.id)
     if (!this.data.myUserInfo) {
@@ -39,9 +45,9 @@ Page({
     } else {
       // 先购买再听课
       // if (this.data.isBuy) {
-        wx.navigateTo({
-          url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
-        })
+      wx.navigateTo({
+        url: '../../myHomepage/speechDetail/speechDetail?id=' + e.currentTarget.dataset.id,
+      })
       // } else {
       //   wx.showToast({
       //     title: "先购买再听课",
@@ -54,6 +60,33 @@ Page({
     this.setData({
       isSet: !this.data.isSet
     })
+
+    console.log(this.data.myUserInfo.individualResume)
+
+    if (this.data.isSet) {
+      if (_this.data.individualResume == "") {
+        wx.showToast({
+          title: '简介不能为空！',
+          icon: 'none'
+        })
+        return
+      }
+      console.log("修改个人简介")
+      wx.cloud.callFunction({
+        name: 'userInfo',
+        data: {
+          fun: "update",
+          update: "individual",
+          individualResume: _this.data.individualResume,
+          openid: _this.data.useInfo.openid,
+        }
+      }).then(res => {
+        console.log("修改简历成功", res)
+        _this.getOne(_this.data.useInfo.openid)
+      }).catch(err => {
+        console.log("修改简历失败", err)
+      })
+    }
   },
   // onqg_5cHwV816egQzqPel1rDZRtA openid createTime
   // 购买功能
@@ -159,6 +192,7 @@ Page({
             _this.setData({
               isShowPay: false,
               useInfo: res.result.data[0],
+              individualResume: res.result.data[0].individualResume,
               isBuy: true
             })
             return
@@ -167,13 +201,14 @@ Page({
         _this.setData({
           isShowPay: true,
           useInfo: res.result.data[0],
+          individualResume: res.result.data[0].individualResume,
           isBuy: false
         })
         console.log("this.data.isShowPay", this.data.isShowPay)
       }
     })
   },
-  getRecomList(openid){ // 相关课程
+  getRecomList(openid) { // 相关课程
     wx.cloud.callFunction({
       name: 'stairway',
       data: {
@@ -187,8 +222,17 @@ Page({
       arr.forEach(item => {
         item.time = `${new Date(item.time).getFullYear()}-${Number(new Date(item.time).getMonth()+1) >=10?Number(new Date(item.time).getMonth()+1):"0"+Number(new Date(item.time).getMonth()+1)}-${Number(new Date(item.time).getDate())>=10?new Date(item.time).getDate():"0"+new Date(item.time).getDate()}`
       });
+
+      function compare(e) {
+        return function (a, b) {
+          var value1 = a[e];
+          var value2 = b[e];
+          return parseInt(value1) - parseInt(value2);
+        }
+      }
+      var arr2 = arr.sort(compare('time')).reverse();
       this.setData({
-        recomList: arr,
+        recomList: arr2,
         isShow: res.result.isF
       })
       wx.hideLoading()
