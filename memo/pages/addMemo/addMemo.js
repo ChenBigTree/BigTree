@@ -120,7 +120,7 @@ Page({
               }
             };
             if (flag) {
-              _this.setDataBase(res.delta, res.text)
+              _this.setDataBase(res.delta, res.text, '')
             }
             /*4-14：方法一：将富文本编辑器的内容渲染到页面上*/
             /**
@@ -160,13 +160,15 @@ Page({
             success(res) {
               console.log("路径转真实路径", res)
               let i = 0;
+              let imageFirst;
               for (var key in delta.ops) {
                 if (delta.ops[key].insert.image) {
+                  imageFirst = res.fileList[0].fileID
                   delta.ops[key].insert.image = res.fileList[i]
                   i++
                 }
               }
-              _this.setDataBase(delta, text)
+              _this.setDataBase(delta, text, imageFirst)
             },
           })
         }
@@ -177,32 +179,22 @@ Page({
     })
   },
 
-  setDataBase(delta, text) {
+  setDataBase(delta, text, imageFirst) {
     console.log("执行")
     var date = new Date();
     var year = date.getFullYear()
-    var month = date.getMonth()
+    var month = date.getMonth() + 1
     var ri = date.getDate()
     var hours = date.getHours()
     var min = date.getMinutes()
     var day = date.getDay()
     day = day == 0 ? "日" : day == 1 ? "一" : day == 2 ? "二" : day == 3 ? "三" : day == 4 ? "四" : day == 5 ? "五" : "六";
-    // console.log("delta", delta)
-    // let image = null
-    // for (let i in delta.ops) {
-    //   console.log(delta.ops[i].insert.image)
-    //   if (delta.ops[i].insert.image){
-    //     image = delta.ops[i].insert.image.fileID
-    //     return
-    //   }
-    // }
-    // console.log("image", image)
-    // return
     wx.cloud.callFunction({
       name: "memo-ArticleList",
       data: {
         test: delta,
         text: text,
+        imageFirst: imageFirst,
         fun: "add",
         time: {
           year: year,
@@ -216,6 +208,9 @@ Page({
       success: (res) => {
         wx.hideLoading()
         console.log("存储数据成功==>", res)
+        wx.navigateTo({
+          url: '../home/home',
+        })
       },
       fail(err) {
         wx.hideLoading()

@@ -11,7 +11,19 @@ Page({
   data: {
     hides: true
   },
-
+  remove() {
+    wx.cloud.callFunction({
+      name: "memo-ArticleList",
+      data: {
+        fun: "remove",
+        name: "memo-ArticleList",
+      }, success: r => {
+        console.log(r)
+      }, fail: e => {
+        console.log(e)
+      }
+    })
+  },
   // 展示一言展示框
   touse() {
     this.setData({
@@ -63,8 +75,10 @@ Page({
 
   // 获取美文
   getBeautifulEssay() {
+    wx.showLoading({
+      title: '加载中',
+    })
     let arr = []
-    let arr1 = []
     for (let i = 0; i < 12; i++) {
       (function(i) {
         wx.cloud.callFunction({
@@ -81,10 +95,10 @@ Page({
               index++
             })
             if (index == 12) {
-
               _this.setData({
                 ArticleList: arr
               })
+              wx.hideLoading()
               console.log("this.data.ArticleList==>", _this.data.ArticleList)
             }
           },

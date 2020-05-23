@@ -15,7 +15,8 @@ exports.main = async(event, context) => {
       data: {
         ops: event.test,
         time: event.time,
-        text: event.text
+        text: event.text,
+        imageFirst: event.imageFirst,
       },
     })
   } else if (event.fun == "get") {
@@ -24,5 +25,9 @@ exports.main = async(event, context) => {
         month: _.eq(event.i)
       }
     }).get()
+  } else if (event.fun == "remove") {
+    return await cloud.database().collection(event.name).where({
+      _id: _.neq("")
+    }).remove()
   }
 }
