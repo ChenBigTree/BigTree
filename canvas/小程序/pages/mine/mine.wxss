@@ -1,0 +1,40 @@
+/* .box {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #7F7F7F;
+}
+
+.boxContent {
+  width: 500rpx;
+  height: 400rpx;
+  margin: 50rpx auto 0;
+  background: red;
+  border-radius: 30rpx;
+}
+
+.span {
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  color: white;
+  font-size: 50rpx;
+  position: absolute;
+  right: 0;
+}
+
+.image {
+  width: 200rpx;
+  height: 200rpx;
+} */
+.box{
+  height: 400rpx;
+  width: 100%;
+  background-color: red;
+  position: relative;
+  top: -100px;
+}

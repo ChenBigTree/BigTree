@@ -1,0 +1,5 @@
+<!-- <view>这是index页面</view> -->
+<button bindtap="click">生成图片</button>
+<canvas canvasId='canvas' style="width:750px; height:600px;"></canvas>
+
+<!-- <button bindtap="getPic">获取图片</button> -->

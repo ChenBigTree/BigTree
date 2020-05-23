@@ -1,0 +1,13 @@
+#canvas {
+  position: relative;
+  z-index: 1;
+}
+
+.image {
+  position: absolute;
+  top: 55px;
+  left: 60rpx;
+  width: 640px;
+  height: 450px;
+  z-index: -1;
+}

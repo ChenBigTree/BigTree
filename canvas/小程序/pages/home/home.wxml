@@ -1,0 +1,2 @@
+<button bindtap="click">生成海报</button>
+<canvas canvasId='canvas' style="width:750px; height:1334px;"></canvas>

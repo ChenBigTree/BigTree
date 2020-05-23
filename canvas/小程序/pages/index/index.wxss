@@ -1,0 +1,7 @@
+.box {
+  height: 100rpx;
+  background-color: rebeccapurple;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
