@@ -13,10 +13,10 @@
 			<view class="title">音视频合成</view>
 			<view class="title" bindtap="navigateTo" data-url="">剪贴板</view>
 			<view class="title">小程序跳转小程序</view>
-			<view class="title" bindtap="navigateTo" data-url="./login/login">获取手机号</view>
 			<view class="title" bindtap="PageByValue">导航栏</view>
 			<view class="title">小程序置顶</view>
 			<view class="listlist">完成</view>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">获取手机号</view>
 			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
 			<view class="title" bindtap="navigateTo" data-url="./sao/sao">扫一扫
 			</view>
@@ -49,7 +49,6 @@
 			</view>
 		</van-tab>
 		<van-tab title="中级">
-			<view class="title" bindtap="navigateTo" data-url="./profilePicture/profilePicture" bindtap="url">上传头像</view>
 			<view class="listlist">未完成</view>
 			<view class="title"> 如何解决小程序异步请求问题？</view>
 			<view class="title">如何获取本地定位信息,解析地址获取经纬度</view>
@@ -68,6 +67,7 @@
 			<view class="title">客服消息</view>
 			<view class="title">即时配送</view>
 			<view class="listlist">完成</view>
+			<view class="title" bindtap="navigateTo" data-url="./profilePicture/profilePicture">上传头像</view>
 		</van-tab>
 		<van-tab title="高级">
 			<view class="listlist">未完成</view>
