@@ -1,28 +1,18 @@
-// miniprogram/pages/list/list.js
+// pages/new/new.js
 Page({
-  data: {
-    active: 0
-  },
-  // 首页加载的渲染方法
 
-  navigateTo(e) {
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url,
-    })
+  /**
+   * 页面的初始数据
+   */
+  data: {
+
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.cloud.callFunction({
-    //   name: "basics-http",
-    //   success: res => {
-    //     console.log(JSON.parse(res.result))
-    //   },
-    //   fail: e => {
-    //     console.log(e)
-    //   }
-    // })
+
   },
 
   /**
@@ -72,22 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  // 页面传值
-  PageByValue() {
-    wx.navigateTo({
-      url: '../list/PageByValue/PageByValue?text=来自首页传来的值',
-      events: {
-        someEvent: data => {
-          console.log(data)
-        }
-      },
-      success(res) {
-        res.eventChannel.emit('someEvent', {
-          data: '通过监听器传list页面的参数'
-        })
-      }
-    })
-  },
-
+  }
 })

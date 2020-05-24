@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .canvasBox {
+        width: 525px;
+        height: 927px;
+        border: 1px solid red;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <div class="canvasBox">
+        <canvas id="canvas" width="525" height="927"></canvas>
+    </div>
+
+    <script>
+        var c = document.querySelector('#canvas')
+        console.log('c==>', c)
+
+        var ctx = c.getContext('2d')
+        console.log('ctx==>', ctx)
+
+        var imgSwiper = new Image()
+        imgSwiper.src = './images/牛排.jpg'
+        imgSwiper.onload = function () {
+            ctx.drawImage(imgSwiper, 39, 119, 447, 325)
+
+        }
+
+        var imgLogo = new Image()
+        imgLogo.src = './images/logo.jpg'
+        imgLogo.onload = function () {
+            ctx.drawImage(imgLogo, 36, 59, 46, 47)
+
+        }
+
+        var img = new Image()
+        img.src = './images/海报02背景图.png'
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, 525, 947)
+
+            // 商户店名
+            // 字体：加重 字体大小 字体样式
+            ctx.font = "500 22px Arial, Helvetica, sans-serif";
+            // 字体颜色      
+            ctx.fillStyle = "#000000";
+            var Tstr = 'Team'
+            var TlineWidth = 0
+            // 限制画布的宽度
+            var cWidth = 300
+            // 距离画布顶部的距离
+            var Theight = 76
+            // 字符串下标
+            var lastIndex = 0
+            // 行数1
+            var Trow = 0
+            for (let j = 0; j < Tstr.length; j++) {
+                // console.log('j==>', j)
+                TlineWidth += ctx.measureText(Tstr[j]).width
+                // console.log('TlineWidth==>', TlineWidth)
+                if (TlineWidth > cWidth) {
+
+                    if (Trow >= 0) {
+                        ctx.fillText(Tstr.substring(lastIndex, j) + '...', 89, Theight)
+                        break
+                    }
+                    TlineWidth = 89
+                    lastIndex = j
+                    Trow++
+                }
+                console.log('lineWidth==>',TlineWidth)
+
+            }
+            // 商品名称
+            // 字体：加重 字体大小 字体样式
+            ctx.font = "500 22px Arial, Helvetica, sans-serif";
+            // 字体颜色         
+            ctx.fillStyle = "#000000";
+            // 填写文本:"文本内容" x，y
+            // ctx.fillText("原切牛排 150g（配黑椒酱）", 36, 481);
+            var name = '原切牛排 150g（配黑椒酱）原切牛排 150g（配黑椒酱）原切牛排 150g（配黑椒酱）原切牛排 150g（配黑椒酱）'
+            var nameWidth = 0
+            // 限制画布的宽度
+            var cWidth = 500
+            // 距离画布顶部的距离
+            var Nheight = 481
+            // 字符串下标
+            var Index = 0
+            // 行数1
+            var Nrow = 0
+            for (let j = 0; j < name.length; j++) {
+                // console.log('j==>', j)
+                nameWidth += ctx.measureText(name[j]).width
+                // console.log('nameWidth==>', nameWidth)
+                if (nameWidth > cWidth) {
+
+                    if (Nrow >= 0) {
+                        ctx.fillText(name.substring(Index, j) + '...', 36, Nheight)
+                        break
+                    }
+                    nameWidth = 36
+                    Index = j
+                    Nrow++
+                }
+
+            }
+
+
+            // 商品详情
+            ctx.font = "14px Arial";
+            ctx.fillStyle = "#8C8C8C";
+            var str =
+                "牛排肉质细嫩多汁、醇厚,饱满丰腴极富弹性，口感嫩滑,层次丰富，越嚼越香 牛排肉质细嫩多汁、醇厚,饱满丰腴极富弹性，口感嫩滑,层次丰富，越嚼越香醇厚,饱满丰腴极富弹性，口感嫩滑,层次丰富，越嚼越香"
+            var lineWidth = 0;
+            //canvas的宽度
+            var canvasWidth = 447;
+            //绘制字体距离canvas顶部初始的高度
+            var initHeight = 510;
+            //每次开始截取的字符串的索引
+            var lastSubStrIndex = 0;
+            var row = 0
+            for (let i = 0; i < str.length; i++) {
+                lineWidth += ctx.measureText(str[i]).width;
+                if (lineWidth > canvasWidth) {
+                    if (row >= 1) {
+                        ctx.fillText(str.substring(lastSubStrIndex, i) + '....', 36, initHeight); //绘制截取部分
+                        // 结束循环
+                        break
+                    } else {
+                        ctx.fillText(str.substring(lastSubStrIndex, i), 36, initHeight);
+                    }
+                    // 行高
+                    initHeight += 22;
+                    lineWidth = 36;
+                    lastSubStrIndex = i;
+                    row++
+                }
+            }
+
+            var num = "9.99"
+            var newNum = num.split('.')
+            // 优惠价格
+            ctx.font = "68px Arial, Helvetica, sans-serif"
+            ctx.fillStyle = "#FE0006";
+            // ctx.textAlign = "left"
+            ctx.fillText(newNum[0], 70, 603);
+
+            var l = newNum[0].length
+            console.log('l==>', l)
+            var lw = l * 37
+            console.log('lw==>', lw)
+
+            function _fun(lw) {
+                console.log('函数===》', lw)
+
+                ctx.font = "40px Arial, Helvetica, sans-serif"
+                ctx.fillStyle = "#FE0006";
+                ctx.textAlign = "center"
+                ctx.fillText('.' + newNum[1], 100 + lw, 603);
+
+                // 文字
+                ctx.font = "18px 'Trebuchet MS', Helvetica, sans-serif"
+                ctx.fillStyle = "#929292";
+                ctx.textAlign = "center"
+                ctx.fillText("/份", 155 + lw, 600);
+
+                // 原价格
+                ctx.font = "20px Arial, Helvetica, sans-serif"
+                ctx.fillStyle = "#929292";
+                ctx.textAlign = "center"
+                ctx.fillText("￥51.50", 215 + lw, 602);
+
+                var logo = new Image()
+                logo.src = './images/活动价.png'
+                logo.onload = function () {
+                    ctx.drawImage(logo, 75 + lw, 550, 55, 17)
+                }
+
+
+                ctx.moveTo(180 + lw, 595); //设置起点状态
+                ctx.lineTo(255 + lw, 595); //设置末端状态
+                ctx.lineWidth = 2; //设置线宽状态
+                ctx.strokeStyle = "#BDBDBD"; //设置线的颜色状态
+                ctx.stroke();
+            }
+
+            _fun(lw)
+        }
+
+        var imgPic = new Image()
+        imgPic.src = './images/二维码.jpg'
+        imgPic.onload = function () {
+            ctx.drawImage(imgPic, 328, 655, 160, 160)
+        }
+    </script>
+</body>
+
+</html>

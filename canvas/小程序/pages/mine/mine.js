@@ -1,28 +1,47 @@
-// miniprogram/pages/list/list.js
+// pages/mine/mine.js
+var that
 Page({
-  data: {
-    active: 0
-  },
-  // 首页加载的渲染方法
 
-  navigateTo(e) {
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url,
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    flag: false,
+    img: ''
+  },
+  click: function () {
+    that = this
+    that.setData({
+      flag: true
+    })
+  },
+  onclick: function () {
+    that = this
+    that.setData({
+      flag: false
+    })
+  },
+  chose: function () {
+    that = this
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'image',
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        // const tempFilePaths = res.tempFiles
+        console.log('res====>', res)
+        that.setData({
+          img: res.tempFiles
+        })
+        console.log('data====>', that.data)
+      }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.cloud.callFunction({
-    //   name: "basics-http",
-    //   success: res => {
-    //     console.log(JSON.parse(res.result))
-    //   },
-    //   fail: e => {
-    //     console.log(e)
-    //   }
-    // })
+
   },
 
   /**
@@ -72,22 +91,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  // 页面传值
-  PageByValue() {
-    wx.navigateTo({
-      url: '../list/PageByValue/PageByValue?text=来自首页传来的值',
-      events: {
-        someEvent: data => {
-          console.log(data)
-        }
-      },
-      success(res) {
-        res.eventChannel.emit('someEvent', {
-          data: '通过监听器传list页面的参数'
-        })
-      }
-    })
-  },
-
+  }
 })

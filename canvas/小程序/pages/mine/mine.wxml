@@ -1,0 +1,10 @@
+<button bindtap="click">按钮</button>
+<view class="box" wx:if="{{flag}}">
+	<view class="span" bindtap="onclick">x</view>
+	<view class="boxContent"></view>
+</view>
+
+<button bindtap="chose">选择</button>
+<image class="image" src="{{img}}"></image>
+
+<view class="box"></view>

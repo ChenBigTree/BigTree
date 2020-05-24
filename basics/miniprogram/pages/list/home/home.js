@@ -48,6 +48,26 @@ Page({
 
   // 获取一言
   hitokotoFun() {
+    wx.cloud.callFunction({
+      name:"basics-http",
+      success(res) {
+        
+        console.log("一言", JSON.parse(res.result))
+        return
+        _this.setData({
+          hitokoto: {
+            hitokoto: res.result.data.hitokoto,
+            name: res.result.data.from_who == null ? res.result.data.from : res.result.data.from_who
+          }
+        })
+        // 停止下拉刷新
+        wx.stopPullDownRefresh()
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+    return
     wx.request({
       url: "https://v1.hitokoto.cn",
 
