@@ -28,7 +28,7 @@
     <view class="essay-box" wx:for="{{ArticleList}}" wx:key="key" wx:if="{{item.length == 0 ? false : true}}">
       <view class="essay-date">· {{item[0].time.year}}年{{item[0].time.month>9?item[0].time.month:"0"+item[0].time.month}}月 ·</view>
       <view class="essay-beauty">
-        <view class="beauty-box" wx:for="{{item}}" wx:for-item="itemName" wx:key="key">
+        <view class="beauty-box" wx:for="{{item}}" wx:for-item="itemName" wx:key="key" data-id="{{itemName._id}}" bindtap="goto" >
           <view class="time">
             <text>{{itemName.time.ri>9?itemName.time.ri:"0"+itemName.time.ri}}</text>
             <text>周{{itemName.time.day}}</text>
@@ -43,7 +43,6 @@
             <image mode="scaleToFill" wx:else src="{{itemName.imageFirst}}"></image>
           </view>
         </view>
-
       </view>
     </view>
   </view>

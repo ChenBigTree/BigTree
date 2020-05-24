@@ -164,7 +164,7 @@ Page({
               for (var key in delta.ops) {
                 if (delta.ops[key].insert.image) {
                   imageFirst = res.fileList[0].fileID
-                  delta.ops[key].insert.image = res.fileList[i]
+                  delta.ops[key].insert.image = res.fileList[i].fileID
                   i++
                 }
               }
@@ -218,13 +218,51 @@ Page({
       }
     })
   },
+  editor(data) {
+    console.log(data.ops)
+    // 创建选择器对象
+    var query = wx.createSelectorQuery()
+    // 通过css选择器获取节点
+    var editor = query.select("#editor")
 
+    // 通过节点获取富文本编辑器的内容对象
+    editor.context(function(res) {
+      // 修改富文本编辑器的内容样式 —— 加粗
+      res.context.setContents({
+        delta:data.ops
+      })
+    }).exec() // .exec() ：执行所有的请求。请求结果按请求次序构成数组
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     // console.log(new Date().getTime())
     _this = this;
+    console.log(options)
+    if (options.id) {
+      _this.setData({
+        isEditor: false
+      })
+      wx.cloud.callFunction({
+        name: "memo-ArticleList",
+        data: {
+          id: options.id,
+          fun: "getone"
+        },
+        success: res => {
+          console.log(res.result.data)
+          _this.editor(res.result.data)
+        },
+        fail: err => {
+          console.log(err)
+        }
+      })
+    } else {
+      _this.setData({
+        isEditor: true
+      })
+    }
   },
 
   /**

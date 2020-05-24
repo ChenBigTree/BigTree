@@ -30,4 +30,7 @@ exports.main = async(event, context) => {
       _id: _.neq("")
     }).remove()
   }
+  else if(event.fun=="getone"){
+    return await cloud.database().collection("memo-ArticleList").doc(event.id).get()
+  }
 }

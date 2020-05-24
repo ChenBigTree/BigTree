@@ -11,15 +11,23 @@ Page({
   data: {
     hides: true
   },
+  goto(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../addMemo/addMemo?id=' + e.currentTarget.dataset.id,
+    })
+  },
   remove() {
     wx.cloud.callFunction({
       name: "memo-ArticleList",
       data: {
         fun: "remove",
         name: "memo-ArticleList",
-      }, success: r => {
+      },
+      success: r => {
         console.log(r)
-      }, fail: e => {
+      },
+      fail: e => {
         console.log(e)
       }
     })

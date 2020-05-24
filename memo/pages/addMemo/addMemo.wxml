@@ -1,5 +1,5 @@
-<editor show-img-toolbar="true" id="editor"></editor>
-<view class="editor-icon">
+<editor show-img-toolbar="true" id="editor" read-only="{{!isEditor}}"></editor>
+<view class="editor-icon" wx:if="{{isEditor}}">
   <image bindtap="img" src="../icon/img.png"></image>
   <image bindtap="I" src="../icon/I{{I}}.png"></image>
   <image bindtap="fontSize" src="../icon/fontSize.png"></image>
