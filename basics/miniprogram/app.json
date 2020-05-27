@@ -15,6 +15,9 @@
     "pages/list/getphone/getphone",
     "pages/list/dataManipulation/dataManipulation",
     "pages/list/canvas/canvas",
+    "pages/list/OpenUploadFile/OpenUploadFile",
+    "pages/list/yunPay/yunPay",
+    "pages/list/clipboard/clipboard",
     "pages/list/profilePicture/profilePicture"
   ],
   "window": {

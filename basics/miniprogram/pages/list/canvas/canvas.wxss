@@ -1,11 +1,13 @@
-.canvas-view {
-  display: block;
-  width: 300px;
-  height: 300px;
-  border: 1px solid #999
+#canvas {
+  position: relative;
+  z-index: 1;
 }
-.canvas-box{
-  width: 300px;
-  height: 200px;
-  overflow: hidden;
+
+.image {
+  position: absolute;
+  top: 55px;
+  left: 60rpx;
+  width: 640px;
+  height: 450px;
+  z-index: -1;
 }

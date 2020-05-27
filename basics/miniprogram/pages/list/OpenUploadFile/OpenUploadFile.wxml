@@ -1,0 +1,9 @@
+<view class="openUpload">
+	<text>文件名：{{upload }}</text>
+	<view class="open">
+		<v-btn class="btn" bindtap="uploadFun">上传文件 </v-btn>
+	</view>
+	<view class="open">
+		<v-btn class="btn" bindtap="openloadFun">打开文件 </v-btn>
+	</view>
+</view>

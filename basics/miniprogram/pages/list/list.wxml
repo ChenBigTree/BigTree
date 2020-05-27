@@ -11,11 +11,11 @@
 			<view class="title">图像处理</view>
 			<view class="title">上传文件监听</view>
 			<view class="title">音视频合成</view>
-			<view class="title" bindtap="navigateTo" data-url="">剪贴板</view>
 			<view class="title">小程序跳转小程序</view>
 			<view class="title" bindtap="PageByValue">导航栏</view>
 			<view class="title">小程序置顶</view>
 			<view class="listlist">完成</view>
+			<view class="title" bindtap="navigateTo" data-url="./clipboard/clipboard">剪贴板</view>
 			<view class="title" bindtap="navigateTo" data-url="./login/login">获取手机号</view>
 			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
 			<view class="title" bindtap="navigateTo" data-url="./sao/sao">扫一扫
@@ -52,7 +52,7 @@
 			<view class="listlist">未完成</view>
 			<view class="title"> 如何解决小程序异步请求问题？</view>
 			<view class="title">如何获取本地定位信息,解析地址获取经纬度</view>
-			<view class="title">如何发送手机信息通知，</view>
+			<view class="title">如何发送手机信息通知</view>
 			<view class="title">发送公众号模板消息</view>
 			<view class="title">发送小程序订阅消息（服务通知）</view>
 			<view class="title">使用音乐播放的使用</view>
@@ -71,16 +71,13 @@
 		</van-tab>
 		<van-tab title="高级">
 			<view class="listlist">未完成</view>
-			<view class="title" data-url="./canvas/canvas"> 小程序画布</view>
 			<view class="title"> 组件间的共享特性怎么处理？</view>
 			<view class="title">生成自定义海报</view>
 			<view class="title">小程序如何使用字体图标</view>
-			<view class="title">支付功能</view>
 			<view class="title">抖音视频播放模板</view>
 			<view class="title">语音转文字</view>
 			<view class="title">发票抬头</view>
 			<view class="title">生物认证</view>
-			<view class="title">小程序上传文件并打开</view>
 			<view class="title">物流</view>
 			<view class="title">aria-component 无障碍访问组件</view>
 			<view class="title">选择器</view>
@@ -88,6 +85,9 @@
 			<view class="title">多端开发kbone框架，h5云开发</view>
 			<view class="title">OCR</view>
 			<view class="listlist">完成</view>
+			<view class="title" data-url="./yunPay/yunPay" bindtap="navigateTo">支付功能</view>
+			<view class="title" data-url="./canvas/canvas" bindtap="navigateTo"> 小程序画布</view>
+			<view class="title" data-url="./OpenUploadFile/OpenUploadFile" bindtap="navigateTo">小程序上传文件并打开</view>
 		</van-tab>
 	</view>
 </van-tabs>

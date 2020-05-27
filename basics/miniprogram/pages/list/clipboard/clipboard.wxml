@@ -1,0 +1,26 @@
+<view class="box clearfix">
+	<text class="nr fl">内容1</text>
+	<text class="fz fl" data-name="内容1" bindtap="fzfun">复制</text>
+</view>
+<view class="box clearfix">
+	<text class="nr fl">内容2</text>
+	<text class="fz fl" data-name="内容2" bindtap="fzfun">复制</text>
+</view>
+<view class="box clearfix">
+	<text class="nr fl">内容3</text>
+	<text class="fz fl" data-name="内容3" bindtap="fzfun">复制</text>
+</view>
+<view class="box clearfix">
+	<text class="nr fl">内容4</text>
+	<text class="fz fl" data-name="内容4" bindtap="fzfun">复制</text>
+</view>
+<view class="box clearfix">
+	<text class="nr fl">内容5</text>
+	<text class="fz fl" data-name="内容5" bindtap="fzfun">复制</text>
+</view>
+<view bindtap="clipboardfun">粘贴板</view>
+<view wx:if="{{isShow}}">
+	所有粘贴板内容：
+	<text wx:for="{{clipboard}}" wx:key="key">{{item}}，</text>
+	<view wx:if="{{clipboard.length == 0}}">内容为空</view>
+</view>

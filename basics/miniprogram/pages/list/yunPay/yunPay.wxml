@@ -1,0 +1,2 @@
+<text>{{pay}}</text>
+<view bindtap="toPay">支付</view>

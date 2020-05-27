@@ -1,0 +1,7 @@
+/* pages/list/clipboard/clipboard.wxss */
+.nr{
+  margin-right: 10px;
+}
+.box{
+  padding: 10px;
+}

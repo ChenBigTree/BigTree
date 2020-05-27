@@ -76,6 +76,27 @@
 					"id": -1,
 					"name": "pages/list/canvas/canvas",
 					"pathName": "pages/list/canvas/canvas",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/OpenUploadFile/OpenUploadFile",
+					"pathName": "pages/list/OpenUploadFile/OpenUploadFile",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/yunPay/yunPay",
+					"pathName": "pages/list/yunPay/yunPay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/clipboard/clipboard",
+					"pathName": "pages/list/clipboard/clipboard",
 					"scene": null
 				}
 			]
