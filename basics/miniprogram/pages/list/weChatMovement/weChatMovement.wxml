@@ -1,0 +1,2 @@
+<!-- <button bindtap="weChatMovement">获取用户步数</button> -->
+<web-view src="http://localhost:8080"></web-view>

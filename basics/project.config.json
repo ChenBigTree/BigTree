@@ -2,14 +2,27 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"enhance": true
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
-	"appid": "wxafa3ec7cc695fda2",
+	"appid": "wx8e92a960e893778a",
 	"projectname": "basics",
 	"libVersion": "2.10.4",
 	"simulatorType": "wechat",
@@ -97,6 +110,13 @@
 					"id": -1,
 					"name": "pages/list/clipboard/clipboard",
 					"pathName": "pages/list/clipboard/clipboard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/weChatMovement/weChatMovement",
+					"pathName": "pages/list/weChatMovement/weChatMovement",
 					"scene": null
 				}
 			]
