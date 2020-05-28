@@ -2,7 +2,7 @@
 	<view class="list">
 		<van-tab title="初级">
 			<view class="listlist">未完成</view>
-			<view class="title">微信运动</view>
+			<view class="title" bindtap="navigateTo" data-url="./weChatMovement/weChatMovement">微信运动</view>
 			<view class="title">数据缓存</view>
 			<view class="title">校验图片和文字是否合法</view>
 			<view class="title">优惠卷（代金卷）</view>
@@ -11,7 +11,7 @@
 			<view class="title">图像处理</view>
 			<view class="title">上传文件监听</view>
 			<view class="title">音视频合成</view>
-			<view class="title">小程序跳转小程序</view>
+			<view class="title" bindtap="navigateTo" data-url="./jump/jump">小程序跳转小程序</view>
 			<view class="title" bindtap="PageByValue">导航栏</view>
 			<view class="title">小程序置顶</view>
 			<view class="listlist">完成</view>

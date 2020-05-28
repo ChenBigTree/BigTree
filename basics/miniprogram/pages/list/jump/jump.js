@@ -1,39 +1,24 @@
-// pages/mine/mine.js
-var that
+// pages/list/jump/jump.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    flag: false,
-    img: ''
+
   },
-  click: function () {
-    that = this
-    that.setData({
-      flag: true
-    })
-  },
-  onclick: function () {
-    that = this
-    that.setData({
-      flag: false
-    })
-  },
-  chose: function () {
-    that = this
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'image',
+  jump() {
+    wx.navigateToMiniProgram({
+      appId: 'wx123b3d18b46ab80f', //小程序appid
+      path: 'pages/wenzhen/questions', //跳转关联小程序app.json配置里面的地址
+      // extraData: { //需要传递给目标小程序的数据，目标小程序可在 App.onLaunch()，App.onShow() 中获取到这份数据。
+      //   foo: 'bar'
+      // },
+      //**重点**要打开的小程序版本，有效值 develop（开发版），trial（体验版），release（正式版） 
+      envVersion: 'release',
       success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        // const tempFilePaths = res.tempFiles
-        console.log('res====>', res)
-        that.setData({
-          img: res.tempFiles[0].path
-        })
-        console.log('data====>', that.data)
+        // 打开成功
+        console.log("打开小程序",res)
       }
     })
   },

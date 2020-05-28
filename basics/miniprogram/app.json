@@ -18,6 +18,8 @@
     "pages/list/OpenUploadFile/OpenUploadFile",
     "pages/list/yunPay/yunPay",
     "pages/list/clipboard/clipboard",
+    "pages/list/jump/jump",
+    "pages/list/weChatMovement/weChatMovement",
     "pages/list/profilePicture/profilePicture"
   ],
   "window": {
