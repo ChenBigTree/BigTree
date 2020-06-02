@@ -1,1 +1,6 @@
 /* pages/list/weChatMovement/weChatMovement.wxss */
+.riqi{
+  width: 100%;
+  margin: 5px 0;
+  text-align: center;
+}
