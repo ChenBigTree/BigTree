@@ -117,6 +117,13 @@
 					"id": -1,
 					"name": "pages/list/weChatMovement/weChatMovement",
 					"pathName": "pages/list/weChatMovement/weChatMovement",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/list/slideshow/slideshow",
+					"pathName": "pages/list/slideshow/slideshow",
 					"scene": null
 				}
 			]

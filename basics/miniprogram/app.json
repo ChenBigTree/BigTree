@@ -20,7 +20,8 @@
     "pages/list/clipboard/clipboard",
     "pages/list/jump/jump",
     "pages/list/weChatMovement/weChatMovement",
-    "pages/list/profilePicture/profilePicture"
+    "pages/list/profilePicture/profilePicture",
+    "pages/list/slideshow/slideshow"
   ],
   "window": {
     "backgroundColor": "#fff",

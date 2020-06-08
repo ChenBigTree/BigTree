@@ -6,3 +6,7 @@
 		<view class="riqi">{{item.step}}步</view>
 	</view>
 </block>
+
+
+<view class="loading">
+</view>
