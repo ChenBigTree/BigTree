@@ -1,2 +1,12 @@
-<!-- <button bindtap="weChatMovement">获取用户步数</button> -->
-<web-view src="http://localhost:8080"></web-view>
+<button bindtap="weChatMovement">获取用户步数</button>
+<!-- <web-view src="http://localhost:8080"></web-view> -->
+<block wx:if="wxwalk">
+	<view class="wx" wx:for="{{wxwalk}}" wx:key="index">
+		<view class="riqi">{{item.time}}</view>
+		<view class="riqi">{{item.step}}步</view>
+	</view>
+</block>
+
+
+<view class="loading">
+</view>

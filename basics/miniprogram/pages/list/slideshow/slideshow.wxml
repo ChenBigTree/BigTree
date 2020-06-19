@@ -1,0 +1,10 @@
+<view>轮播图1</view>
+<view class="slide1">
+	<swiper class="card-swiper round-dot {{news? '':'page'}} " indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+		<swiper-item wx:for="{{news}}" wx:key="index" class="{{cardCur==index?'cur':''}}">
+			<view class="bg-img shadow-blur">
+				<image class="image-box" mode="widthFix" src="{{item.url}}"></image>
+			</view>
+		</swiper-item>
+	</swiper>
+</view>

@@ -1,5 +1,5 @@
 // pages/list/weChatMovement/weChatMovement.js
-var WXBizDataCrypt = require("../../utils/WXBizDataCrypt")
+var WXBizDataCrypt = require("../../utils/RdWXBizDataCrypt")
 Page({
 
   /**
@@ -8,68 +8,70 @@ Page({
   data: {
 
   },
+  compare(e) {
+    return function (a, b) {
+      var value1 = a[e];
+      var value2 = b[e];
+      return parseInt(value1) - parseInt(value2);
+    }
+  },
   weChatMovement() {
-
+    let _this = this
+    // 登录
     wx.login({
-      complete: (res) => {
-        console.log("res", res)
-        let code = res.code
-        wx.request({
-          url: 'http://localhost:8080/wxapp/onlogin',
-          data: {
-            code: res.code
-          },
-          success: function (resSession) {
-            console.log("resSession", resSession)
-            wx.getWeRunData({
-              success(resRun) {
-                const encryptedData = resRun.encryptedData
-                let url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorizationcode"
-                console.log("encryptedData", encryptedData)
-                console.log("iv", resRun.iv)
-                console.log("code", code)
-                console.log("url", url)
-                let appid = "wxafa3ec7cc695fda2"
-                let secret = "54c91375f96d0e16a041e3687873f5cb"
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
 
-                var pc = new WXBizDataCrypt(appid, secret)
+        console.log("res.code", res.code)
+        if (res.code) {
+          var APPID = 'wxafa3ec7cc695fda2'
+          var SECRET = 'da06ad3de832ff0f461e3fe232421822'
+          var JSCODE = res.code
+          var session_key
+          console.log("JSCODE " + JSCODE)
+          wx.request({
+            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + APPID + '&secret=' + SECRET + '&js_code=' + JSCODE + '&grant_type=authorization_code',
+            data: {
+              //code: res.code
+            },
+            header: {
+              'content-type': 'application/json' // 默认值
+            },
+            success: function (res) {
+              console.log("res.data " + res.data)
+              session_key = res.data.session_key
+              console.log("session_key: " + session_key)
+              wx.getWeRunData({
+                success(res) {
+                  const encryptedRunData = res.encryptedData
+                  const runiv = res.iv
+                  console.log("加密的数据: " + encryptedRunData)
+                  var pc = new WXBizDataCrypt(APPID, session_key)
+                  var tmpdata = pc.decryptData(encryptedRunData, runiv).stepInfoList
+                  for (let i in tmpdata) {
 
-                console.log("pc", pc)
-                var data = pc.decryptData(encryptedData, resRun.iv)
+                    let year = new Date(tmpdata[i].timestamp * 1000).getFullYear()
+                    let month = new Date(tmpdata[i].timestamp * 1000).getMonth() + 1
+                    month = month > 9 ? month : "0" + month
+                    let date = new Date(tmpdata[i].timestamp * 1000).getDate()
+                    date = date > 9 ? date : "0" + date
+                    let time = year + "年" + month + "月" + date + "日"
+                    tmpdata[i].time = time
+                  } 
 
-                console.log('解密后 data: ', data)
-                return
-                wx.request({
-                  url: 'http://localhost:8080/wxapp/decrypt',
-                  data: {
-                    encryptedData: resRun.encryptedData,
-                    iv: resRun.iv,
-                    code: res.code
-                  },
-                  method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-                  // header: {}, // 设置请求的 header
-                  success: function (resDecrypt) {
-                    // var runData = JSON.stringify(resDecrypt.data)
-                    // console.info("步数信息1",runData);
-                    console.info("步数信息", resDecrypt);
-                    // console.info("步数信息2",resDecrypt.data.data);
-                    return
-                    if (runData.stepInfoList) {
-                      runData.stepInfoList = runData.stepInfoList.reverse()
-                      for (var i in runData.stepInfoList) {
-                        runData.stepInfoList[i].date = util.formatTime(new Date(runData.stepInfoList[i].timestamp * 1000))
-                      }
-                      that.setData({
-                        runData: runData.stepInfoList
-                      });
-                    }
-                  }
-                });
-              }
-            })
-          }
-        })
-      },
+                  var arr2 = tmpdata.sort(_this.compare('time')).reverse();
+                  console.log("解密后data：", arr2)
+                  _this.setData({
+                    wxwalk:arr2
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          console.log('失败' + res.errMsg)
+        }
+      }
     })
   },
   /**
