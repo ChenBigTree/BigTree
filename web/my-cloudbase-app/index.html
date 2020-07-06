@@ -9,28 +9,44 @@
 </head>
 
 <body>
-    <button id="box">www</button>
+    <button id="box">www</button><button id="login">login</button>
     <script src="./tcb.js"></script>
     <script>
-        window.onload = function () {
             const app = tcb.init({
-                env: 'wx99155eb36a6a05c7-8oeqj'
+                traceUser: true,
+                env: 'kpxjt-pjo8d'
             })
-            console.log(app.auth())
-            console.log(app.auth().getLoginState())
+            const provider = app.auth().weixinAuthProvider({
+                appid: "wxafa3ec7cc695fda2",
+                scope: "snsapi_userinfo"
+            });
+            // 假设我们有一个“微信登录”按钮，点击后跳转登录页面
+            document.getElementById("login").onclick = function () {
+                provider.signInWithRedirect();
+            };
 
-            const loginState = app
-                .auth()
-                .getLoginState()
-                .then(loginState => {
-                    if (loginState) {
-                        console.log("登陆成功")
-                        // 登录态有效
-                    } else {
-                        // 没有登录态，或者登录态已经失效
-                        console.log("登录失败")
-                    }
-                });
+            // 如果页面含有微信的登录态，那么回调中会存在 LoginState
+            provider.getRedirectResult().then(loginState => {
+                if (loginState) {
+                    // 有登录态
+                    console.log("e", loginState)
+                }
+            });
+
+
+
+            // const loginState = app
+            //     .auth()
+            //     .getLoginState()
+            //     .then(loginState => {
+            //         if (loginState) {
+            //             console.log("登陆成功")
+            //             // 登录态有效
+            //         } else {
+            //             // 没有登录态，或者登录态已经失效
+            //             console.log("登录失败")
+            //         }
+            //     });
             // app.auth().signInAnonymously().then(() => {
             //     console.log("登陆成功")
             // }).catch(err => {
@@ -149,7 +165,6 @@
             //     return arr.join('&');
             // }
 
-        }
 
     </script>
 </body>
