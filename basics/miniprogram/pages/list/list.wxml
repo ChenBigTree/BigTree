@@ -18,35 +18,22 @@
 			<view class="title" bindtap="navigateTo" data-url="./clipboard/clipboard">剪贴板</view>
 			<view class="title" bindtap="navigateTo" data-url="./login/login">获取手机号</view>
 			<view class="title" bindtap="PageByValue">小程序如何进行页面之间传值？</view>
-			<view class="title" bindtap="navigateTo" data-url="./sao/sao">扫一扫
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="../list/Render/Render">首次数据加载的渲染方法
-			</view>
+			<view class="title" bindtap="navigateTo" data-url="./sao/sao">扫一扫 </view>
+			<view class="title" bindtap="navigateTo" data-url="../list/Render/Render">首次数据加载的渲染方法 </view>
 			<view class="title" bindtap="navigateTo" data-url="./file/file">文件上传与下载 </view>
-			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库增删改查
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库模糊匹配查询
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./sao/sao">转发
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./home/home">如何发起http请求和请求注意事项
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject）
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./pictures/pictures">如何从本地选择图片或者拍照上传图片
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./remdom/remdom">获取六位随机数？
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./home/home">如何实现小程序下拉刷新?触底加载
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./verification/verification">验证手机号是否正确？邮箱等
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./login/login">登录验证与获取用户信息
-			</view>
-			<view class="title" bindtap="navigateTo" data-url="./login/login">收货地址
-			</view>
+			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库增删改查 </view>
+			<view class="title" bindtap="navigateTo" data-url="./dataManipulation/dataManipulation">数据库模糊匹配查询 </view>
+			<view class="title" bindtap="navigateTo" data-url="./sao/sao">转发 </view>
+			<view class="title" bindtap="navigateTo" data-url="./flex/flex">如何使用flex布局对父级里面的子级进行平均分布，以及盒子居中 </view>
+			<view class="title" bindtap="navigateTo" data-url="./home/home">如何发起http请求和请求注意事项 </view>
+			<view class="title" bindtap="navigateTo" data-url="../list/promise/promise">promise的使用（then,catch,finally,resolve,reject） </view>
+			<view class="title" bindtap="navigateTo" data-url="./pictures/pictures">如何从本地选择图片或者拍照上传图片 </view>
+			<view class="title" bindtap="navigateTo" data-url="./remdom/remdom">获取六位随机数？ </view>
+			<view class="title" bindtap="navigateTo" data-url="./slideshow/slideshow">轮播图 </view>
+			<view class="title" bindtap="navigateTo" data-url="./home/home">如何实现小程序下拉刷新?触底加载 </view>
+			<view class="title" bindtap="navigateTo" data-url="./verification/verification">验证手机号是否正确？邮箱等 </view>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">登录验证与获取用户信息 </view>
+			<view class="title" bindtap="navigateTo" data-url="./login/login">收货地址 </view>
 		</van-tab>
 		<van-tab title="中级">
 			<view class="listlist">未完成</view>

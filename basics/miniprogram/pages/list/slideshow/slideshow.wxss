@@ -1,3 +1,4 @@
+@import "../../../iconfont.wxss";
 
 swiper.square-dot .wx-swiper-dot {
   background: #fff;
@@ -110,18 +111,25 @@ swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active {
 .padding-xs {
   padding: 10rpx;
 }
+
 .padding-xl {
   padding: 150rpx;
 }
-.text-white, .line-white, .lines-white {
+
+.text-white,
+.line-white,
+.lines-white {
   color: #fff;
 }
+
 .cu-list.menu-avatar>.cu-item .flex .text-cut {
   max-width: 510rpx;
 }
+
 .text-xl {
   font-size: 36rpx;
 }
+
 .shadow-blur {
   position: relative;
   overflow: hidden;
@@ -143,7 +151,8 @@ swiper.round-dot .wx-swiper-dot.wx-swiper-dot-active {
   border-radius: inherit;
   transform: scale(1, 1);
 }
-.image-box{
+
+.image-box {
   width: 100%;
   display: block;
 }
