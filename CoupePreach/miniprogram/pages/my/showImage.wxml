@@ -1,6 +1,0 @@
-<view class="imagePage" data-name="imagePage"  catchtap="imageFun">
-	<view class="image-text" data-name="image-text" catchtap="imageFun">更换头像</view>
-	<view class="image-box" data-name="imagePage" catchtap="imageFun">
-		<image mode="widthFix" src="{{url}}"></image>
-	</view>
-</view>

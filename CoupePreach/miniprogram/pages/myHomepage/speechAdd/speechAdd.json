@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "i-message": "../../../components/message/index"
-  },
-  "navigationBarBackgroundColor":"#2f3336",
-  "navigationBarTextStyle":"white",
-  "navigationBarTitleText":"群讲堂"
-}

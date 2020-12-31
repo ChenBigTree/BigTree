@@ -1,7 +1,0 @@
-<!--miniprogram/pages/login/login.wxml-->
-<button open-type="getUserInfo" bindgetuserinfo="userInfo">获取用户信息</button>
-<button bindtap="login">登录</button>
- 
-<button type="primary" wx:if="{{!userInfo}}" bindtap="openConfirm">我要注册</button>
-<mp-auth show="{{dialogShow}}" bindgetUserInfo="getUserInfo"></mp-auth>
-

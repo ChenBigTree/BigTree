@@ -1,8 +1,0 @@
-<view class="box">
-	<view class="item" bindtap="toCurriculumDetail" wx:for="{{curriculumArr}}" wx:key="index" data-id="{{item._id}}">
-		<image class="img" src="{{item.auth.avatarUrl}}"></image>
-		<view class="shade">
-			<view class="txt">{{item.title}}</view>
-		</view>
-	</view>
-</view>

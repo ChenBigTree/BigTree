@@ -11,7 +11,6 @@ Page({
   click: function (e) {
     // console.log('e==>', e)
     that = this
-
     let p1 = new Promise((resolve, reject) => {
       wx.getImageInfo({
         src: 'https://dc.xiansg.cn/attachment/images/global/canvas/goodsPoster/xiaoguo.jpg',
@@ -66,7 +65,7 @@ Page({
             destHeight: 600,
             canvasId: 'canvas',
             success(res) {
-              // console.log('res-===>', res)
+              console.log('res-===>', res)
               that.setData({
                 img: res.tempFilePath
               })
@@ -84,7 +83,7 @@ Page({
       .catch(err => {
         console.log("err==>", err)
       });
-  
+
   },
   /**
    * 生命周期函数--监听页面加载

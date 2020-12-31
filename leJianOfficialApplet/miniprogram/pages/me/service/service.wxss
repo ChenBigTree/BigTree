@@ -1,8 +1,0 @@
-/* miniprogram/pages/me/service/service.wxss */
-.box{
-  width: 100%;
-  /* width:; */
-}
-.box>image{
-  width: 100%;
-}

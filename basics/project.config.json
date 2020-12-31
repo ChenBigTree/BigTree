@@ -20,7 +20,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"useCompilerModule": false
 	},
 	"appid": "wxafa3ec7cc695fda2",
 	"projectname": "basics",
